@@ -73,17 +73,18 @@ public class SplashScreen {
 		splashScreen.setForeground(new Color(0, 0, 0));
 		splashScreen.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\resources\\logo.png"));
 		splashScreen.setTitle("Vijay Computer Academy Database Application");
-		splashScreen.setBounds(100, 100, 689, 674);
+		splashScreen.setBounds(100, 100, 752, 707);
 		splashScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		splashScreen.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel titlePanel = new JPanel();
 		titlePanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		titlePanel.setBackground(new Color(51, 102, 153));
+		titlePanel.setBackground(Color.LIGHT_GRAY);
 		splashScreen.getContentPane().add(titlePanel, BorderLayout.NORTH);
 		titlePanel.setLayout(new MigLayout("", "[14px][][][]", "[grow]"));
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.RED);
 		titlePanel.add(panel, "cell 1 0,grow");
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -94,15 +95,15 @@ public class SplashScreen {
 		titlePanel.add(horizontalStrut, "cell 2 0");
 		
 		JLabel lblNewLabel_1 = new JLabel("Vijay Computer Academy");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
+		lblNewLabel_1.setForeground(Color.DARK_GRAY);
 		titlePanel.add(lblNewLabel_1, "flowy,cell 3 0,alignx center");
 		
 		JLabel lblNewLabel_2 = new JLabel("Global IT education & training institute since 1990 ");
 		lblNewLabel_2.setIconTextGap(0);
 		lblNewLabel_2.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setForeground(Color.BLACK);
 		titlePanel.add(lblNewLabel_2, "cell 3 0,alignx center");
 		
 		JPanel panel_1 = new JPanel();
@@ -128,7 +129,7 @@ public class SplashScreen {
 				enroll.newScreen();
 			}
 		});
-		enrollmentButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\resources\\user.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		enrollmentButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\resources\\student.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		buttonPanel.add(enrollmentButton);
 		
 		
@@ -168,15 +169,15 @@ public class SplashScreen {
 		buttonPanel.add(equipmentButton);
 		
 		
-		//Finances Button
-		JButton financeButton = new JButton("Finances");
+		//Room Reserve Button
+		JButton financeButton = new JButton("Room Reservation");
 		financeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FinanceWindow fin = new FinanceWindow();
-				fin.createWindow();
+				RoomRentalWindow fin = new RoomRentalWindow();
+				fin.newWindow();
 			}
 		});
-		financeButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\resources\\hand.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		financeButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\resources\\classroom.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		financeButton.setIconTextGap(15);
 		financeButton.setForeground(new Color(255, 255, 255));
 		financeButton.setBackground(new Color(204, 51, 51));
@@ -193,7 +194,7 @@ public class SplashScreen {
 				dir.createWindow();
 			}
 		});
-		directoryButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\resources\\communicate.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		directoryButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\resources\\book.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		directoryButton.setIconTextGap(15);
 		directoryButton.setForeground(new Color(255, 255, 255));
 		directoryButton.setBackground(new Color(204, 51, 51));
@@ -204,7 +205,7 @@ public class SplashScreen {
 		
 		//Employee Services
 		JButton employeeSButton = new JButton("Employee Services");
-		employeeSButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\resources\\skills.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		employeeSButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\resources\\employee.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		employeeSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EmployeeServicesWindow esw = new EmployeeServicesWindow();

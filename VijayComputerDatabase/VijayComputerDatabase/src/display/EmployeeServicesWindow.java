@@ -9,6 +9,8 @@ import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JButton;
 
 public class EmployeeServicesWindow {
 
@@ -59,6 +61,11 @@ public class EmployeeServicesWindow {
 		
 		JPanel panel_3 = new JPanel();
 		frmVcaEmployee.getContentPane().add(panel_3, BorderLayout.WEST);
+		panel_3.setLayout(new MigLayout("", "[]", "[]"));
+		
+		JButton btnNewButton = new JButton("Certification Center");
+		btnNewButton.setToolTipText("This is where the certifications are granted to students");
+		panel_3.add(btnNewButton, "cell 0 0");
 		
 		JPanel panel_4 = new JPanel();
 		frmVcaEmployee.getContentPane().add(panel_4, BorderLayout.EAST);
