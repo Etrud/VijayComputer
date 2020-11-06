@@ -18,10 +18,13 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class DirectoryWindow {
 
 	private JFrame frmVijayComputerDirectory;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -75,6 +78,15 @@ public class DirectoryWindow {
 		JMenu mnNewMenu_1 = new JMenu("Edit");
 		menuBar.add(mnNewMenu_1);
 		
+		JMenuItem mntmNewBusinessContact = new JMenuItem("New Business Contact");
+		mntmNewBusinessContact.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CreateBusinessContact contact = new CreateBusinessContact();
+				contact.createWindow();
+			}
+		});
+		mnNewMenu_1.add(mntmNewBusinessContact);
+		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Edit Business Contacts");
 		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
@@ -88,6 +100,12 @@ public class DirectoryWindow {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmVijayComputerDirectory.getContentPane().add(panel, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(153, 255, 204));

@@ -41,6 +41,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.ImageIcon;
 import javax.swing.ButtonGroup;
@@ -373,14 +374,27 @@ public class CreateStudent {
 				
 				try {
 			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
-					String sql = "INSERT INTO Student " + "VALUES ("+studentIDTextField.getText()+","+lastNameTextField.getText()+","+
-					firstNameTextField.getText()+","+middleInitialTextField.getText()+","+homePhTextField.getText()+","+mobilePhTextField.getText()+","+emailTextField.getText();
-					PreparedStatement pst = conn.prepareStatement(sql);
-			        ResultSet rs = pst.executeQuery();
+			        System.out.println("Inserting records into the table...");
+			    	String sql = "INSERT INTO Student VALUES ('"+studentIDTextField.getText()+"','"+lastNameTextField.getText()+"','"+
+					firstNameTextField.getText()+"','"+middleInitialTextField.getText()+"','"+homePhTextField.getText()+"','"+mobilePhTextField.getText()+"','"+emailTextField.getText()+"','"+dateField.getJFormattedTextField()+addressNumTextField.getText()+"','"+
+							addressStreetTextField.getText()+"','"+address2StreetTextField.getText()+"','"+postalCodeTextField.getText()+"','"+cityTextField.getText()+"','"+(String)countryComboBox.getSelectedItem()+"','"+(String)stateComboBox.getSelectedItem()+"','"+facebookTextField.getText()+"','"+instagramTextField.getText()+"','"+twitterTextField.getText()+"')";
+
+			    	Statement pst = null;
+			    	pst = conn.createStatement();
+			        pst.executeUpdate(sql);
+			        System.out.println("Inserted records into the table...");
+
 				}
 				catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e);
+				}
+				catch(Exception e){
+				      //Handle errors for Class.forName
+				      e.printStackTrace();
+				 }
+				finally {
+					frmCreateStudent.dispose();
 				}
 			}});
 		CreateStudentButtonGroup.add(createStudentButton2);

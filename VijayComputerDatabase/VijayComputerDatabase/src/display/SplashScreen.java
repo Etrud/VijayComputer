@@ -88,7 +88,7 @@ public class SplashScreen {
 		titlePanel.add(panel, "cell 1 0,grow");
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\bshaffer\\git\\VijayComputerDatabase\\VijayComputerDatabase\\resources\\logo.png").getImage().getScaledInstance(90,90,Image.SCALE_SMOOTH)));
+		lblNewLabel.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\resources\\logo.png").getImage().getScaledInstance(90,90,Image.SCALE_SMOOTH)));
 		panel.add(lblNewLabel);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);

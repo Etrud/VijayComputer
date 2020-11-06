@@ -22,10 +22,13 @@ import java.awt.Color;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
 import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.JScrollPane;
+import java.awt.FlowLayout;
 
 public class StudentWindow {
 
@@ -91,9 +94,6 @@ public class StudentWindow {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmStudentView.getContentPane().add(panel_1);
-		
-		studentTable = new JTable();
-		studentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		DefaultTableModel studModel =new DefaultTableModel(
 				new Object[][] {
 				},
@@ -102,8 +102,15 @@ public class StudentWindow {
 				}
 
 			);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_1.add(scrollPane);
+		
+		studentTable = new JTable();
+		scrollPane.setViewportView(studentTable);
+		studentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		studentTable.setModel(studModel);
-		panel_1.add(studentTable);
 		
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
@@ -122,8 +129,7 @@ public class StudentWindow {
 	        }
 
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, e1);
 		}
 		
 		
