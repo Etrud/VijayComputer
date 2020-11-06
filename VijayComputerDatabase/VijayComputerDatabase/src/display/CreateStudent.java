@@ -1,5 +1,6 @@
 package display;
 
+import net.codejava.sql.JavaConnectionSQL;
 import java.awt.EventQueue;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,6 +9,7 @@ import java.util.Properties;
 import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -34,28 +36,39 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.ImageIcon;
+import javax.swing.ButtonGroup;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
 
 public class CreateStudent {
 
 	private JFrame frmCreateStudent;
-	private JFormattedTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JFormattedTextField studentIDTextField;
+	private JTextField firstNameTextField;
+	private JTextField lastNameTextField;
+	private JTextField middleInitialTextField;
+	private JTextField homePhTextField;
 	private JLabel textField_5;
-	private JTextField textField_6;
+	private JTextField emailTextField;
 	private JDatePickerImpl dateField;
-	private JTextField textField_9;
-	private JTextField textField_7;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_13;
-	private JTextField textField_14;
-	private JTextField textField_15;
-	private JTextField textField_16;
-	private JTextField textField_8;
+	private JTextField addressNumTextField;
+	private JTextField addressStreetTextField;
+	private JTextField postalCodeTextField;
+	private JTextField cityTextField;
+	private JTextField facebookTextField;
+	private JTextField instagramTextField;
+	private JTextField twitterTextField;
+	private JTextField mobilePhTextField;
+	private JTextField address2StreetTextField;
+	private final ButtonGroup CreateStudentButtonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -110,32 +123,32 @@ public class CreateStudent {
 		horizontalStrut_1.setPreferredSize(new Dimension(10, 0));
 		panel.add(horizontalStrut_1, "cell 2 2");
 		
-		textField = new JFormattedTextField();
-		textField.setAlignmentY(Component.TOP_ALIGNMENT);
-		textField.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panel.add(textField, "cell 3 2,alignx left");
-		textField.setColumns(8);
+		studentIDTextField = new JFormattedTextField();
+		studentIDTextField.setAlignmentY(Component.TOP_ALIGNMENT);
+		studentIDTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panel.add(studentIDTextField, "cell 3 2,alignx left");
+		studentIDTextField.setColumns(8);
 		
 		JLabel lblNewLabel_1 = new JLabel("First Name:");
 		panel.add(lblNewLabel_1, "cell 1 3,alignx trailing");
 		
-		textField_1 = new JTextField();
-		panel.add(textField_1, "cell 3 3,alignx left");
-		textField_1.setColumns(30);
+		firstNameTextField = new JTextField();
+		panel.add(firstNameTextField, "cell 3 3,alignx left");
+		firstNameTextField.setColumns(30);
 		
 		JLabel lblNewLabel_2 = new JLabel("Last Name:");
 		panel.add(lblNewLabel_2, "cell 1 4,alignx trailing");
 		
-		textField_2 = new JTextField();
-		panel.add(textField_2, "cell 3 4,alignx left");
-		textField_2.setColumns(30);
+		lastNameTextField = new JTextField();
+		panel.add(lastNameTextField, "cell 3 4,alignx left");
+		lastNameTextField.setColumns(30);
 		
 		JLabel lblNewLabel_3 = new JLabel("Middle Initial:");
 		panel.add(lblNewLabel_3, "cell 1 5,alignx trailing");
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(1);
-		panel.add(textField_3, "cell 3 5,alignx left");
+		middleInitialTextField = new JTextField();
+		middleInitialTextField.setColumns(1);
+		panel.add(middleInitialTextField, "cell 3 5,alignx left");
 		
 		JLabel lblNewLabel_4 = new JLabel("Home Phone:");
 		panel.add(lblNewLabel_4, "cell 1 6,alignx trailing");
@@ -148,9 +161,9 @@ public class CreateStudent {
 		}
 	    mf1.setPlaceholderCharacter('_');
 		
-		textField_4 = new JFormattedTextField(mf1);
-		textField_4.setColumns(11);
-		panel.add(textField_4, "cell 3 6,alignx left");
+		homePhTextField = new JFormattedTextField(mf1);
+		homePhTextField.setColumns(11);
+		panel.add(homePhTextField, "cell 3 6,alignx left");
 		
 		JLabel lblNewLabel_5 = new JLabel("Mobile Phone:");
 		panel.add(lblNewLabel_5, "cell 1 7,alignx trailing");
@@ -163,22 +176,46 @@ public class CreateStudent {
 		}
 	    mf2.setPlaceholderCharacter('_');
 		
-		textField_16 = new JFormattedTextField(mf2);
-		textField_16.setColumns(11);
-		panel.add(textField_16, "cell 3 7,alignx left");
+		mobilePhTextField = new JFormattedTextField(mf2);
+		mobilePhTextField.setColumns(11);
+		panel.add(mobilePhTextField, "cell 3 7,alignx left");
 		
 		JLabel lblNewLabel_6 = new JLabel("Email:");
 		panel.add(lblNewLabel_6, "cell 1 8,alignx trailing");
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(35);
-		panel.add(textField_6, "cell 3 8,alignx left");
+		emailTextField = new JTextField();
+		emailTextField.setColumns(35);
+		panel.add(emailTextField, "cell 3 8,alignx left");
 		
+		//Gender
 		JLabel lblNewLabel_7 = new JLabel("Gender");
 		panel.add(lblNewLabel_7, "cell 1 9,alignx trailing");
+
+		JComboBox genderComboBox = new JComboBox();
+		panel.add(genderComboBox, "cell 3 9,alignx left");
 		
-		JComboBox comboBox = new JComboBox();
-		panel.add(comboBox, "cell 3 9,alignx left");
+		
+	    try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
+	        String sql = "SELECT GenderName FROM Gender";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         genderComboBox.addItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
+		
 		
 		JLabel lblNewLabel_8 = new JLabel("Date of Birth:");
 		panel.add(lblNewLabel_8, "cell 1 10,alignx trailing,aligny baseline");
@@ -205,70 +242,115 @@ public class CreateStudent {
 		JLabel lblNewLabel_9 = new JLabel("Address Num:");
 		panel.add(lblNewLabel_9, "cell 1 11,alignx trailing");
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		panel.add(textField_9, "cell 3 11,alignx left");
+		addressNumTextField = new JTextField();
+		addressNumTextField.setColumns(10);
+		panel.add(addressNumTextField, "cell 3 11,alignx left");
 		
 		JLabel lblNewLabel_9_1 = new JLabel("Address Street:");
 		panel.add(lblNewLabel_9_1, "cell 1 12,alignx trailing");
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(30);
-		panel.add(textField_7, "cell 3 12,alignx left");
+		addressStreetTextField = new JTextField();
+		addressStreetTextField.setColumns(30);
+		panel.add(addressStreetTextField, "cell 3 12,alignx left");
 		
 		JLabel lblNewLabel_9_1_1 = new JLabel("Address Line 2:");
 		panel.add(lblNewLabel_9_1_1, "cell 1 13,alignx trailing");
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(30);
-		panel.add(textField_8, "cell 3 13,alignx left");
+		address2StreetTextField = new JTextField();
+		address2StreetTextField.setColumns(30);
+		panel.add(address2StreetTextField, "cell 3 13,alignx left");
 		
 		JLabel lblNewLabel_9_2 = new JLabel("Postal Code:");
 		panel.add(lblNewLabel_9_2, "cell 1 14,alignx trailing");
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(8);
-		panel.add(textField_10, "cell 3 14,alignx left");
+		postalCodeTextField = new JTextField();
+		postalCodeTextField.setColumns(8);
+		panel.add(postalCodeTextField, "cell 3 14,alignx left");
 		
 		JLabel lblNewLabel_9_2_1 = new JLabel("City:");
 		panel.add(lblNewLabel_9_2_1, "cell 1 15,alignx trailing");
 		
-		textField_11 = new JTextField();
-		textField_11.setColumns(30);
-		panel.add(textField_11, "cell 3 15,alignx left");
+		cityTextField = new JTextField();
+		cityTextField.setColumns(30);
+		panel.add(cityTextField, "cell 3 15,alignx left");
 		
 		JLabel lblNewLabel_9_2_2 = new JLabel("Country:");
 		panel.add(lblNewLabel_9_2_2, "cell 1 16,alignx trailing");
 		
-		JComboBox comboBox_1_1 = new JComboBox();
-		panel.add(comboBox_1_1, "cell 3 16,alignx left");
+		JComboBox countryComboBox = new JComboBox();
+		panel.add(countryComboBox, "cell 3 16,alignx left");
+		
+	    try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
+	        String sql = "SELECT CountryName FROM Country";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         countryComboBox.addItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		
 		JLabel lblNewLabel_10 = new JLabel("State / Providence:");
 		panel.add(lblNewLabel_10, "cell 1 17,alignx trailing,aligny center");
 		
-		JComboBox comboBox_1 = new JComboBox();
-		panel.add(comboBox_1, "cell 3 17,alignx left");
+		JComboBox stateComboBox = new JComboBox();
+		panel.add(stateComboBox, "cell 3 17,alignx left");
+		
+	    try{
+	    	
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
+	    	String sql = "SELECT StateProvName FROM StateProv";
+	        
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         stateComboBox.addItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
+		
 		
 		JLabel lblNewLabel_10_1 = new JLabel("Facebook:");
 		panel.add(lblNewLabel_10_1, "cell 1 18,alignx trailing");
 		
-		textField_13 = new JTextField();
-		textField_13.setColumns(30);
-		panel.add(textField_13, "cell 3 18,alignx left");
+		facebookTextField = new JTextField();
+		facebookTextField.setColumns(30);
+		panel.add(facebookTextField, "cell 3 18,alignx left");
 		
 		JLabel lblNewLabel_10_2 = new JLabel("Instagram Handle:");
 		panel.add(lblNewLabel_10_2, "cell 1 19,alignx trailing");
 		
-		textField_14 = new JTextField();
-		textField_14.setColumns(20);
-		panel.add(textField_14, "cell 3 19,alignx left");
+		instagramTextField = new JTextField();
+		instagramTextField.setColumns(20);
+		panel.add(instagramTextField, "cell 3 19,alignx left");
 		
 		JLabel lblNewLabel_10_3 = new JLabel("Twitter Handle:");
 		panel.add(lblNewLabel_10_3, "cell 1 20,alignx trailing");
 		
-		textField_15 = new JTextField();
-		textField_15.setColumns(20);
-		panel.add(textField_15, "cell 3 20,alignx left");
+		twitterTextField = new JTextField();
+		twitterTextField.setColumns(20);
+		panel.add(twitterTextField, "cell 3 20,alignx left");
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
 		panel.add(verticalStrut, "cell 3 22");
@@ -276,16 +358,35 @@ public class CreateStudent {
 		JPanel panel_1 = new JPanel();
 		frmCreateStudent.getContentPane().add(panel_1, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Create Student");
-		panel_1.add(btnNewButton);
+		JButton createStudentButton = new JButton("Create Student");
+		CreateStudentButtonGroup.add(createStudentButton);
+		panel_1.add(createStudentButton);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setAlignmentX(Component.LEFT_ALIGNMENT);
 		frmCreateStudent.getContentPane().add(panel_2, BorderLayout.NORTH);
 		panel_2.setLayout(new MigLayout("", "[107px,grow]", "[grow][23px]"));
 		
-		JButton btnNewButton_1 = new JButton("Create Student");
-		panel_2.add(btnNewButton_1, "cell 0 1,alignx center");
+		JButton createStudentButton2 = new JButton("Create Student");
+		createStudentButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try {
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
+					String sql = "INSERT INTO Student " + "VALUES ("+studentIDTextField.getText()+","+lastNameTextField.getText()+","+
+					firstNameTextField.getText()+","+middleInitialTextField.getText()+","+homePhTextField.getText()+","+mobilePhTextField.getText()+","+emailTextField.getText();
+					PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+				}
+				catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}});
+		CreateStudentButtonGroup.add(createStudentButton2);
+		panel_2.add(createStudentButton2, "cell 0 1,alignx center");
+		
+		
 		
 		textField_5 = new JLabel();
 		frmCreateStudent.getContentPane().add(textField_5, BorderLayout.CENTER);

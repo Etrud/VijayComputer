@@ -9,6 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
 import javax.swing.Box;
@@ -19,11 +24,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import java.awt.Toolkit;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.ListSelectionModel;
 
 public class StudentWindow {
 
 	private JFrame frmStudentView;
-	private JTable table;
+	private JTable studentTable;
 
 	/**
 	 * Launch the application.
@@ -78,18 +85,55 @@ public class StudentWindow {
 		});
 		panel.add(newStudBut, "cell 0 0,alignx center,aligny center");
 		
-		JButton btnNewButton = new JButton("Delete Selected");
-		panel.add(btnNewButton, "cell 1 0,alignx center,aligny top");
-		
 		JButton btnEditSelected = new JButton("Edit Selected");
-		panel.add(btnEditSelected, "cell 2 0");
+		panel.add(btnEditSelected, "cell 1 0");
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmStudentView.getContentPane().add(panel_1);
 		
-		table = new JTable();
-		panel_1.add(table);
+		studentTable = new JTable();
+		studentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		DefaultTableModel studModel =new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Student ID", "First Name", "Last Name", "Email", "DOB"
+				}
+
+			);
+		studentTable.setModel(studModel);
+		panel_1.add(studentTable);
+		
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
+			String sql = "SELECT * FROM Student";
+			PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+	        
+	        while(rs.next())
+	        {
+	            String a = rs.getString("StudentID");
+	            String b = rs.getString("FirstName");
+	            String c = rs.getString("LastName");
+	            String d = rs.getString("Email");
+	            String e = rs.getString("DOB");
+	            studModel.addRow(new Object[]{a, b, c, d, e});
+	        }
+
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		JPanel panel_3 = new JPanel();
 		frmStudentView.getContentPane().add(panel_3, BorderLayout.WEST);
