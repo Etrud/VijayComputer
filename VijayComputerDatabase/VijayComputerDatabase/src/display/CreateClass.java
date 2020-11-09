@@ -13,6 +13,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class CreateClass {
 
@@ -37,7 +40,7 @@ public class CreateClass {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void newWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -68,8 +71,9 @@ public class CreateClass {
 		frmCreateClass.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
-		frmCreateClass.getContentPane().add(panel, BorderLayout.WEST);
-		panel.setLayout(new MigLayout("", "[][grow][grow]", "[][][][grow][][][][][][][][][][][][][][][]"));
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		frmCreateClass.getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(new MigLayout("", "[][grow]", "[][][][grow][][][][][][][][][][][][][][][]"));
 		
 		JLabel lblNewLabel = new JLabel("Class ID:");
 		panel.add(lblNewLabel, "cell 0 0,alignx trailing,aligny center");
@@ -197,22 +201,42 @@ public class CreateClass {
 		panel.add(textField_15, "cell 1 17,alignx left");
 		
 		JPanel panel_1 = new JPanel();
-		frmCreateClass.getContentPane().add(panel_1, BorderLayout.SOUTH);
+		panel_1.setBackground(new Color(173, 216, 230));
+		frmCreateClass.getContentPane().add(panel_1, BorderLayout.NORTH);
+		
+		Component verticalStrut_1 = Box.createVerticalStrut(20);
+		panel_1.add(verticalStrut_1);
 		
 		JButton btnNewButton = new JButton("Create");
 		panel_1.add(btnNewButton);
 		
 		JPanel panel_2 = new JPanel();
-		frmCreateClass.getContentPane().add(panel_2, BorderLayout.NORTH);
+		panel_2.setBackground(new Color(173, 216, 230));
+		frmCreateClass.getContentPane().add(panel_2, BorderLayout.SOUTH);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		panel_2.add(verticalStrut);
 		
 		JButton btnNewButton_1 = new JButton("Create");
 		panel_2.add(btnNewButton_1);
 		
 		textField_5 = new JLabel();
-		frmCreateClass.getContentPane().add(textField_5, BorderLayout.CENTER);
+		textField_5.setHorizontalAlignment(SwingConstants.CENTER);
+		frmCreateClass.getContentPane().add(textField_5, BorderLayout.WEST);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(20);
-		frmCreateClass.getContentPane().add(horizontalStrut, BorderLayout.EAST);
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(173, 216, 230));
+		frmCreateClass.getContentPane().add(panel_3, BorderLayout.WEST);
+		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(10);
+		panel_3.add(horizontalStrut_1);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(173, 216, 230));
+		frmCreateClass.getContentPane().add(panel_4, BorderLayout.EAST);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(10);
+		panel_4.add(horizontalStrut);
 	}
 
 }

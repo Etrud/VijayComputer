@@ -81,7 +81,7 @@ public class DirectoryWindow {
 		JMenuItem mntmNewBusinessContact = new JMenuItem("New Business Contact");
 		mntmNewBusinessContact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CreateBusinessContact contact = new CreateBusinessContact();
+				createBusinessContact contact = new createBusinessContact();
 				contact.createWindow();
 			}
 		});
@@ -108,21 +108,21 @@ public class DirectoryWindow {
 		scrollPane.setViewportView(table);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(153, 255, 204));
+		panel_1.setBackground(new Color(230, 230, 250));
 		frmVijayComputerDirectory.getContentPane().add(panel_1, BorderLayout.NORTH);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(10);
 		panel_1.add(verticalStrut_1);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(new Color(153, 255, 204));
+		panel_4.setBackground(new Color(230, 230, 250));
 		frmVijayComputerDirectory.getContentPane().add(panel_4, BorderLayout.EAST);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(10);
 		panel_4.add(horizontalStrut);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(153, 255, 204));
+		panel_3.setBackground(new Color(230, 230, 250));
 		frmVijayComputerDirectory.getContentPane().add(panel_3, BorderLayout.WEST);
 		panel_3.setLayout(new MigLayout("", "[grow]", "[][grow]"));
 		
@@ -144,7 +144,7 @@ public class DirectoryWindow {
 		panel_5.add(chckbxNewCheckBox_2, "cell 0 2");
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(153, 255, 204));
+		panel_2.setBackground(new Color(230, 230, 250));
 		frmVijayComputerDirectory.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
 		Component verticalStrut = Box.createVerticalStrut(10);

@@ -62,34 +62,49 @@ public class RoomRentalWindow {
 	 */
 	private void initialize() {
 		frmVcaRoom = new JFrame();
-		frmVcaRoom.setTitle("VCA - Room Rental");
-		frmVcaRoom.setBounds(100, 100, 450, 300);
-		frmVcaRoom.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmVcaRoom.setTitle("VCA - Room Reservation");
+		frmVcaRoom.setBounds(100, 100, 687, 374);
+		frmVcaRoom.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmVcaRoom.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 248, 220));
 		frmVcaRoom.getContentPane().add(panel, BorderLayout.WEST);
-		panel.setLayout(new MigLayout("", "[][grow]", "[grow]"));
+		panel.setLayout(new MigLayout("", "[117px,grow]", "[][]"));
+		
+		JLabel lblNewLabel_2 = new JLabel("Room Reservation");
+		panel.add(lblNewLabel_2, "cell 0 0,alignx center,aligny center");
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.add(panel_5, "cell 0 1,grow");
+		panel_5.setLayout(new MigLayout("", "[117px]", "[23px][]"));
 		
 		//Room Rental Button
-		JButton btnNewButton = new JButton("New Room Rental");
+		JButton btnNewButton = new JButton("New Room Reservation");
+		panel_5.add(btnNewButton, "cell 0 0,alignx center,aligny center");
+		
+		JButton btnNewButton_1 = new JButton("Update Room Status");
+		panel_5.add(btnNewButton_1, "cell 0 1,alignx center,aligny center");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NewRoomReserve nrr = new NewRoomReserve();
 				nrr.newWindow();
 			}
 		});
-		panel.add(btnNewButton, "cell 0 0");
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 248, 220));
 		frmVcaRoom.getContentPane().add(panel_1, BorderLayout.EAST);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(255, 248, 220));
 		frmVcaRoom.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(255, 248, 220));
 		frmVcaRoom.getContentPane().add(panel_3, BorderLayout.NORTH);
-		panel_3.setLayout(new MigLayout("", "[][grow][][grow]", "[grow][grow]"));
+		panel_3.setLayout(new MigLayout("", "[][][][grow]", "[grow][grow]"));
 		
 		JLabel lblNewLabel = new JLabel("Show Room Status:");
 		panel_3.add(lblNewLabel, "cell 0 0,alignx trailing");

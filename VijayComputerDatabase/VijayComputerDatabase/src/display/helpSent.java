@@ -13,6 +13,8 @@ import net.miginfocom.swing.MigLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class helpSent extends JDialog {
 
@@ -41,6 +43,7 @@ public class helpSent extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(153, 102, 204));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -61,6 +64,7 @@ public class helpSent extends JDialog {
 			panel.setLayout(new BorderLayout(0, 0));
 			{
 				JPanel panel_1 = new JPanel();
+				panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 				panel.add(panel_1, BorderLayout.CENTER);
 				panel_1.setLayout(new MigLayout("", "[274px,grow,center]", "[14px,grow][grow]"));
 				{
@@ -72,6 +76,21 @@ public class helpSent extends JDialog {
 					panel_1.add(lblNewLabel_1, "cell 0 1,alignx center,aligny top");
 				}
 			}
+		}
+		{
+			JPanel panel = new JPanel();
+			panel.setBackground(new Color(153, 102, 204));
+			getContentPane().add(panel, BorderLayout.NORTH);
+		}
+		{
+			JPanel panel = new JPanel();
+			panel.setBackground(new Color(153, 102, 204));
+			getContentPane().add(panel, BorderLayout.WEST);
+		}
+		{
+			JPanel panel = new JPanel();
+			panel.setBackground(new Color(153, 102, 204));
+			getContentPane().add(panel, BorderLayout.EAST);
 		}
 	}
 

@@ -63,7 +63,7 @@ public class StudentWindow {
 	 */
 	private void initialize() {
 		frmStudentView = new JFrame();
-		frmStudentView.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\bshaffer\\git\\VijayComputerDatabase\\VijayComputerDatabase\\resources\\user.png"));
+		frmStudentView.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\user.png"));
 		frmStudentView.setTitle("Student View");
 		frmStudentView.setBounds(100, 100, 687, 522);
 		frmStudentView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

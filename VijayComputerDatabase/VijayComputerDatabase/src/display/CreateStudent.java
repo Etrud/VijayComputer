@@ -48,6 +48,8 @@ import javax.swing.ButtonGroup;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
 
 public class CreateStudent {
 
@@ -57,7 +59,6 @@ public class CreateStudent {
 	private JTextField lastNameTextField;
 	private JTextField middleInitialTextField;
 	private JTextField homePhTextField;
-	private JLabel textField_5;
 	private JTextField emailTextField;
 	private JDatePickerImpl dateField;
 	private JTextField addressNumTextField;
@@ -105,54 +106,42 @@ public class CreateStudent {
 		frmCreateStudent.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmCreateStudent.getContentPane().setLayout(new BorderLayout(0, 0));
 		JPanel panel = new JPanel();
-		frmCreateStudent.getContentPane().add(panel, BorderLayout.WEST);
-		panel.setLayout(new MigLayout("", "[][][][grow][grow]", "[][][][][][grow][][][][][grow][][][][][][][][][][][][][]"));
-		
-		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		panel.add(verticalStrut_1, "cell 3 0");
-		
-		Component horizontalStrut_1_1 = Box.createHorizontalStrut(20);
-		horizontalStrut_1_1.setPreferredSize(new Dimension(10, 0));
-		horizontalStrut_1_1.setMinimumSize(new Dimension(10, 0));
-		panel.add(horizontalStrut_1_1, "cell 0 2");
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		frmCreateStudent.getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(new MigLayout("", "[][grow]", "[][][][][][][][][][][][][][][][][][][]"));
 		
 		JLabel lblNewLabel = new JLabel("Student ID:");
-		panel.add(lblNewLabel, "cell 1 2,alignx trailing,aligny center");
-		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-		horizontalStrut_1.setMinimumSize(new Dimension(10, 0));
-		horizontalStrut_1.setPreferredSize(new Dimension(10, 0));
-		panel.add(horizontalStrut_1, "cell 2 2");
+		panel.add(lblNewLabel, "cell 0 0,alignx trailing,aligny center");
 		
 		studentIDTextField = new JFormattedTextField();
 		studentIDTextField.setAlignmentY(Component.TOP_ALIGNMENT);
 		studentIDTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panel.add(studentIDTextField, "cell 3 2,alignx left");
+		panel.add(studentIDTextField, "cell 1 0,alignx left");
 		studentIDTextField.setColumns(8);
 		
 		JLabel lblNewLabel_1 = new JLabel("First Name:");
-		panel.add(lblNewLabel_1, "cell 1 3,alignx trailing");
+		panel.add(lblNewLabel_1, "cell 0 1,alignx trailing");
 		
 		firstNameTextField = new JTextField();
-		panel.add(firstNameTextField, "cell 3 3,alignx left");
+		panel.add(firstNameTextField, "cell 1 1,alignx left");
 		firstNameTextField.setColumns(30);
 		
 		JLabel lblNewLabel_2 = new JLabel("Last Name:");
-		panel.add(lblNewLabel_2, "cell 1 4,alignx trailing");
+		panel.add(lblNewLabel_2, "cell 0 2,alignx trailing");
 		
 		lastNameTextField = new JTextField();
-		panel.add(lastNameTextField, "cell 3 4,alignx left");
+		panel.add(lastNameTextField, "cell 1 2,alignx left");
 		lastNameTextField.setColumns(30);
 		
 		JLabel lblNewLabel_3 = new JLabel("Middle Initial:");
-		panel.add(lblNewLabel_3, "cell 1 5,alignx trailing");
+		panel.add(lblNewLabel_3, "cell 0 3,alignx trailing");
 		
 		middleInitialTextField = new JTextField();
 		middleInitialTextField.setColumns(1);
-		panel.add(middleInitialTextField, "cell 3 5,alignx left");
+		panel.add(middleInitialTextField, "cell 1 3,alignx left");
 		
 		JLabel lblNewLabel_4 = new JLabel("Home Phone:");
-		panel.add(lblNewLabel_4, "cell 1 6,alignx trailing");
+		panel.add(lblNewLabel_4, "cell 0 4,alignx trailing");
 		MaskFormatter mf1 = null;
 		try {
 			mf1 = new MaskFormatter("(###)-###-####");
@@ -164,10 +153,10 @@ public class CreateStudent {
 		
 		homePhTextField = new JFormattedTextField(mf1);
 		homePhTextField.setColumns(11);
-		panel.add(homePhTextField, "cell 3 6,alignx left");
+		panel.add(homePhTextField, "cell 1 4,alignx left");
 		
 		JLabel lblNewLabel_5 = new JLabel("Mobile Phone:");
-		panel.add(lblNewLabel_5, "cell 1 7,alignx trailing");
+		panel.add(lblNewLabel_5, "cell 0 5,alignx trailing");
 		MaskFormatter mf2 = null;
 		try {
 			mf2 = new MaskFormatter("(###)-###-####");
@@ -179,21 +168,21 @@ public class CreateStudent {
 		
 		mobilePhTextField = new JFormattedTextField(mf2);
 		mobilePhTextField.setColumns(11);
-		panel.add(mobilePhTextField, "cell 3 7,alignx left");
+		panel.add(mobilePhTextField, "cell 1 5,alignx left");
 		
 		JLabel lblNewLabel_6 = new JLabel("Email:");
-		panel.add(lblNewLabel_6, "cell 1 8,alignx trailing");
+		panel.add(lblNewLabel_6, "cell 0 6,alignx trailing");
 		
 		emailTextField = new JTextField();
 		emailTextField.setColumns(35);
-		panel.add(emailTextField, "cell 3 8,alignx left");
+		panel.add(emailTextField, "cell 1 6,alignx left");
 		
 		//Gender
 		JLabel lblNewLabel_7 = new JLabel("Gender");
-		panel.add(lblNewLabel_7, "cell 1 9,alignx trailing");
+		panel.add(lblNewLabel_7, "cell 0 7,alignx trailing");
 
 		JComboBox genderComboBox = new JComboBox();
-		panel.add(genderComboBox, "cell 3 9,alignx left");
+		panel.add(genderComboBox, "cell 1 7,alignx left");
 		
 		
 	    try{
@@ -219,12 +208,12 @@ public class CreateStudent {
 		
 		
 		JLabel lblNewLabel_8 = new JLabel("Date of Birth:");
-		panel.add(lblNewLabel_8, "cell 1 10,alignx trailing,aligny baseline");
+		panel.add(lblNewLabel_8, "cell 0 8,alignx trailing,aligny baseline");
 		
 		JPanel panel_3 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_3.getLayout();
 		flowLayout.setHgap(0);
-		panel.add(panel_3, "cell 3 10,alignx left,aligny center");
+		panel.add(panel_3, "cell 1 8,alignx left,aligny center");
 	    UtilDateModel model=new UtilDateModel();
 	    Properties p = new Properties();
         p.put("text.today", "Today");
@@ -241,45 +230,45 @@ public class CreateStudent {
 
 		
 		JLabel lblNewLabel_9 = new JLabel("Address Num:");
-		panel.add(lblNewLabel_9, "cell 1 11,alignx trailing");
+		panel.add(lblNewLabel_9, "cell 0 9,alignx trailing");
 		
 		addressNumTextField = new JTextField();
 		addressNumTextField.setColumns(10);
-		panel.add(addressNumTextField, "cell 3 11,alignx left");
+		panel.add(addressNumTextField, "cell 1 9,alignx left");
 		
 		JLabel lblNewLabel_9_1 = new JLabel("Address Street:");
-		panel.add(lblNewLabel_9_1, "cell 1 12,alignx trailing");
+		panel.add(lblNewLabel_9_1, "cell 0 10,alignx trailing");
 		
 		addressStreetTextField = new JTextField();
 		addressStreetTextField.setColumns(30);
-		panel.add(addressStreetTextField, "cell 3 12,alignx left");
+		panel.add(addressStreetTextField, "cell 1 10,alignx left");
 		
 		JLabel lblNewLabel_9_1_1 = new JLabel("Address Line 2:");
-		panel.add(lblNewLabel_9_1_1, "cell 1 13,alignx trailing");
+		panel.add(lblNewLabel_9_1_1, "cell 0 11,alignx trailing");
 		
 		address2StreetTextField = new JTextField();
 		address2StreetTextField.setColumns(30);
-		panel.add(address2StreetTextField, "cell 3 13,alignx left");
+		panel.add(address2StreetTextField, "cell 1 11,alignx left");
 		
 		JLabel lblNewLabel_9_2 = new JLabel("Postal Code:");
-		panel.add(lblNewLabel_9_2, "cell 1 14,alignx trailing");
+		panel.add(lblNewLabel_9_2, "cell 0 12,alignx trailing");
 		
 		postalCodeTextField = new JTextField();
 		postalCodeTextField.setColumns(8);
-		panel.add(postalCodeTextField, "cell 3 14,alignx left");
+		panel.add(postalCodeTextField, "cell 1 12,alignx left");
 		
 		JLabel lblNewLabel_9_2_1 = new JLabel("City:");
-		panel.add(lblNewLabel_9_2_1, "cell 1 15,alignx trailing");
+		panel.add(lblNewLabel_9_2_1, "cell 0 13,alignx trailing");
 		
 		cityTextField = new JTextField();
 		cityTextField.setColumns(30);
-		panel.add(cityTextField, "cell 3 15,alignx left");
+		panel.add(cityTextField, "cell 1 13,alignx left");
 		
 		JLabel lblNewLabel_9_2_2 = new JLabel("Country:");
-		panel.add(lblNewLabel_9_2_2, "cell 1 16,alignx trailing");
+		panel.add(lblNewLabel_9_2_2, "cell 0 14,alignx trailing");
 		
 		JComboBox countryComboBox = new JComboBox();
-		panel.add(countryComboBox, "cell 3 16,alignx left");
+		panel.add(countryComboBox, "cell 1 14,alignx left");
 		
 	    try{
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -303,10 +292,10 @@ public class CreateStudent {
 	    }
 		
 		JLabel lblNewLabel_10 = new JLabel("State / Providence:");
-		panel.add(lblNewLabel_10, "cell 1 17,alignx trailing,aligny center");
+		panel.add(lblNewLabel_10, "cell 0 15,alignx trailing,aligny center");
 		
 		JComboBox stateComboBox = new JComboBox();
-		panel.add(stateComboBox, "cell 3 17,alignx left");
+		panel.add(stateComboBox, "cell 1 15,alignx left");
 		
 	    try{
 	    	
@@ -333,40 +322,41 @@ public class CreateStudent {
 		
 		
 		JLabel lblNewLabel_10_1 = new JLabel("Facebook:");
-		panel.add(lblNewLabel_10_1, "cell 1 18,alignx trailing");
+		panel.add(lblNewLabel_10_1, "cell 0 16,alignx trailing");
 		
 		facebookTextField = new JTextField();
 		facebookTextField.setColumns(30);
-		panel.add(facebookTextField, "cell 3 18,alignx left");
+		panel.add(facebookTextField, "cell 1 16,alignx left");
 		
 		JLabel lblNewLabel_10_2 = new JLabel("Instagram Handle:");
-		panel.add(lblNewLabel_10_2, "cell 1 19,alignx trailing");
+		panel.add(lblNewLabel_10_2, "cell 0 17,alignx trailing");
 		
 		instagramTextField = new JTextField();
 		instagramTextField.setColumns(20);
-		panel.add(instagramTextField, "cell 3 19,alignx left");
+		panel.add(instagramTextField, "cell 1 17,alignx left");
 		
 		JLabel lblNewLabel_10_3 = new JLabel("Twitter Handle:");
-		panel.add(lblNewLabel_10_3, "cell 1 20,alignx trailing");
+		panel.add(lblNewLabel_10_3, "cell 0 18,alignx trailing");
 		
 		twitterTextField = new JTextField();
 		twitterTextField.setColumns(20);
-		panel.add(twitterTextField, "cell 3 20,alignx left");
-		
-		Component verticalStrut = Box.createVerticalStrut(20);
-		panel.add(verticalStrut, "cell 3 22");
+		panel.add(twitterTextField, "cell 1 18,alignx left");
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(176, 196, 222));
 		frmCreateStudent.getContentPane().add(panel_1, BorderLayout.SOUTH);
+		
+		Component verticalStrut_2 = Box.createVerticalStrut(20);
+		panel_1.add(verticalStrut_2);
 		
 		JButton createStudentButton = new JButton("Create Student");
 		CreateStudentButtonGroup.add(createStudentButton);
 		panel_1.add(createStudentButton);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(176, 196, 222));
 		panel_2.setAlignmentX(Component.LEFT_ALIGNMENT);
 		frmCreateStudent.getContentPane().add(panel_2, BorderLayout.NORTH);
-		panel_2.setLayout(new MigLayout("", "[107px,grow]", "[grow][23px]"));
 		
 		JButton createStudentButton2 = new JButton("Create Student");
 		createStudentButton2.addActionListener(new ActionListener() {
@@ -397,16 +387,30 @@ public class CreateStudent {
 					frmCreateStudent.dispose();
 				}
 			}});
+		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		Component verticalStrut_2_1 = Box.createVerticalStrut(20);
+		panel_2.add(verticalStrut_2_1);
 		CreateStudentButtonGroup.add(createStudentButton2);
-		panel_2.add(createStudentButton2, "cell 0 1,alignx center");
+		panel_2.add(createStudentButton2);
 		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(176, 196, 222));
+		frmCreateStudent.getContentPane().add(panel_4, BorderLayout.EAST);
 		
+		Component horizontalStrut_1_1_1_1 = Box.createHorizontalStrut(20);
+		horizontalStrut_1_1_1_1.setPreferredSize(new Dimension(10, 0));
+		horizontalStrut_1_1_1_1.setMinimumSize(new Dimension(10, 0));
+		panel_4.add(horizontalStrut_1_1_1_1);
 		
-		textField_5 = new JLabel();
-		frmCreateStudent.getContentPane().add(textField_5, BorderLayout.CENTER);
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(new Color(176, 196, 222));
+		frmCreateStudent.getContentPane().add(panel_5, BorderLayout.WEST);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(20);
-		frmCreateStudent.getContentPane().add(horizontalStrut, BorderLayout.EAST);
+		Component horizontalStrut_1_1_1 = Box.createHorizontalStrut(20);
+		horizontalStrut_1_1_1.setPreferredSize(new Dimension(10, 0));
+		horizontalStrut_1_1_1.setMinimumSize(new Dimension(10, 0));
+		panel_5.add(horizontalStrut_1_1_1);
 	}
 	
 public class DateLabelFormatter extends AbstractFormatter {

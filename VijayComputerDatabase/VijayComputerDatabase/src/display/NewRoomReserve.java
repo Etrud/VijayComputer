@@ -73,36 +73,49 @@ public class NewRoomReserve {
 		frmVcaNew.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(135, 206, 250));
 		frmVcaNew.getContentPane().add(panel, BorderLayout.WEST);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(20);
+		Component horizontalStrut = Box.createHorizontalStrut(15);
 		panel.add(horizontalStrut);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(135, 206, 250));
 		frmVcaNew.getContentPane().add(panel_1, BorderLayout.EAST);
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		Component horizontalStrut_1 = Box.createHorizontalStrut(15);
 		panel_1.add(horizontalStrut_1);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(135, 206, 250));
 		frmVcaNew.getContentPane().add(panel_2, BorderLayout.NORTH);
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
 		panel_2.add(verticalStrut);
 		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_2.add(panel_5);
+		
 		JButton btnNewButton_1 = new JButton("Create Reservation");
-		panel_2.add(btnNewButton_1);
+		panel_5.add(btnNewButton_1);
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(135, 206, 250));
 		frmVcaNew.getContentPane().add(panel_3, BorderLayout.SOUTH);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		panel_3.add(verticalStrut_1);
 		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_3.add(panel_6);
+		
 		JButton btnNewButton = new JButton("Create Reservation");
-		panel_3.add(btnNewButton);
+		panel_6.add(btnNewButton);
 		
 		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmVcaNew.getContentPane().add(panel_4, BorderLayout.CENTER);
 		panel_4.setLayout(new MigLayout("", "[][grow,fill]", "[grow,center][grow][grow,center][grow,baseline]"));
 		

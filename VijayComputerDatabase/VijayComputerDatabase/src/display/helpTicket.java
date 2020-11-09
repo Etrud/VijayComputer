@@ -45,64 +45,77 @@ public class helpTicket extends JDialog {
 		setTitle("Submit a Help Request");
 		setResizable(false);			
 		helpTextArea = new JTextArea();
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 500, 321);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(153, 204, 255));
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
 			helpTextArea.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 			helpTextArea.setRows(10);
-			helpTextArea.setColumns(35);
+			helpTextArea.setColumns(50);
 			contentPanel.add(helpTextArea);
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(153, 204, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Desktop desktop = Desktop.getDesktop();
-						String message = "mailto:redcougardata@gmail.com?subject=Service%20Email&body="+helpTextArea.getText().replace(" ","%20")+"";
-						URI uri = URI.create(message);
-						try {
-							dispose();
-							helpSent hs = new helpSent();
-							helpSent.createWindow();
-							TimeUnit.SECONDS.sleep(2);
-							desktop.mail(uri);
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+				{
+					JPanel panel = new JPanel();
+					panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+					buttonPane.add(panel);
+					JButton okButton = new JButton("OK");
+					panel.add(okButton);
+					okButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							Desktop desktop = Desktop.getDesktop();
+							String message = "mailto:redcougardata@gmail.com?subject=Service%20Email&body="+helpTextArea.getText().replace(" ","%20")+"";
+							URI uri = URI.create(message);
+							try {
+								dispose();
+								helpSent hs = new helpSent();
+								helpSent.createWindow();
+								TimeUnit.SECONDS.sleep(2);
+								desktop.mail(uri);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 						}
+					});
+					okButton.setActionCommand("OK");
+					getRootPane().setDefaultButton(okButton);
+					{
+						JButton cancelButton = new JButton("Cancel");
+						panel.add(cancelButton);
+						cancelButton.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								dispose();
+							}
+						});
+						cancelButton.setActionCommand("Cancel");
 					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				}
 			}
 		}
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(new Color(153, 204, 255));
 			getContentPane().add(panel, BorderLayout.NORTH);
 			{
-				JLabel lblNewLabel = new JLabel("Please type a small description of your issue below.");
-				panel.add(lblNewLabel);
+				JPanel panel_1 = new JPanel();
+				panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+				panel.add(panel_1);
+				{
+					JLabel lblNewLabel = new JLabel("Please type a small description of your issue below.");
+					panel_1.add(lblNewLabel);
+				}
 			}
 		}
 	}

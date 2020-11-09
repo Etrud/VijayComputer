@@ -84,6 +84,7 @@ public class MainScreen {
 		
 		JButton btnNewButton = new JButton("LOGIN");
 		btnNewButton.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				JavaConnectionSQL connection = new JavaConnectionSQL();
@@ -104,7 +105,7 @@ public class MainScreen {
 		textField_1.setColumns(10);
 		
 		JLabel logoLogin = new JLabel("");
-		ImageIcon icon = new ImageIcon(new ImageIcon("VijayComputerDatabase/resources//logo.png").getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT));
+		ImageIcon icon = new ImageIcon(new ImageIcon("VijayComputerDatabase\\VijayComputerDatabase/resources//logo.png").getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT));
 		logoLogin.setIcon(icon);
 		
 		passwordField = new JPasswordField();

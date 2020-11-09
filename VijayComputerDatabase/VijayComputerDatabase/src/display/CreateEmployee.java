@@ -13,6 +13,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import java.awt.Component;
 import javax.swing.Box;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
 
 public class CreateEmployee {
 
@@ -22,7 +24,6 @@ public class CreateEmployee {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private JLabel textField_5;
 	private JTextField textField_6;
 	private JTextField textField_8;
 	private JTextField textField_9;
@@ -69,8 +70,9 @@ public class CreateEmployee {
 		frmCreateEmployee.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
-		frmCreateEmployee.getContentPane().add(panel, BorderLayout.WEST);
-		panel.setLayout(new MigLayout("", "[][grow][grow]", "[][][][grow][][][][][][][][][][][][][][][][][]"));
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		frmCreateEmployee.getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(new MigLayout("", "[][grow]", "[][][][grow][][][][][][][][][][][][][][][]"));
 		
 		JLabel lblNewLabel = new JLabel("Employee ID:");
 		panel.add(lblNewLabel, "cell 0 0,alignx trailing,aligny center");
@@ -204,26 +206,39 @@ public class CreateEmployee {
 		textField_15.setColumns(20);
 		panel.add(textField_15, "cell 1 18,alignx left");
 		
-		Component verticalStrut = Box.createVerticalStrut(20);
-		panel.add(verticalStrut, "cell 1 20");
-		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(173, 216, 230));
 		frmCreateEmployee.getContentPane().add(panel_1, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Create");
+		Component verticalStrut_1 = Box.createVerticalStrut(15);
+		panel_1.add(verticalStrut_1);
+		
+		JButton btnNewButton = new JButton("Create Employee");
 		panel_1.add(btnNewButton);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(173, 216, 230));
 		frmCreateEmployee.getContentPane().add(panel_2, BorderLayout.NORTH);
 		
-		JButton btnNewButton_1 = new JButton("Create");
+		Component verticalStrut_1_1 = Box.createVerticalStrut(15);
+		panel_2.add(verticalStrut_1_1);
+		
+		JButton btnNewButton_1 = new JButton("Create Employee");
 		panel_2.add(btnNewButton_1);
 		
-		textField_5 = new JLabel();
-		frmCreateEmployee.getContentPane().add(textField_5, BorderLayout.CENTER);
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(173, 216, 230));
+		frmCreateEmployee.getContentPane().add(panel_3, BorderLayout.WEST);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(20);
-		frmCreateEmployee.getContentPane().add(horizontalStrut, BorderLayout.EAST);
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		panel_3.add(horizontalStrut_1);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(173, 216, 230));
+		frmCreateEmployee.getContentPane().add(panel_4, BorderLayout.EAST);
+		
+		Component horizontalStrut_1_1 = Box.createHorizontalStrut(20);
+		panel_4.add(horizontalStrut_1_1);
 	}
 
 }

@@ -82,6 +82,7 @@ public class createAnnouncement {
 		frmVcaCreate.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmVcaCreate.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new MigLayout("", "[115px][287px,grow]", "[16px][16px,grow][16px,grow][132px]"));
 		
@@ -136,26 +137,34 @@ public class createAnnouncement {
 		panel.add(textArea, "cell 1 3,grow");
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(224, 255, 255));
 		frmVcaCreate.getContentPane().add(panel_1, BorderLayout.EAST);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(224, 255, 255));
 		frmVcaCreate.getContentPane().add(panel_2, BorderLayout.NORTH);
 		
 		JLabel lblNewLabel = new JLabel("Create Announcement Form");
 		panel_2.add(lblNewLabel);
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(224, 255, 255));
 		frmVcaCreate.getContentPane().add(panel_3, BorderLayout.SOUTH);
 		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_3.add(panel_4);
+		
 		JButton btnNewButton = new JButton("Create");
+		panel_4.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmVcaCreate.dispose();
 			}
 		});
-		panel_3.add(btnNewButton);
 		
 		JPanel panel_1_1 = new JPanel();
+		panel_1_1.setBackground(new Color(224, 255, 255));
 		frmVcaCreate.getContentPane().add(panel_1_1, BorderLayout.WEST);
 	}
 	public class DateLabelFormatter extends AbstractFormatter {
