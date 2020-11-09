@@ -20,11 +20,14 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
 
 public class DirectoryWindow {
 
 	private JFrame frmVijayComputerDirectory;
-	private JTable table;
+	private JTable studentTable;
+	private JTable empTable;
+	private JTable busTable;
 
 	/**
 	 * Launch the application.
@@ -56,7 +59,7 @@ public class DirectoryWindow {
 		frmVijayComputerDirectory = new JFrame();
 		frmVijayComputerDirectory.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\bshaffer\\git\\VijayComputerDatabase\\VijayComputerDatabase\\resources\\communicate.png"));
 		frmVijayComputerDirectory.setTitle("VCA - Directory");
-		frmVijayComputerDirectory.setBounds(100, 100, 450, 300);
+		frmVijayComputerDirectory.setBounds(100, 100, 520, 355);
 		frmVijayComputerDirectory.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -100,12 +103,46 @@ public class DirectoryWindow {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmVijayComputerDirectory.getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
+		
+		JPanel studentPanel = new JPanel();
+		panel.add(studentPanel, "cell 0 0,grow");
+		studentPanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_3 = new JLabel("Student Directory:");
+		studentPanel.add(lblNewLabel_3, BorderLayout.NORTH);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		panel.add(scrollPane);
+		studentPanel.add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		studentTable = new JTable();
+		scrollPane.setViewportView(studentTable);
+		
+		JPanel empPanel = new JPanel();
+		panel.add(empPanel, "cell 0 1,grow");
+		empPanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_2 = new JLabel("Employee Directory:");
+		empPanel.add(lblNewLabel_2, BorderLayout.NORTH);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		empPanel.add(scrollPane_1, BorderLayout.CENTER);
+		
+		empTable = new JTable();
+		scrollPane_1.setViewportView(empTable);
+		
+		JPanel busPanel = new JPanel();
+		panel.add(busPanel, "cell 0 2,grow");
+		busPanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_1 = new JLabel("Business Directory:");
+		busPanel.add(lblNewLabel_1, BorderLayout.NORTH);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		busPanel.add(scrollPane_2, BorderLayout.CENTER);
+		
+		busTable = new JTable();
+		scrollPane_2.setViewportView(busTable);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(230, 230, 250));
@@ -132,16 +169,26 @@ public class DirectoryWindow {
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_3.add(panel_5, "cell 0 1,aligny top");
-		panel_5.setLayout(new MigLayout("", "[]", "[][][]"));
+		panel_5.setLayout(new MigLayout("", "[]", "[][][][][]"));
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Students");
-		panel_5.add(chckbxNewCheckBox, "cell 0 0");
+		chckbxNewCheckBox.setSelected(true);
+		panel_5.add(chckbxNewCheckBox, "cell 0 1");
 		
 		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Employees");
-		panel_5.add(chckbxNewCheckBox_1, "cell 0 1");
+		chckbxNewCheckBox_1.setSelected(true);
+		panel_5.add(chckbxNewCheckBox_1, "cell 0 2");
 		
 		JCheckBox chckbxNewCheckBox_2 = new JCheckBox("Business Contacts");
-		panel_5.add(chckbxNewCheckBox_2, "cell 0 2");
+		chckbxNewCheckBox_2.setSelected(true);
+		panel_5.add(chckbxNewCheckBox_2, "flowy,cell 0 3");
+		
+		JButton btnNewButton = new JButton("Update");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		panel_5.add(btnNewButton, "cell 0 4,alignx center,aligny center");
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(230, 230, 250));

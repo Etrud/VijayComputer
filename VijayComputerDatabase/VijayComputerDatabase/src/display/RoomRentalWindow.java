@@ -27,6 +27,7 @@ import display.CreateStudent.DateLabelFormatter;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
 
 public class RoomRentalWindow {
 
@@ -104,19 +105,19 @@ public class RoomRentalWindow {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(255, 248, 220));
 		frmVcaRoom.getContentPane().add(panel_3, BorderLayout.NORTH);
-		panel_3.setLayout(new MigLayout("", "[][][][grow]", "[grow][grow]"));
+		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblNewLabel = new JLabel("Show Room Status:");
-		panel_3.add(lblNewLabel, "cell 0 0,alignx trailing");
+		panel_3.add(lblNewLabel);
 		
 		JComboBox comboBox = new JComboBox();
-		panel_3.add(comboBox, "cell 1 0,alignx left");
+		panel_3.add(comboBox);
 		
 		JLabel lblNewLabel_1 = new JLabel("on date");
-		panel_3.add(lblNewLabel_1, "cell 2 0,alignx right");
+		panel_3.add(lblNewLabel_1);
 		
 		JPanel panel_6 = new JPanel();
-		panel_3.add(panel_6, "cell 3 0,alignx left,growy");
+		panel_3.add(panel_6);
 		 UtilDateModel model=new UtilDateModel();
 		    Properties p = new Properties();
 	        p.put("text.today", "Today");

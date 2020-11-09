@@ -116,12 +116,6 @@ public class CalendarWindow {
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Exit");
 		mnNewMenu.add(mntmNewMenuItem_4);
-		
-		JMenu mnNewMenu_2 = new JMenu("Edit");
-		menuBar.add(mnNewMenu_2);
-		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Edit Announcements");
-		mnNewMenu_2.add(mntmNewMenuItem_5);
 		frmCalendar.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_5 = new JPanel();
@@ -156,7 +150,7 @@ public class CalendarWindow {
         p.put("text.year", "Year");
 	    JDatePanelImpl datePanel2 = new JDatePanelImpl(model, p);
 	    
-	    JLabel lblNewLabel_2 = new JLabel("Create new announcment");
+	    JLabel lblNewLabel_2 = new JLabel("Announcement Center");
 	    lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
 	    panel.add(lblNewLabel_2, "cell 0 0,alignx center,aligny center");
 	    
@@ -304,9 +298,19 @@ public class CalendarWindow {
 	    JPanel panel_7 = new JPanel();
 	    panel_7.setBorder(new LineBorder(new Color(0, 0, 0)));
 	    panel.add(panel_7, "flowx,cell 0 1,alignx center,aligny center");
+	    panel_7.setLayout(new MigLayout("", "[1px]", "[1px][23px]"));
 	    
 	    JButton btnNewButton_1 = new JButton("New Announcment");
-	    panel_7.add(btnNewButton_1);
+	    panel_7.add(btnNewButton_1, "cell 0 0,grow");
+	    
+	    JButton btnNewButton_1_1 = new JButton("Edit Announcement");
+	    btnNewButton_1_1.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		editAnnouncement eAnnoun = new editAnnouncement();
+	    		eAnnoun.createWindow();
+	    	}
+	    });
+	    panel_7.add(btnNewButton_1_1, "cell 0 1,alignx left,aligny top");
 	    btnNewButton_1.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		createAnnouncement cAnnoun = new createAnnouncement();

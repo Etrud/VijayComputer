@@ -71,21 +71,21 @@ public class EquipmentWindow {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(153, 204, 204));
 		frmEquipmentMenu.getContentPane().add(panel, BorderLayout.NORTH);
-		panel.setLayout(new MigLayout("", "[147px,grow][30px,grow]", "[22px]"));
-		
-		JLabel lblNewLabel = new JLabel("Display Equipment with status:");
-		panel.add(lblNewLabel, "cell 0 0,alignx right");
+		panel.setLayout(new MigLayout("", "[30px,grow]", "[22px]"));
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.add(panel_6, "cell 1 0");
-		panel_6.setLayout(new MigLayout("", "[30px][47px]", "[23px]"));
+		panel.add(panel_6, "flowx,cell 0 0,alignx center,aligny center");
+		panel_6.setLayout(new MigLayout("", "[][][30px][47px]", "[23px]"));
+		
+		JLabel lblNewLabel = new JLabel("Display Equipment with status:");
+		panel_6.add(lblNewLabel, "cell 0 0");
 		
 		JComboBox statusComboBox = new JComboBox();
-		panel_6.add(statusComboBox, "cell 0 0,alignx left,aligny top");
+		panel_6.add(statusComboBox, "cell 2 0,alignx left,aligny top");
 		
 		JButton btnNewButton_2 = new JButton("OK");
-		panel_6.add(btnNewButton_2, "cell 1 0,alignx left,aligny top");
+		panel_6.add(btnNewButton_2, "cell 3 0,alignx left,aligny top");
 		
 	    try{
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -118,7 +118,7 @@ public class EquipmentWindow {
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.add(panel_5, "cell 0 1,alignx center");
+		panel_1.add(panel_5, "cell 0 1,alignx center,aligny top");
 		panel_5.setLayout(new MigLayout("", "[]", "[][][]"));
 		
 		JButton newCheckoutButton = new JButton("Checkout Equipment");
@@ -140,11 +140,11 @@ public class EquipmentWindow {
 		});
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Software Management");
-		panel_1.add(lblNewLabel_1_1, "cell 0 3,alignx center,aligny center");
+		panel_1.add(lblNewLabel_1_1, "cell 0 3,alignx center,aligny bottom");
 		
 		JPanel panel_5_1 = new JPanel();
 		panel_5_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.add(panel_5_1, "cell 0 4,alignx center");
+		panel_1.add(panel_5_1, "cell 0 4,alignx center,aligny top");
 		panel_5_1.setLayout(new MigLayout("", "[77px,grow]", "[23px]"));
 		
 		JButton btnNewButton_1 = new JButton("Software");

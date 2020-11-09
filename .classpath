@@ -10,6 +10,6 @@
 	<classpathentry kind="lib" path="VijayComputerDatabase/jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="lib" path="VijayComputerDatabase/jgoodies-forms-1.8.0.jar"/>
 	<classpathentry kind="lib" path="VijayComputerDatabase/miglayout15-swing.jar"/>
-	<classpathentry kind="lib" path="C:/Users/etrud/Desktop/VijayComputer-main/VijayComputerDatabase/mssql-jdbc-8.4.1.jre14.jar"/>
+	<classpathentry kind="lib" path="C:/Users/bshaffer/git/VijayComputer/VijayComputerDatabase/mssql-jdbc-8.4.1.jre14.jar"/>
 	<classpathentry kind="output" path="VijayComputerDatabase/bin"/>
 </classpath>
