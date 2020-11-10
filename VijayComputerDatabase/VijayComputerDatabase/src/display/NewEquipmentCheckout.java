@@ -83,7 +83,7 @@ public class NewEquipmentCheckout {
 	private void initialize() {
 		frmVcaEquipment = new JFrame();
 		frmVcaEquipment.setTitle("VCA - Equipment Checkout Form");
-		frmVcaEquipment.setBounds(100, 100, 479, 390);
+		frmVcaEquipment.setBounds(100, 100, 481, 412);
 		frmVcaEquipment.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmVcaEquipment.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -106,7 +106,8 @@ public class NewEquipmentCheckout {
 		frmVcaEquipment.getContentPane().add(panel_2, BorderLayout.NORTH);
 		
 		JLabel lblNewLabel_5 = new JLabel("VCA Equipment Checkout");
-		lblNewLabel_5.setFont(new Font("Cambria", Font.BOLD, 25));
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_5.setFont(new Font("Calibri", Font.BOLD, 25));
 		panel_2.add(lblNewLabel_5);
 		
 		JPanel panel_3 = new JPanel();
@@ -127,7 +128,7 @@ public class NewEquipmentCheckout {
 		JButton btnNewButton = new JButton("New Checkout");
 		panel_6.add(btnNewButton);
 		
-		Component verticalStrut = Box.createVerticalStrut(20);
+		Component verticalStrut = Box.createVerticalStrut(35);
 		panel_5.add(verticalStrut);
 		
 		JPanel panel_4 = new JPanel();
@@ -150,15 +151,14 @@ public class NewEquipmentCheckout {
 		
 	    try{
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
-	        String sql = "SELECT EquipmentName FROM EquipmentType";
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT EquipmentName from EquipmentType";
 	        PreparedStatement pst = conn.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();
 
 	        while(rs.next()){
 	         String s = rs.getString(1);
 	         hardwareTypecomboBox.addItem(s);
-
 	        }
 
 	        pst.close();

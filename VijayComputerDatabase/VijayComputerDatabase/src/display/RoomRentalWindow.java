@@ -35,11 +35,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class RoomRentalWindow {
 
 	private JFrame frmVcaRoom;
 	private JDatePickerImpl dateField;
+	private JTable table;
 
 
 	/**
@@ -137,10 +141,34 @@ public class RoomRentalWindow {
 		    SpringLayout springLayout = (SpringLayout) dateField.getLayout();
 		    springLayout.putConstraint(SpringLayout.WEST, dateField.getJFormattedTextField(), 0, SpringLayout.WEST, dateField);
 		    panel_6.add(dateField);
+		    
+		    JButton okButton = new JButton("OK");
+		    okButton.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		
+		    	}
+		    });
+		    panel_3.add(okButton);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmVcaRoom.getContentPane().add(panel_4, BorderLayout.CENTER);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_4.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Reservation Date", "Room Number", "Time Start", "Time End"
+			}
+		));
+		table.getColumnModel().getColumn(0).setPreferredWidth(94);
+		table.getColumnModel().getColumn(1).setPreferredWidth(83);
+		scrollPane.setViewportView(table);
 	}
 
 
@@ -165,5 +193,4 @@ public class RoomRentalWindow {
 	    }
 
 	}
-	
 }

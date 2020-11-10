@@ -238,8 +238,8 @@ public class DirectoryWindow {
 	    		{
 	    			studentPanel.setVisible(true);
 	    			try {
-	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=testDatabase","sa","Cougarnet2020!");
-	    				String sql = "SELECT Student.StudentID, Student.FirstName, Student.MiddleInital, Student.LastName, Student.HomePhone, Student.MobilePhone, Student.Email, Student.AddressNum, Student.AddressStreet, Student.PostalCode, Student.City, StateProv.StateProvName, Country.CountryName, Student.FaceBookHandle, Student.InstagramHandle, Student.TwitterHandle FROM Student INNER JOIN StateProv ON Student.StateID = StateProv.StateID INNER JOIN Country ON Student.CountryID = Country.CountryID";
+	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	    				String sql = "SELECT Student.StudentID, Student.FirstName, Student.MiddleInital, Student.LastName, Student.HomePhone, Student.MobilePhone, Student.Email, Student.AddressNum, Student.AddressStreet, Student.AddressStreet2, Student.PostalCode, Student.City, StateProv.StateProvName, Country.CountryName, Student.FaceBookHandle, Student.InstagramHandle, Student.TwitterHandle FROM Student INNER JOIN StateProv ON Student.StateID = StateProv.StateID INNER JOIN Country ON Student.CountryID = Country.CountryID";
 	    				PreparedStatement pst = conn.prepareStatement(sql);
 	    		        ResultSet rs = pst.executeQuery();
 	    		        
@@ -254,7 +254,7 @@ public class DirectoryWindow {
 	    		            String g = rs.getString("Email");
 	    		            String h = rs.getString("AddressNum");
 	    		            String i = rs.getString("AddressStreet");
-	    		            //String i2 = rs.getString("AddressStreet2");
+	    		            String i2 = rs.getString("AddressStreet2");
 	    		            String j = rs.getString("PostalCode");
 	    		            String k = rs.getString("City");
 	    		            String l = rs.getString("StateProvName");
@@ -262,7 +262,7 @@ public class DirectoryWindow {
 	    		            String n = rs.getString("FacebookHandle");
 	    		            String o = rs.getString("InstagramHandle");
 	    		            String p = rs.getString("TwitterHandle");
-	    		            studModel.addRow(new Object[]{a, b, c, d, e1, f,g,h,i,j,k,l,m,n,o,p});
+	    		            studModel.addRow(new Object[]{a, b, c, d, e1, f,g,h,i,i2,j,k,l,m,n,o,p});
 	    		        }
 
 	    			} catch (SQLException e1) {
@@ -278,8 +278,8 @@ public class DirectoryWindow {
 	    		{
 	    			empPanel.setVisible(true);
 	    			try {
-	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=testDatabase","sa","Cougarnet2020!");
-	    				String sql = "SELECT Employee.EmployeeID, Employee.FirstName, Employee.MiddleInitial, Employee.LastName, EmployeeStatus.Status, Employee.HomePhone, Employee.MobilePhone, Employee.Email, Employee.AddressNum,Employee.AddressStreet, Employee.PostalCode, Employee.City, StateProv.StateProvName, Country.CountryName, Employee.FacebookHandle, Employee.InstagramHandle, Employee.TwitterHandle FROM Employee INNER JOIN StateProv ON Employee.StateProvinceID = StateProv.StateID INNER JOIN Country ON Employee.CountryID = Country.CountryID INNER JOIN EmployeeStatus ON Employee.EmployeeStatusID = EmployeeStatus.EmpStatusID";	    				
+	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	    				String sql = "SELECT Employee.EmployeeID, Employee.FirstName, Employee.MiddleInitial, Employee.LastName, EmployeeStatus.Status, Employee.HomePhone, Employee.MobilePhone, Employee.Email, Employee.AddressNum,Employee.AddressStreet,Employee.AddressStreet2, Employee.PostalCode, Employee.City, StateProv.StateProvName, Country.CountryName, Employee.FacebookHandle, Employee.InstagramHandle, Employee.TwitterHandle FROM Employee INNER JOIN StateProv ON Employee.StateProvinceID = StateProv.StateID INNER JOIN Country ON Employee.CountryID = Country.CountryID INNER JOIN EmployeeStatus ON Employee.EmployeeStatusID = EmployeeStatus.EmpStatusID";	    				
 	    				PreparedStatement pst = conn.prepareStatement(sql);
 	    		        ResultSet rs = pst.executeQuery();
 	    		        
@@ -295,7 +295,7 @@ public class DirectoryWindow {
 	    		            String g = rs.getString("Email");
 	    		            String h = rs.getString("AddressNum");
 	    		            String i = rs.getString("AddressStreet");
-	    		            //String i2 = rs.getString("AddressStreet2");
+	    		            String i2 = rs.getString("AddressStreet2");
 	    		            String j = rs.getString("PostalCode");
 	    		            String k = rs.getString("City");
 	    		            String l = rs.getString("StateProvName");
@@ -303,7 +303,7 @@ public class DirectoryWindow {
 	    		            String n = rs.getString("FacebookHandle");
 	    		            String o = rs.getString("InstagramHandle");
 	    		            String p = rs.getString("TwitterHandle");
-	    		            empModel.addRow(new Object[]{a, b, c, d,d1,e1,f,g,h,i,j,k,l,m,n,o,p});
+	    		            empModel.addRow(new Object[]{a, b, c, d,d1,e1,f,g,h,i,i2,j,k,l,m,n,o,p});
 	    		        }
 
 	    			} catch (SQLException e1) {
@@ -320,7 +320,7 @@ public class DirectoryWindow {
 	    			busPanel.setVisible(true);
 	    			try {
 	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=testDatabase","sa","Cougarnet2020!");
-	    				String sql = "SELECT BusinessContact.ContactID, BusinessContact.BusinessName, Title.TitleNAME, BusinessContact.FirstName, BusinessContact.MiddleInitial, BusinessContact.LastName, BusinessStatus.BusinessStatus,BusinessContact.Email, BusinessContact.Phone, BusinessContact.AddressNum, BusinessContact.AddressStreet, BusinessContact.PostalCode, BusinessContact.City, StateProv.StateProvName, Country.CountryName FROM BusinessContact INNER JOIN BusinessStatus ON BusinessContact.BusinessStatusID = BusinessStatus.BusinessStatusID INNER JOIN Title ON BusinessContact.TitleID = Title.TitleID INNER JOIN Country ON BusinessContact.CountryID = Country.CountryID INNER JOIN StateProv ON BusinessContact.StateProvID = StateProv.StateID";
+	    				String sql = "SELECT BusinessContact.ContactID, BusinessContact.BusinessName, Title.TitleNAME, BusinessContact.FirstName, BusinessContact.MiddleInitial, BusinessContact.LastName, BusinessStatus.BusinessStatus,BusinessContact.Email, BusinessContact.Phone, BusinessContact.AddressNum, BusinessContact.AddressStreet,BusinessContact.AddressStreet2, BusinessContact.PostalCode, BusinessContact.City, StateProv.StateProvName, Country.CountryName FROM BusinessContact INNER JOIN BusinessStatus ON BusinessContact.BusinessStatusID = BusinessStatus.BusinessStatusID INNER JOIN Title ON BusinessContact.TitleID = Title.TitleID INNER JOIN Country ON BusinessContact.CountryID = Country.CountryID INNER JOIN StateProv ON BusinessContact.StateID = stateProv.StateID";
 	    				PreparedStatement pst = conn.prepareStatement(sql);
 	    		        ResultSet rs = pst.executeQuery();
 	    		        
@@ -337,13 +337,13 @@ public class DirectoryWindow {
 	    		            String f = rs.getString("Phone");
 	    		            String h = rs.getString("AddressNum");
 	    		            String i = rs.getString("AddressStreet");
-	    		            //String i2 = rs.getString("AddressStreet2");
+	    		            String i2 = rs.getString("AddressStreet2");
 	    		            String j = rs.getString("PostalCode");
 	    		            String k = rs.getString("City");
 	    		            String l = rs.getString("StateProvName");
 	    		            String m = rs.getString("CountryName");
 
-	    		            busModel.addRow(new Object[]{a,a1,a2, b, c, d,d1,e1,f,h,i,j,k,l,m});
+	    		            busModel.addRow(new Object[]{a,a1,a2, b, c, d,d1,e1,f,h,i,i2,j,k,l,m});
 	    		        }
 
 	    			} catch (SQLException e1) {
