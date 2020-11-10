@@ -54,7 +54,7 @@ public class helpTicket extends JDialog {
 		{
 			helpTextArea.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 			helpTextArea.setRows(10);
-			helpTextArea.setColumns(50);
+			helpTextArea.setColumns(35);
 			contentPanel.add(helpTextArea);
 		}
 		{

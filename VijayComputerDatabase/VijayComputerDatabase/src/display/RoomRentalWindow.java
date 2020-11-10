@@ -3,7 +3,9 @@ package display;
 import java.awt.EventQueue;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Properties;
 
 import javax.swing.JFrame;
@@ -13,6 +15,7 @@ import javax.swing.SpringLayout;
 
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JButton;
@@ -26,6 +29,10 @@ import display.CreateStudent.DateLabelFormatter;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
@@ -110,8 +117,10 @@ public class RoomRentalWindow {
 		JLabel lblNewLabel = new JLabel("Show Room Status:");
 		panel_3.add(lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox();
-		panel_3.add(comboBox);
+		JComboBox roomStatusComboBox = new JComboBox();
+		panel_3.add(roomStatusComboBox);
+	    roomStatusComboBox.addItem(new String("Available"));
+	    roomStatusComboBox.addItem(new String("Booked"));
 		
 		JLabel lblNewLabel_1 = new JLabel("on date");
 		panel_3.add(lblNewLabel_1);

@@ -22,6 +22,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -33,6 +34,7 @@ public class EquipmentWindow {
 
 	private JFrame frmEquipmentMenu;
 	private JTable equipTable;
+	DefaultTableModel eqpModel;
 
 	/**
 	 * Launch the application.
@@ -84,8 +86,55 @@ public class EquipmentWindow {
 		JComboBox statusComboBox = new JComboBox();
 		panel_6.add(statusComboBox, "cell 2 0,alignx left,aligny top");
 		
-		JButton btnNewButton_2 = new JButton("OK");
-		panel_6.add(btnNewButton_2, "cell 3 0,alignx left,aligny top");
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=testDatabase","sa","Cougarnet2020!");
+	        String sql = "SELECT EqpStatus FROM EquipmentStatus";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         statusComboBox.addItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
+		
+		JButton okButton = new JButton("OK");
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				eqpModel.setRowCount(0);
+				try {
+				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=testDatabase","sa","Cougarnet2020!");
+				String sql = "SELECT EquipmentStatus.EqpStatus, Equipment.EquipSerialNum, EquipmentType.EquipmentName, EquipCheckout.CheckoutDate, EquipCheckout.ReturnDate FROM EquipmentStatus INNER JOIN Equipment ON EquipmentStatus.EquipmentStatusID = Equipment.StatusID INNER JOIN EquipmentType ON Equipment.EquipTypeID = EquipmentType.EquipmentID INNER JOIN EquipCheckout ON Equipment.EquipSerialNum = EquipCheckout.EquipSerialNum WHERE EqpStatus = '"+statusComboBox.getSelectedItem().toString()+"'";
+				PreparedStatement pst = conn.prepareStatement(sql);
+		        ResultSet rs = pst.executeQuery();
+		        
+		        while(rs.next())
+		       {
+		       
+		            String a = rs.getString("EqpStatus");
+		            String b = rs.getString("EquipSerialNum");
+		            String c = rs.getString("EquipmentName");
+		            String d = rs.getString("CheckoutDate");
+		            String e = rs.getString("ReturnDate");
+		            eqpModel.addRow(new Object[]{a, b, c, d, e});
+		        }
+
+			} catch (SQLException e1) {
+				JOptionPane.showMessageDialog(null, e1);
+			}
+				
+			}
+		});
+		panel_6.add(okButton, "cell 3 0,alignx left,aligny top");
 		
 	    try{
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -173,18 +222,14 @@ public class EquipmentWindow {
 		panel_4.add(scrollPane);
 		
 		equipTable = new JTable();
-		equipTable.setModel(new DefaultTableModel(
+		eqpModel =new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"Equipment Status", "Serial Number", "Equipment Type", "Checkout Date", "Check-in Date"
 			}
-		));
-		equipTable.getColumnModel().getColumn(0).setPreferredWidth(98);
-		equipTable.getColumnModel().getColumn(1).setPreferredWidth(80);
-		equipTable.getColumnModel().getColumn(2).setPreferredWidth(88);
-		equipTable.getColumnModel().getColumn(3).setPreferredWidth(86);
-		equipTable.getColumnModel().getColumn(4).setPreferredWidth(85);
+		);
+		equipTable.setModel(eqpModel);
 		scrollPane.setViewportView(equipTable);
 		
 		JMenuBar menuBar = new JMenuBar();
