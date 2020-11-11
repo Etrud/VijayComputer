@@ -119,15 +119,27 @@ public class EnrollmentWindow {
 		JComboBox classTypeComboBox = new JComboBox();
 		panel_8.add(classTypeComboBox);
 		
+		
+		//Update Button
 		JButton btnNewButton_2 = new JButton("Update");
 		panel_8.add(btnNewButton_2);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-    			classMod.setRowCount(0);
-
-    			 try {
-    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-    				String sql = "SELECT ClassType.ClassType, Class.ClassID, Course.CourseName, Room.RoomNum, BusinessContact.BusinessName, Class.ClassTimeStart, Class.ClassTimeEnd"
+				String sql = "";
+				if( classTypeComboBox.getSelectedItem().toString().equals("All"))
+				{
+					sql = "SELECT ClassType.ClassType, Class.ClassID, Course.CourseName, Room.RoomNum, BusinessContact.BusinessName, Class.ClassTimeStart, Class.ClassTimeEnd, Class.ClassStartDate, Class.ClassEndDate"
+    						+ " FROM Class INNER JOIN"
+    						+ " RoomReserve ON Class.RoomReserveID = RoomReserve.RoomReserveID INNER JOIN"
+    						+ " Room ON RoomReserve.RoomID = Room.RoomID INNER JOIN"
+    						+ " ClassType ON Class.ClassTypeID = ClassType.ClassTypeID INNER JOIN"
+    						+ " ClassContact ON Class.CustomerID = ClassContact.CustomerId INNER JOIN"
+    						+ " Course ON Class.CourseID = Course.CourseID INNER JOIN"
+    						+ " BusinessContact ON ClassContact.ContactId = BusinessContact.ContactID";
+				}
+				else
+				{
+					sql = "SELECT ClassType.ClassType, Class.ClassID, Course.CourseName, Room.RoomNum, BusinessContact.BusinessName, Class.ClassTimeStart, Class.ClassTimeEnd, Class.ClassStartDate, Class.ClassEndDate"
     						+ " FROM Class INNER JOIN"
     						+ " RoomReserve ON Class.RoomReserveID = RoomReserve.RoomReserveID INNER JOIN"
     						+ " Room ON RoomReserve.RoomID = Room.RoomID INNER JOIN"
@@ -136,6 +148,11 @@ public class EnrollmentWindow {
     						+ " Course ON Class.CourseID = Course.CourseID INNER JOIN"
     						+ " BusinessContact ON ClassContact.ContactId = BusinessContact.ContactID"
     						+ " WHERE ClassType ='"+classTypeComboBox.getSelectedItem().toString()+"'";
+				}
+    			classMod.setRowCount(0);
+
+    			 try {
+    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
     				PreparedStatement pst = conn.prepareStatement(sql);
     		        ResultSet rs = pst.executeQuery();
     		        
@@ -148,7 +165,9 @@ public class EnrollmentWindow {
     		            String e = rs.getString("BusinessName");
     		            String f = rs.getString("ClassTimeStart");
     		            String g = rs.getString("ClassTimeEnd");
-    		            classMod.addRow(new Object[]{a, b, c, d, e, f,g});
+    		            String f1 = rs.getString("ClassStartDate");
+    		            String g1 = rs.getString("ClassEndDate");
+    		            classMod.addRow(new Object[]{a, b, c, d, e, f,g,f1,g1});
     		        }
 
     			} catch (SQLException e1) {
@@ -191,7 +210,7 @@ public class EnrollmentWindow {
 		panel_1.add(panel_7, "cell 0 7,alignx center,aligny center");
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\etrud\\Desktop\\VijayComputer-main\\VijayComputerDatabase\\VijayComputerDatabase\\resources\\logo.png"));
+		lblNewLabel_3.setIcon(new ImageIcon("VijayComputerDatabase\\VijayComputerDatabase\\resources\\logo.png"));
 		panel_7.add(lblNewLabel_3);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -223,7 +242,7 @@ public class EnrollmentWindow {
 		         classTypeComboBox.addItem(s);
 
 		        }
-
+		        classTypeComboBox.addItem("All");
 		        pst.close();
 		        rs.close();
 		        conn.close();
@@ -245,7 +264,7 @@ public class EnrollmentWindow {
 			new Object[][] {
 			},
 			new String[] {
-				"Class Type", "Class ID #", "Course Name", "Room #", "Business Name", "Class Time Start", "Class Time End"
+				"Class Type", "Class ID #", "Course Name", "Room #", "Business Name", "Class Time Start", "Class Time End", "Class Start Date", "Class End Date"
 			}
 		);
 		classTable.setModel(classMod);

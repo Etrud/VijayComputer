@@ -65,17 +65,19 @@ public class StudentWindow {
 		frmStudentView = new JFrame();
 		frmStudentView.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\user.png"));
 		frmStudentView.setTitle("Student View");
-		frmStudentView.setBounds(100, 100, 687, 522);
+		frmStudentView.setBounds(100, 100, 735, 522);
 		frmStudentView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmStudentView.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(153, 255, 102));
 		frmStudentView.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
 		Component verticalStrut = Box.createVerticalStrut(5);
 		panel_2.add(verticalStrut);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(153, 255, 102));
 		frmStudentView.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new MigLayout("", "[89px][][]", "[23px]"));
 		
@@ -98,7 +100,7 @@ public class StudentWindow {
 				new Object[][] {
 				},
 				new String[] {
-					"Student ID", "First Name", "Last Name", "Email", "DOB"
+					"Student ID", "First Name", "Last Name", "Email", "DOB", "Student Certification"
 				}
 
 			);
@@ -114,7 +116,10 @@ public class StudentWindow {
 		
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-			String sql = "SELECT * FROM Student";
+			String sql = "SELECT Student.StudentID, Student.FirstName, Student.LastName, Student.Email, Student.DOB, Certification.CertName"
+					+ " FROM Student INNER JOIN"
+					+ " StuCompCert ON Student.StudentID = StuCompCert.StudentID INNER JOIN"
+					+ " Certification ON StuCompCert.CertID = Certification.CertID";
 			PreparedStatement pst = conn.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();
 	        
@@ -125,7 +130,8 @@ public class StudentWindow {
 	            String c = rs.getString("LastName");
 	            String d = rs.getString("Email");
 	            String e = rs.getString("DOB");
-	            studModel.addRow(new Object[]{a, b, c, d, e});
+	            String f = rs.getString("CertName");
+	            studModel.addRow(new Object[]{a, b, c, d, e, f});
 	        }
 
 		} catch (SQLException e1) {
@@ -142,12 +148,14 @@ public class StudentWindow {
 		
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(153, 255, 102));
 		frmStudentView.getContentPane().add(panel_3, BorderLayout.WEST);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(5);
 		panel_3.add(horizontalStrut);
 		
 		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(153, 255, 102));
 		frmStudentView.getContentPane().add(panel_4, BorderLayout.EAST);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(5);

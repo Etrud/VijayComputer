@@ -120,15 +120,7 @@ public class RoomRentalWindow {
 		frmVcaRoom.getContentPane().add(panel_3, BorderLayout.NORTH);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblNewLabel = new JLabel("Show Room Status:");
-		panel_3.add(lblNewLabel);
-		
-		JComboBox roomStatusComboBox = new JComboBox();
-		panel_3.add(roomStatusComboBox);
-	    roomStatusComboBox.addItem(new String("Available"));
-	    roomStatusComboBox.addItem(new String("Booked"));
-		
-		JLabel lblNewLabel_1 = new JLabel("on date");
+		JLabel lblNewLabel_1 = new JLabel("Sort Room Reservations by date:");
 		panel_3.add(lblNewLabel_1);
 		
 		JPanel panel_6 = new JPanel();
