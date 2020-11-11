@@ -88,7 +88,7 @@ public class EquipmentWindow {
 		
 		try{
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=testDatabase","sa","Cougarnet2020!");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	        String sql = "SELECT EqpStatus FROM EquipmentStatus";
 	        PreparedStatement pst = conn.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();
@@ -112,7 +112,7 @@ public class EquipmentWindow {
 			public void actionPerformed(ActionEvent arg0) {
 				eqpModel.setRowCount(0);
 				try {
-				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=testDatabase","sa","Cougarnet2020!");
+				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 				String sql = "SELECT EquipmentStatus.EqpStatus, Equipment.EquipSerialNum, EquipmentType.EquipmentName, EquipCheckout.CheckoutDate, EquipCheckout.ReturnDate FROM EquipmentStatus INNER JOIN Equipment ON EquipmentStatus.EquipmentStatusID = Equipment.StatusID INNER JOIN EquipmentType ON Equipment.EquipTypeID = EquipmentType.EquipmentID INNER JOIN EquipCheckout ON Equipment.EquipSerialNum = EquipCheckout.EquipSerialNum WHERE EqpStatus = '"+statusComboBox.getSelectedItem().toString()+"'";
 				PreparedStatement pst = conn.prepareStatement(sql);
 		        ResultSet rs = pst.executeQuery();

@@ -61,7 +61,7 @@ public class createBusinessContact {
 	private void initialize() {
 		frmVcaCreate = new JFrame();
 		frmVcaCreate.setTitle("VCA - Create Business Contact");
-		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\etrud\\Desktop\\VijayComputer-main\\VijayComputerDatabase\\VijayComputerDatabase\\resources\\book.png"));
+		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\book.png"));
 		frmVcaCreate.setBounds(100, 100, 644, 575);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmVcaCreate.getContentPane().setLayout(new BorderLayout(0, 0));

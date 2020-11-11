@@ -75,7 +75,7 @@ public class createAnnouncement {
 	 */
 	private void initialize() {
 		frmVcaCreate = new JFrame();
-		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\bshaffer\\git\\VijayComputerDatabase\\VijayComputerDatabase\\resources\\googlecalendar.png"));
+		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\calendar.png"));
 		frmVcaCreate.setTitle("VCA - Create Announcement");
 		frmVcaCreate.setBounds(100, 100, 450, 300);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

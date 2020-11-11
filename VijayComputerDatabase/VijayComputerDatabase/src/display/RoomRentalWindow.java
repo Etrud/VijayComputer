@@ -33,6 +33,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
@@ -43,7 +44,8 @@ public class RoomRentalWindow {
 
 	private JFrame frmVcaRoom;
 	private JDatePickerImpl dateField;
-	private JTable table;
+	private JTable roomTable;
+	private DefaultTableModel roomModel;
 
 
 	/**
@@ -145,6 +147,27 @@ public class RoomRentalWindow {
 		    JButton okButton = new JButton("OK");
 		    okButton.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
+		    		roomModel.setRowCount(0);
+		    		try {
+	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	    				String sql = "SELECT RoomReserve.Reserve, Room.RoomNum, RoomReserve.TimeStart, RoomReserve.TimeEnd"
+	    						+ " FROM RoomReserve INNER JOIN"
+	    						+ " Room ON RoomReserve.RoomID = Room.RoomID";
+	    				PreparedStatement pst = conn.prepareStatement(sql);
+	    		        ResultSet rs = pst.executeQuery();
+	    		        
+	    		        while(rs.next())
+	    		        {
+	    		            String a = rs.getString("Reserve");
+	    		            String b = rs.getString("RoomNum");
+	    		            String c = rs.getString("TimeStart");
+	    		            String d = rs.getString("TimeEnd");
+	    		            roomModel.addRow(new Object[]{a, b, c, d});
+	    		        }
+
+	    			} catch (SQLException e1) {
+	    				JOptionPane.showMessageDialog(null, e1);
+	    			}
 		    		
 		    	}
 		    });
@@ -158,17 +181,18 @@ public class RoomRentalWindow {
 		JScrollPane scrollPane = new JScrollPane();
 		panel_4.add(scrollPane);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		roomTable = new JTable();
+		roomModel = new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"Reservation Date", "Room Number", "Time Start", "Time End"
 			}
-		));
-		table.getColumnModel().getColumn(0).setPreferredWidth(94);
-		table.getColumnModel().getColumn(1).setPreferredWidth(83);
-		scrollPane.setViewportView(table);
+		);
+		roomTable.setModel(roomModel);
+		roomTable.getColumnModel().getColumn(0).setPreferredWidth(94);
+		roomTable.getColumnModel().getColumn(1).setPreferredWidth(83);
+		scrollPane.setViewportView(roomTable);
 	}
 
 

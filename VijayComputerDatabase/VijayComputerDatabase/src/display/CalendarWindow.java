@@ -210,7 +210,7 @@ public class CalendarWindow {
 	    		{
 	    			classPanel.setVisible(true);
 	    			try {
-	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=testDatabase","sa","Cougarnet2020!");
+	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    				String sql = "SELECT Class.ClassStartDate, Class.ClassEndDate, Class.ClassID, Room.RoomNum, Employee.FirstName, Employee.LastName FROM Class INNER JOIN RoomReserve ON Class.RoomReserveID = RoomReserve.RoomReserveID INNER JOIN Room ON RoomReserve.RoomID = Room.RoomID INNER JOIN Employee ON Class.EmployeeID = Employee.EmployeeID WHERE datediff(day, ClassStartDate,'"+dateField.getJFormattedTextField().getText()+"') = 0 OR datediff(day, ClassEndDate,'"+dateField.getJFormattedTextField().getText()+"') = 0";
 	    				PreparedStatement pst = conn.prepareStatement(sql);
 	    		        ResultSet rs = pst.executeQuery();
@@ -239,7 +239,7 @@ public class CalendarWindow {
 	    		{
 	    			annPanel.setVisible(true);
 	    			try {
-	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=testDatabase","sa","Cougarnet2020!");
+	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    				String sql = "SELECT Announcement.Date, Announcement.Time,Room.RoomNum, Announcement.Announcement FROM Announcement INNER JOIN Class ON Announcement.ClassID = Class.ClassID INNER JOIN RoomReserve ON Class.RoomReserveID = RoomReserve.RoomReserveID INNER JOIN Room ON RoomReserve.RoomID = Room.RoomID WHERE datediff(day, ClassStartDate,'"+dateField.getJFormattedTextField().getText()+"') = 0 OR datediff(day, Date,'"+dateField.getJFormattedTextField().getText()+"') = 0";
 	    				PreparedStatement pst = conn.prepareStatement(sql);
 	    		        ResultSet rs = pst.executeQuery();
@@ -267,7 +267,7 @@ public class CalendarWindow {
 	    		{
 	    			birthPanel.setVisible(true);
 	    			try {
-	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=testDatabase","sa","Cougarnet2020!");
+	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    				String sql = "SELECT Employee.DOB, Employee.FirstName, Employee.LastName, Employee.MobilePhone FROM Employee WHERE DATEPART(d,DOB)='"+dateField.getJFormattedTextField().getText().substring(8)+"' AND DATEPART(m,DOB)='"+dateField.getJFormattedTextField().getText().substring(5,7)+"'";
 	    				PreparedStatement pst = conn.prepareStatement(sql);
 	    		        ResultSet rs = pst.executeQuery();

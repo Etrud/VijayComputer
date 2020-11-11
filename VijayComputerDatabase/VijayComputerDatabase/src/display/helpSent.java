@@ -36,7 +36,7 @@ public class helpSent extends JDialog {
 	 */
 	public helpSent() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\bshaffer\\git\\VijayComputerDatabase\\VijayComputerDatabase\\resources\\logo.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\logo.png"));
 		setTitle("Ticket Recieved");
 		setModal(true);
 		setBounds(100, 100, 450, 300);

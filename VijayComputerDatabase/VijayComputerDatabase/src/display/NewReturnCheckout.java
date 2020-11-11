@@ -126,7 +126,7 @@ public class NewReturnCheckout {
 		panel_4.add(equipmentComboBox, "cell 1 0,alignx left,aligny center");
 		 try{
 		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
+		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 		        String sql = "SELECT EquipSerialNum FROM EquipCheckout WHERE ReturnDate = null OR ReturnTime = null";
 		        PreparedStatement pst = conn.prepareStatement(sql);
 		        ResultSet rs = pst.executeQuery();

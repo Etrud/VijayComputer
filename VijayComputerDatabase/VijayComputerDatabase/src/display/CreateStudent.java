@@ -102,7 +102,7 @@ public class CreateStudent {
 		frmCreateStudent = new JFrame();
 		frmCreateStudent.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\resources\\user.png"));
 		frmCreateStudent.setTitle("Create Student");
-		frmCreateStudent.setBounds(100, 100, 695, 660);
+		frmCreateStudent.setBounds(100, 100, 604, 660);
 		frmCreateStudent.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmCreateStudent.getContentPane().setLayout(new BorderLayout(0, 0));
 		JPanel panel = new JPanel();
@@ -152,8 +152,8 @@ public class CreateStudent {
 	    mf1.setPlaceholderCharacter('_');
 		
 		homePhTextField = new JFormattedTextField(mf1);
-		homePhTextField.setColumns(11);
-		panel.add(homePhTextField, "cell 1 4,alignx left");
+		homePhTextField.setColumns(8);
+		panel.add(homePhTextField, "cell 1 4,alignx left,aligny center");
 		
 		JLabel lblNewLabel_5 = new JLabel("Mobile Phone:");
 		panel.add(lblNewLabel_5, "cell 0 5,alignx trailing");
@@ -167,7 +167,7 @@ public class CreateStudent {
 	    mf2.setPlaceholderCharacter('_');
 		
 		mobilePhTextField = new JFormattedTextField(mf2);
-		mobilePhTextField.setColumns(11);
+		mobilePhTextField.setColumns(8);
 		panel.add(mobilePhTextField, "cell 1 5,alignx left");
 		
 		JLabel lblNewLabel_6 = new JLabel("Email:");
@@ -187,7 +187,7 @@ public class CreateStudent {
 		
 	    try{
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	        String sql = "SELECT GenderName FROM Gender";
 	        PreparedStatement pst = conn.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();
@@ -272,7 +272,7 @@ public class CreateStudent {
 		
 	    try{
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	        String sql = "SELECT CountryName FROM Country";
 	        PreparedStatement pst = conn.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();
@@ -300,7 +300,7 @@ public class CreateStudent {
 	    try{
 	    	
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    	String sql = "SELECT StateProvName FROM StateProv";
 	        
 	        PreparedStatement pst = conn.prepareStatement(sql);
@@ -363,7 +363,7 @@ public class CreateStudent {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
-			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER","sa","Cougarnet2020!");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 			        System.out.println("Inserting records into the table...");
 			    	String sql = "INSERT INTO Student VALUES ('"+studentIDTextField.getText()+"','"+lastNameTextField.getText()+"','"+
 					firstNameTextField.getText()+"','"+middleInitialTextField.getText()+"','"+homePhTextField.getText()+"','"+mobilePhTextField.getText()+"','"+emailTextField.getText()+"','"+dateField.getJFormattedTextField()+addressNumTextField.getText()+"','"+

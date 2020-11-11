@@ -70,7 +70,7 @@ public class DirectoryWindow {
 	 */
 	private void initialize() {
 		frmVijayComputerDirectory = new JFrame();
-		frmVijayComputerDirectory.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\bshaffer\\git\\VijayComputerDatabase\\VijayComputerDatabase\\resources\\communicate.png"));
+		frmVijayComputerDirectory.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\communicate.png"));
 		frmVijayComputerDirectory.setTitle("VCA - Directory");
 		frmVijayComputerDirectory.setBounds(100, 100, 1330, 502);
 		frmVijayComputerDirectory.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -319,7 +319,7 @@ public class DirectoryWindow {
 	    		{
 	    			busPanel.setVisible(true);
 	    			try {
-	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=testDatabase","sa","Cougarnet2020!");
+	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    				String sql = "SELECT BusinessContact.ContactID, BusinessContact.BusinessName, Title.TitleNAME, BusinessContact.FirstName, BusinessContact.MiddleInitial, BusinessContact.LastName, BusinessStatus.BusinessStatus,BusinessContact.Email, BusinessContact.Phone, BusinessContact.AddressNum, BusinessContact.AddressStreet,BusinessContact.AddressStreet2, BusinessContact.PostalCode, BusinessContact.City, StateProv.StateProvName, Country.CountryName FROM BusinessContact INNER JOIN BusinessStatus ON BusinessContact.BusinessStatusID = BusinessStatus.BusinessStatusID INNER JOIN Title ON BusinessContact.TitleID = Title.TitleID INNER JOIN Country ON BusinessContact.CountryID = Country.CountryID INNER JOIN StateProv ON BusinessContact.StateID = stateProv.StateID";
 	    				PreparedStatement pst = conn.prepareStatement(sql);
 	    		        ResultSet rs = pst.executeQuery();
