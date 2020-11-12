@@ -71,6 +71,7 @@ public class CreateStudent {
 	private JTextField mobilePhTextField;
 	private JTextField address2StreetTextField;
 	private final ButtonGroup CreateStudentButtonGroup = new ButtonGroup();
+	private int GenderId;
 
 	/**
 	 * Launch the application.
@@ -232,6 +233,8 @@ public class CreateStudent {
 	    }catch (Exception e){
 	        JOptionPane.showMessageDialog(null, e);
 	    }
+	    
+	    GenderId = genderComboBox.getSelectedIndex();
 		
 		
 		JLabel lblNewLabel_8 = new JLabel("Date of Birth:");
@@ -389,12 +392,14 @@ public class CreateStudent {
 		createStudentButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				
+				
 				try {
 			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 			        System.out.println("Inserting records into the table...");
-			    	String sql = "INSERT INTO Student VALUES ('"+studentIDTextField.getText()+"','"+lastNameTextField.getText()+"','"+
-					firstNameTextField.getText()+"','"+middleInitialTextField.getText()+"','"+homePhTextField.getText()+"','"+mobilePhTextField.getText()+"','"+emailTextField.getText()+"','"+dateField.getJFormattedTextField()+addressNumTextField.getText()+"','"+
-							addressStreetTextField.getText()+"','"+address2StreetTextField.getText()+"','"+postalCodeTextField.getText()+"','"+cityTextField.getText()+"','"+(String)countryComboBox.getSelectedItem()+"','"+(String)stateComboBox.getSelectedItem()+"','"+facebookTextField.getText()+"','"+instagramTextField.getText()+"','"+twitterTextField.getText()+"')";
+			    	String sql = "INSERT INTO Student VALUES ('"+Integer.parseInt(studentIDTextField.getText())+"','"+lastNameTextField.getText()+"','"+
+					firstNameTextField.getText()+"','"+middleInitialTextField.getText()+"','"+Integer.parseInt(homePhTextField.getText())+"','"+Integer.parseInt(mobilePhTextField.getText())+"','"+emailTextField.getText()+"','"+dateField.getJFormattedTextField()+Integer.parseInt(addressNumTextField.getText())+"','"+
+							addressStreetTextField.getText()+"','"+address2StreetTextField.getText()+"','"+postalCodeTextField.getText()+"','"+cityTextField.getText()+"','"+countryComboBox.getSelectedIndex()+"','"+stateComboBox.getSelectedIndex()+"','"+facebookTextField.getText()+"','"+instagramTextField.getText()+"','"+twitterTextField.getText()+"')";
 
 			    	Statement pst = null;
 			    	pst = conn.createStatement();

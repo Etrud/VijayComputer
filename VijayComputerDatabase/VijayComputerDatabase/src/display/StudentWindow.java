@@ -132,7 +132,7 @@ public class StudentWindow {
 			String sql = "SELECT Student.StudentID, Student.FirstName, Student.LastName, Student.Email, Student.DOB, Certification.CertName"
 					+ " FROM Student INNER JOIN"
 					+ " StuCompCert ON Student.StudentID = StuCompCert.StudentID INNER JOIN"
-					+ " Certification ON StuCompCert.CertID = Certification.CertID";
+					+ " Certification ON StuCompCert.CertID = Certification.CertID ORDER BY Student.StudentID";
 			PreparedStatement pst = conn.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();
 	        

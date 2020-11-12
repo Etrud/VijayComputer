@@ -104,6 +104,12 @@ public class DirectoryWindow {
 		mnNewMenu_1.add(mntmNewBusinessContact);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Edit Business Contacts");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editBusinessContactDialog contact = new editBusinessContactDialog();
+				contact.newWindow();
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
 		JMenu mnNewMenu_2 = new JMenu("Hide Info");
@@ -234,18 +240,271 @@ public class DirectoryWindow {
 		mnNewMenu_2.add(nameChkBox);
 		
 		JCheckBoxMenuItem emailChkBox = new JCheckBoxMenuItem("Email");
+		emailChkBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (emailChkBox.isSelected()==false)
+				{
+					studentTable.getColumnModel().getColumn(6).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(6).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(6).setPreferredWidth(0);
+					
+					empTable.getColumnModel().getColumn(7).setMinWidth(0);
+					empTable.getColumnModel().getColumn(7).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(7).setPreferredWidth(0);
+					
+					busTable.getColumnModel().getColumn(7).setMinWidth(0);
+					busTable.getColumnModel().getColumn(7).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(7).setPreferredWidth(0);
+					
+				}
+				else
+				{
+					final int width = 65;
+					studentTable.getColumnModel().getColumn(6).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(6).setMaxWidth(1000);
+					studentTable.getColumnModel().getColumn(6).setPreferredWidth(width);
+					
+					empTable.getColumnModel().getColumn(7).setMinWidth(15);
+					empTable.getColumnModel().getColumn(7).setMaxWidth(10000);
+					empTable.getColumnModel().getColumn(7).setPreferredWidth(width);
+					
+					busTable.getColumnModel().getColumn(7).setMinWidth(15);
+					busTable.getColumnModel().getColumn(7).setMaxWidth(1000);
+					busTable.getColumnModel().getColumn(7).setPreferredWidth(width);
+					
+				}
+			}
+		});
 		emailChkBox.setSelected(true);
 		mnNewMenu_2.add(emailChkBox);
 		
 		JCheckBoxMenuItem socialMediaChkBox = new JCheckBoxMenuItem("Social Media");
+		socialMediaChkBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (socialMediaChkBox.isSelected()==false)
+				{
+					studentTable.getColumnModel().getColumn(14).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(14).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(14).setPreferredWidth(0);
+					studentTable.getColumnModel().getColumn(15).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(15).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(15).setPreferredWidth(0);
+					studentTable.getColumnModel().getColumn(16).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(16).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(16).setPreferredWidth(0);
+					
+					empTable.getColumnModel().getColumn(15).setMinWidth(0);
+					empTable.getColumnModel().getColumn(15).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(15).setPreferredWidth(0);
+					empTable.getColumnModel().getColumn(16).setMinWidth(0);
+					empTable.getColumnModel().getColumn(16).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(16).setPreferredWidth(0);
+					empTable.getColumnModel().getColumn(17).setMinWidth(0);
+					empTable.getColumnModel().getColumn(17).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(17).setPreferredWidth(0);
+					
+				}
+				else
+				{
+					final int width = 65;
+					studentTable.getColumnModel().getColumn(14).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(14).setMaxWidth(width);
+					studentTable.getColumnModel().getColumn(14).setMinWidth(width);
+					studentTable.getColumnModel().getColumn(15).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(15).setMaxWidth(width);
+					studentTable.getColumnModel().getColumn(15).setMinWidth(width);
+					studentTable.getColumnModel().getColumn(16).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(16).setMaxWidth(width);
+					studentTable.getColumnModel().getColumn(16).setMinWidth(width);
+					
+					
+					empTable.getColumnModel().getColumn(15).setMinWidth(15);
+					empTable.getColumnModel().getColumn(15).setMaxWidth(width);
+					empTable.getColumnModel().getColumn(15).setMinWidth(width);
+					empTable.getColumnModel().getColumn(16).setMinWidth(15);
+					empTable.getColumnModel().getColumn(16).setMaxWidth(width);
+					empTable.getColumnModel().getColumn(16).setMinWidth(width);
+					empTable.getColumnModel().getColumn(17).setMinWidth(15);
+					empTable.getColumnModel().getColumn(17).setMaxWidth(width);
+					empTable.getColumnModel().getColumn(17).setMinWidth(width);
+				}
+			}
+		});
 		socialMediaChkBox.setSelected(true);
 		mnNewMenu_2.add(socialMediaChkBox);
 		
 		JCheckBoxMenuItem statusChkBox = new JCheckBoxMenuItem("Status");
+		statusChkBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(statusChkBox.isSelected()==false)
+				{
+					empTable.getColumnModel().getColumn(4).setMinWidth(0);
+					empTable.getColumnModel().getColumn(4).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(4).setPreferredWidth(0);
+					
+					busTable.getColumnModel().getColumn(6).setMinWidth(0);
+					busTable.getColumnModel().getColumn(6).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(6).setPreferredWidth(0);
+				}
+				else
+				{
+					final int width = 100;
+					empTable.getColumnModel().getColumn(4).setMinWidth(15);
+					empTable.getColumnModel().getColumn(4).setMaxWidth(width);
+					empTable.getColumnModel().getColumn(4).setMinWidth(width);
+					
+					busTable.getColumnModel().getColumn(6).setMinWidth(15);
+					busTable.getColumnModel().getColumn(6).setMaxWidth(width);
+					busTable.getColumnModel().getColumn(6).setMinWidth(width);
+				}
+			}
+		});
 		statusChkBox.setSelected(true);
 		mnNewMenu_2.add(statusChkBox);
 		
 		JCheckBoxMenuItem addressChkBox = new JCheckBoxMenuItem("Addresses");
+		addressChkBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(addressChkBox.isSelected()==false)
+				{
+					studentTable.getColumnModel().getColumn(7).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(7).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(7).setPreferredWidth(0);
+					studentTable.getColumnModel().getColumn(8).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(8).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(8).setPreferredWidth(0);
+					studentTable.getColumnModel().getColumn(9).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(9).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(9).setPreferredWidth(0);
+					studentTable.getColumnModel().getColumn(10).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(10).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(10).setPreferredWidth(0);
+					studentTable.getColumnModel().getColumn(11).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(11).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(11).setPreferredWidth(0);
+					studentTable.getColumnModel().getColumn(12).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(12).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(12).setPreferredWidth(0);
+					studentTable.getColumnModel().getColumn(13).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(13).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(13).setPreferredWidth(0);
+					
+					empTable.getColumnModel().getColumn(8).setMinWidth(0);
+					empTable.getColumnModel().getColumn(8).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(8).setPreferredWidth(0);
+					empTable.getColumnModel().getColumn(9).setMinWidth(0);
+					empTable.getColumnModel().getColumn(9).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(9).setPreferredWidth(0);
+					empTable.getColumnModel().getColumn(10).setMinWidth(0);
+					empTable.getColumnModel().getColumn(10).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(10).setPreferredWidth(0);
+					empTable.getColumnModel().getColumn(11).setMinWidth(0);
+					empTable.getColumnModel().getColumn(11).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(11).setPreferredWidth(0);
+					empTable.getColumnModel().getColumn(12).setMinWidth(0);
+					empTable.getColumnModel().getColumn(12).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(12).setPreferredWidth(0);
+					empTable.getColumnModel().getColumn(13).setMinWidth(0);
+					empTable.getColumnModel().getColumn(13).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(13).setPreferredWidth(0);
+					empTable.getColumnModel().getColumn(14).setMinWidth(0);
+					empTable.getColumnModel().getColumn(14).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(14).setPreferredWidth(0);
+					
+					busTable.getColumnModel().getColumn(9).setMinWidth(0);
+					busTable.getColumnModel().getColumn(9).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(9).setPreferredWidth(0);
+					busTable.getColumnModel().getColumn(10).setMinWidth(0);
+					busTable.getColumnModel().getColumn(10).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(10).setPreferredWidth(0);
+					busTable.getColumnModel().getColumn(11).setMinWidth(0);
+					busTable.getColumnModel().getColumn(11).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(11).setPreferredWidth(0);
+					busTable.getColumnModel().getColumn(12).setMinWidth(0);
+					busTable.getColumnModel().getColumn(12).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(12).setPreferredWidth(0);
+					busTable.getColumnModel().getColumn(13).setMinWidth(0);
+					busTable.getColumnModel().getColumn(13).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(13).setPreferredWidth(0);
+					busTable.getColumnModel().getColumn(14).setMinWidth(0);
+					busTable.getColumnModel().getColumn(14).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(14).setPreferredWidth(0);
+					busTable.getColumnModel().getColumn(15).setMinWidth(0);
+					busTable.getColumnModel().getColumn(15).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(15).setPreferredWidth(0);
+				}
+				else
+				{
+					final int width = 65;
+
+					studentTable.getColumnModel().getColumn(7).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(7).setMaxWidth(1000);
+					studentTable.getColumnModel().getColumn(7).setPreferredWidth(width);
+					studentTable.getColumnModel().getColumn(8).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(8).setMaxWidth(1000);
+					studentTable.getColumnModel().getColumn(8).setPreferredWidth(width);
+					studentTable.getColumnModel().getColumn(9).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(9).setMaxWidth(1000);
+					studentTable.getColumnModel().getColumn(9).setPreferredWidth(width);
+					studentTable.getColumnModel().getColumn(10).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(10).setMaxWidth(1000);
+					studentTable.getColumnModel().getColumn(10).setPreferredWidth(width);
+					studentTable.getColumnModel().getColumn(11).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(11).setMaxWidth(1000);
+					studentTable.getColumnModel().getColumn(11).setPreferredWidth(width);
+					studentTable.getColumnModel().getColumn(12).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(12).setMaxWidth(1000);
+					studentTable.getColumnModel().getColumn(12).setPreferredWidth(width);
+					studentTable.getColumnModel().getColumn(13).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(13).setMaxWidth(1000);
+					studentTable.getColumnModel().getColumn(13).setPreferredWidth(width);
+					
+					empTable.getColumnModel().getColumn(8).setMinWidth(15);
+					empTable.getColumnModel().getColumn(8).setMaxWidth(10000);
+					empTable.getColumnModel().getColumn(8).setPreferredWidth(width);
+					empTable.getColumnModel().getColumn(9).setMinWidth(15);
+					empTable.getColumnModel().getColumn(9).setMaxWidth(10000);
+					empTable.getColumnModel().getColumn(9).setPreferredWidth(width);
+					empTable.getColumnModel().getColumn(10).setMinWidth(15);
+					empTable.getColumnModel().getColumn(10).setMaxWidth(10000);
+					empTable.getColumnModel().getColumn(10).setPreferredWidth(width);
+					empTable.getColumnModel().getColumn(11).setMinWidth(15);
+					empTable.getColumnModel().getColumn(11).setMaxWidth(10000);
+					empTable.getColumnModel().getColumn(11).setPreferredWidth(width);
+					empTable.getColumnModel().getColumn(12).setMinWidth(15);
+					empTable.getColumnModel().getColumn(12).setMaxWidth(10000);
+					empTable.getColumnModel().getColumn(12).setPreferredWidth(width);
+					empTable.getColumnModel().getColumn(13).setMinWidth(15);
+					empTable.getColumnModel().getColumn(13).setMaxWidth(10000);
+					empTable.getColumnModel().getColumn(13).setPreferredWidth(width);
+					empTable.getColumnModel().getColumn(14).setMinWidth(15);
+					empTable.getColumnModel().getColumn(14).setMaxWidth(10000);
+					empTable.getColumnModel().getColumn(14).setPreferredWidth(width);
+					
+					busTable.getColumnModel().getColumn(9).setMinWidth(15);
+					busTable.getColumnModel().getColumn(9).setMaxWidth(1000);
+					busTable.getColumnModel().getColumn(9).setPreferredWidth(width);
+					busTable.getColumnModel().getColumn(10).setMinWidth(15);
+					busTable.getColumnModel().getColumn(10).setMaxWidth(1000);
+					busTable.getColumnModel().getColumn(10).setPreferredWidth(width);
+					busTable.getColumnModel().getColumn(11).setMinWidth(15);
+					busTable.getColumnModel().getColumn(11).setMaxWidth(1000);
+					busTable.getColumnModel().getColumn(11).setPreferredWidth(width);
+					busTable.getColumnModel().getColumn(12).setMinWidth(15);
+					busTable.getColumnModel().getColumn(12).setMaxWidth(1000);
+					busTable.getColumnModel().getColumn(12).setPreferredWidth(width);
+					busTable.getColumnModel().getColumn(13).setMinWidth(15);
+					busTable.getColumnModel().getColumn(13).setMaxWidth(1000);
+					busTable.getColumnModel().getColumn(13).setPreferredWidth(width);
+					busTable.getColumnModel().getColumn(14).setMinWidth(15);
+					busTable.getColumnModel().getColumn(14).setMaxWidth(1000);
+					busTable.getColumnModel().getColumn(14).setPreferredWidth(width);
+					busTable.getColumnModel().getColumn(15).setMinWidth(15);
+					busTable.getColumnModel().getColumn(15).setMaxWidth(1000);
+					busTable.getColumnModel().getColumn(15).setPreferredWidth(width);
+				}
+			}
+		});
 		addressChkBox.setSelected(true);
 		mnNewMenu_2.add(addressChkBox);
 		phoneChkBox.setSelected(true);
