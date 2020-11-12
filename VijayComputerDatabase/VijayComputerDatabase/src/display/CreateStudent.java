@@ -398,7 +398,7 @@ public class CreateStudent {
 			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 			        System.out.println("Inserting records into the table...");
 			    	String sql = "INSERT INTO Student VALUES ('"+Integer.parseInt(studentIDTextField.getText())+"','"+lastNameTextField.getText()+"','"+
-					firstNameTextField.getText()+"','"+middleInitialTextField.getText()+"','"+Integer.parseInt(homePhTextField.getText())+"','"+Integer.parseInt(mobilePhTextField.getText())+"','"+emailTextField.getText()+"','"+dateField.getJFormattedTextField()+Integer.parseInt(addressNumTextField.getText())+"','"+
+					firstNameTextField.getText()+"','"+middleInitialTextField.getText()+"','"+homePhTextField.getText()+"','"+Integer.parseInt(mobilePhTextField.getText())+"','"+emailTextField.getText()+"','"+dateField.getJFormattedTextField()+Integer.parseInt(addressNumTextField.getText())+"','"+
 							addressStreetTextField.getText()+"','"+address2StreetTextField.getText()+"','"+postalCodeTextField.getText()+"','"+cityTextField.getText()+"','"+countryComboBox.getSelectedIndex()+"','"+stateComboBox.getSelectedIndex()+"','"+facebookTextField.getText()+"','"+instagramTextField.getText()+"','"+twitterTextField.getText()+"')";
 
 			    	Statement pst = null;
