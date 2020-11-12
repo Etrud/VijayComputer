@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
+import javax.swing.JLabel;
 
 public class StudentWindow {
 
@@ -79,19 +80,31 @@ public class StudentWindow {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(153, 255, 102));
 		frmStudentView.getContentPane().add(panel, BorderLayout.NORTH);
-		panel.setLayout(new MigLayout("", "[89px][][]", "[23px]"));
+		panel.setLayout(new MigLayout("", "[grow]", "[23px,grow]"));
+		
+		JPanel panel_5 = new JPanel();
+		panel.add(panel_5, "cell 0 0,alignx center,growy");
+		
+		JLabel lblNewLabel = new JLabel("Student Options:");
+		panel_5.add(lblNewLabel);
 		
 		JButton newStudBut = new JButton("New Student");
+		panel_5.add(newStudBut);
+		
+		JButton btnEditSelected = new JButton("Edit Student");
+		panel_5.add(btnEditSelected);
+		btnEditSelected.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editStudentDialog eStud = new editStudentDialog();
+				eStud.newWindow();
+			}
+		});
 		newStudBut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CreateStudent stud = new CreateStudent();
 				stud.createStud();
 			}
 		});
-		panel.add(newStudBut, "cell 0 0,alignx center,aligny center");
-		
-		JButton btnEditSelected = new JButton("Edit Selected");
-		panel.add(btnEditSelected, "cell 1 0");
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));

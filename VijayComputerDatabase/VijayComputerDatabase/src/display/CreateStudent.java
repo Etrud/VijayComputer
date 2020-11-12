@@ -113,7 +113,34 @@ public class CreateStudent {
 		JLabel lblNewLabel = new JLabel("Student ID:");
 		panel.add(lblNewLabel, "cell 0 0,alignx trailing,aligny center");
 		
+		
+		//Set new Primary Key by 1
 		studentIDTextField = new JFormattedTextField();
+	    try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT MAX(StudentID) FROM Student";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         int s = rs.getInt(1);
+	         int q = s +1;
+	         studentIDTextField.setText(Integer.toString(q));
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
+		
+		
+		
+		
 		studentIDTextField.setAlignmentY(Component.TOP_ALIGNMENT);
 		studentIDTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel.add(studentIDTextField, "cell 1 0,alignx left");

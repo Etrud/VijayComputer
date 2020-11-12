@@ -113,13 +113,141 @@ public class DirectoryWindow {
 		phoneChkBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (phoneChkBox.isSelected() == false){
-					studentTable.removeColumn(studentTable.getColumnModel().getColumn(4));
+					studentTable.getColumnModel().getColumn(4).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(4).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(4).setPreferredWidth(0);
+					studentTable.getColumnModel().getColumn(5).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(5).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(5).setPreferredWidth(0);
+					
+					empTable.getColumnModel().getColumn(5).setMinWidth(0);
+					empTable.getColumnModel().getColumn(5).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(5).setPreferredWidth(0);
+					empTable.getColumnModel().getColumn(6).setMinWidth(0);
+					empTable.getColumnModel().getColumn(6).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(6).setPreferredWidth(0);
+					
+					busTable.getColumnModel().getColumn(8).setMinWidth(0);
+					busTable.getColumnModel().getColumn(8).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(8).setPreferredWidth(0);
 				}
 				else
 				{
-					studentTable.addColumn((TableColumn) studentTable.getModel().getValueAt(studentTable.getSelectedRow(),4));
+				    final int width = 85;
+					studentTable.getColumnModel().getColumn(4).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(4).setMaxWidth(width);
+					studentTable.getColumnModel().getColumn(4).setMinWidth(width);
+					studentTable.getColumnModel().getColumn(5).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(5).setMaxWidth(width);
+					studentTable.getColumnModel().getColumn(5).setMinWidth(width);
+					
+					empTable.getColumnModel().getColumn(5).setMinWidth(15);
+					empTable.getColumnModel().getColumn(5).setMaxWidth(width);
+					empTable.getColumnModel().getColumn(5).setMinWidth(width);
+					empTable.getColumnModel().getColumn(6).setMinWidth(15);
+					empTable.getColumnModel().getColumn(6).setMaxWidth(width);
+					empTable.getColumnModel().getColumn(6).setMinWidth(width);
+					
+					busTable.getColumnModel().getColumn(8).setMinWidth(15);
+					busTable.getColumnModel().getColumn(8).setMaxWidth(width);
+					busTable.getColumnModel().getColumn(8).setMinWidth(width);
 				}
 			}});
+		
+		JCheckBoxMenuItem nameChkBox = new JCheckBoxMenuItem("Contact Names");
+		nameChkBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (nameChkBox.isSelected()==false)
+				{
+					studentTable.getColumnModel().getColumn(1).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(1).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(1).setPreferredWidth(0);
+					studentTable.getColumnModel().getColumn(2).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(2).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(2).setPreferredWidth(0);
+					studentTable.getColumnModel().getColumn(3).setMinWidth(0);
+					studentTable.getColumnModel().getColumn(3).setMaxWidth(0);
+					studentTable.getColumnModel().getColumn(3).setPreferredWidth(0);
+					
+					empTable.getColumnModel().getColumn(1).setMinWidth(0);
+					empTable.getColumnModel().getColumn(1).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(1).setPreferredWidth(0);
+					empTable.getColumnModel().getColumn(2).setMinWidth(0);
+					empTable.getColumnModel().getColumn(2).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(2).setPreferredWidth(0);
+					empTable.getColumnModel().getColumn(3).setMinWidth(0);
+					empTable.getColumnModel().getColumn(3).setMaxWidth(0);
+					empTable.getColumnModel().getColumn(3).setPreferredWidth(0);
+					
+					busTable.getColumnModel().getColumn(2).setMinWidth(0);
+					busTable.getColumnModel().getColumn(2).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(2).setPreferredWidth(0);
+					busTable.getColumnModel().getColumn(3).setMinWidth(0);
+					busTable.getColumnModel().getColumn(3).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(3).setPreferredWidth(0);
+					busTable.getColumnModel().getColumn(4).setMinWidth(0);
+					busTable.getColumnModel().getColumn(4).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(4).setPreferredWidth(0);
+					busTable.getColumnModel().getColumn(5).setMinWidth(0);
+					busTable.getColumnModel().getColumn(5).setMaxWidth(0);
+					busTable.getColumnModel().getColumn(5).setPreferredWidth(0);
+				}
+				else
+				{
+					final int width = 65;
+					studentTable.getColumnModel().getColumn(1).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(1).setMaxWidth(width);
+					studentTable.getColumnModel().getColumn(1).setMinWidth(width);
+					studentTable.getColumnModel().getColumn(2).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(2).setMaxWidth(width);
+					studentTable.getColumnModel().getColumn(2).setMinWidth(width);
+					studentTable.getColumnModel().getColumn(3).setMinWidth(15);
+					studentTable.getColumnModel().getColumn(3).setMaxWidth(width);
+					studentTable.getColumnModel().getColumn(3).setMinWidth(width);
+					
+					empTable.getColumnModel().getColumn(1).setMinWidth(15);
+					empTable.getColumnModel().getColumn(1).setMaxWidth(width);
+					empTable.getColumnModel().getColumn(1).setMinWidth(width);
+					empTable.getColumnModel().getColumn(2).setMinWidth(15);
+					empTable.getColumnModel().getColumn(2).setMaxWidth(width);
+					empTable.getColumnModel().getColumn(2).setMinWidth(width);
+					empTable.getColumnModel().getColumn(3).setMinWidth(15);
+					empTable.getColumnModel().getColumn(3).setMaxWidth(width);
+					empTable.getColumnModel().getColumn(3).setMinWidth(width);
+					
+					busTable.getColumnModel().getColumn(2).setMinWidth(15);
+					busTable.getColumnModel().getColumn(2).setMaxWidth(width);
+					busTable.getColumnModel().getColumn(2).setMinWidth(width);
+					busTable.getColumnModel().getColumn(3).setMinWidth(15);
+					busTable.getColumnModel().getColumn(3).setMaxWidth(width);
+					busTable.getColumnModel().getColumn(3).setMinWidth(width);
+					busTable.getColumnModel().getColumn(4).setMinWidth(15);
+					busTable.getColumnModel().getColumn(4).setMaxWidth(width);
+					busTable.getColumnModel().getColumn(4).setMinWidth(width);
+					busTable.getColumnModel().getColumn(5).setMinWidth(15);
+					busTable.getColumnModel().getColumn(5).setMaxWidth(width);
+					busTable.getColumnModel().getColumn(5).setMinWidth(width);
+				}
+			}
+		});
+		nameChkBox.setSelected(true);
+		mnNewMenu_2.add(nameChkBox);
+		
+		JCheckBoxMenuItem emailChkBox = new JCheckBoxMenuItem("Email");
+		emailChkBox.setSelected(true);
+		mnNewMenu_2.add(emailChkBox);
+		
+		JCheckBoxMenuItem socialMediaChkBox = new JCheckBoxMenuItem("Social Media");
+		socialMediaChkBox.setSelected(true);
+		mnNewMenu_2.add(socialMediaChkBox);
+		
+		JCheckBoxMenuItem statusChkBox = new JCheckBoxMenuItem("Status");
+		statusChkBox.setSelected(true);
+		mnNewMenu_2.add(statusChkBox);
+		
+		JCheckBoxMenuItem addressChkBox = new JCheckBoxMenuItem("Addresses");
+		addressChkBox.setSelected(true);
+		mnNewMenu_2.add(addressChkBox);
 		phoneChkBox.setSelected(true);
 		mnNewMenu_2.add(phoneChkBox);
 		frmVijayComputerDirectory.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -239,7 +367,7 @@ public class DirectoryWindow {
 	    			studentPanel.setVisible(true);
 	    			try {
 	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	    				String sql = "SELECT Student.StudentID, Student.FirstName, Student.MiddleInital, Student.LastName, Student.HomePhone, Student.MobilePhone, Student.Email, Student.AddressNum, Student.AddressStreet, Student.AddressStreet2, Student.PostalCode, Student.City, StateProv.StateProvName, Country.CountryName, Student.FaceBookHandle, Student.InstagramHandle, Student.TwitterHandle FROM Student INNER JOIN StateProv ON Student.StateID = StateProv.StateID INNER JOIN Country ON Student.CountryID = Country.CountryID";
+	    				String sql = "SELECT Student.StudentID, Student.FirstName, Student.MiddleInital, Student.LastName, Student.HomePhone, Student.MobilePhone, Student.Email, Student.AddressNum, Student.AddressStreet, Student.AddressStreet2, Student.PostalCode, Student.City, StateProv.StateAbvr, Country.CountryAbvr, Student.FaceBookHandle, Student.InstagramHandle, Student.TwitterHandle FROM Student INNER JOIN StateProv ON Student.StateID = StateProv.StateID INNER JOIN Country ON Student.CountryID = Country.CountryID";
 	    				PreparedStatement pst = conn.prepareStatement(sql);
 	    		        ResultSet rs = pst.executeQuery();
 	    		        
@@ -257,8 +385,8 @@ public class DirectoryWindow {
 	    		            String i2 = rs.getString("AddressStreet2");
 	    		            String j = rs.getString("PostalCode");
 	    		            String k = rs.getString("City");
-	    		            String l = rs.getString("StateProvName");
-	    		            String m = rs.getString("CountryName");
+	    		            String l = rs.getString("StateAbvr");
+	    		            String m = rs.getString("CountryAbvr");
 	    		            String n = rs.getString("FacebookHandle");
 	    		            String o = rs.getString("InstagramHandle");
 	    		            String p = rs.getString("TwitterHandle");

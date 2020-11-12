@@ -195,6 +195,12 @@ public class EnrollmentWindow {
 		panel_6.add(panel_2, "cell 0 0,grow");
 		
 		JButton btnNewButton_1 = new JButton("Class Portal");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				classWindow casa = new classWindow();
+				casa.newWindow();
+			}
+		});
 		panel_2.add(btnNewButton_1);
 		
 		JPanel panel_2_1 = new JPanel();

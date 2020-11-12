@@ -15,6 +15,7 @@ import display.CreateStudent.DateLabelFormatter;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpringLayout;
@@ -39,12 +40,16 @@ import net.miginfocom.swing.MigLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 
 public class createAnnouncement {
 
 	private JFrame frmVcaCreate;
-	private JTextField textField_2;
+	private JTextField annIDTextField;
 	private JDatePickerImpl dateField;
 
 	/**
@@ -89,10 +94,31 @@ public class createAnnouncement {
 		JLabel lblNewLabel_2 = new JLabel("Announcement ID:");
 		panel.add(lblNewLabel_2, "cell 0 0,alignx right,aligny center");
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(7);
-		textField_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.add(textField_2, "cell 1 0,alignx left,aligny top");
+		annIDTextField = new JTextField();
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT MAX(AnnouncementID) FROM Announcement";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         int s = rs.getInt(1);
+	         int q = s +1;
+	         annIDTextField.setText(Integer.toString(q));
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
+		annIDTextField.setColumns(7);
+		annIDTextField.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.add(annIDTextField, "cell 1 0,alignx left,aligny top");
 		
 		JLabel lblNewLabel_1 = new JLabel("Date of Announcement:");
 		panel.add(lblNewLabel_1, "cell 0 1,alignx right,aligny center");

@@ -7,10 +7,15 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.border.LineBorder;
@@ -62,7 +67,7 @@ public class createBusinessContact {
 		frmVcaCreate = new JFrame();
 		frmVcaCreate.setTitle("VCA - Create Business Contact");
 		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\book.png"));
-		frmVcaCreate.setBounds(100, 100, 644, 575);
+		frmVcaCreate.setBounds(100, 100, 644, 615);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmVcaCreate.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -115,12 +120,51 @@ public class createBusinessContact {
 		
 		JComboBox titleComboBox = new JComboBox();
 		panel_4.add(titleComboBox, "cell 1 3,alignx left");
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT TitleNAME FROM Title";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         titleComboBox.addItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
+		
 		
 		JLabel lblNewLabel_3 = new JLabel("Department:");
 		panel_4.add(lblNewLabel_3, "cell 0 4,alignx trailing");
 		
 		JComboBox departmentComboBox = new JComboBox();
 		panel_4.add(departmentComboBox, "cell 1 4,alignx left");
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT DepartmentName FROM Department";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         departmentComboBox.addItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		
 		JLabel lblNewLabel_4 = new JLabel("First Name:");
 		panel_4.add(lblNewLabel_4, "cell 0 5,alignx trailing");
@@ -198,17 +242,75 @@ public class createBusinessContact {
 		JComboBox countryComboBox = new JComboBox();
 		panel_4.add(countryComboBox, "cell 1 15,alignx left");
 		
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT CountryName FROM Country";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         countryComboBox.addItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
+		
 		JLabel lblNewLabel_15 = new JLabel("State / Providence:");
 		panel_4.add(lblNewLabel_15, "cell 0 16,alignx trailing");
 		
 		JComboBox stateProvComboBox = new JComboBox();
 		panel_4.add(stateProvComboBox, "cell 1 16,alignx left");
-		
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT StateProvName FROM StateProv";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         stateProvComboBox.addItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		JLabel lblNewLabel_16 = new JLabel("Status:");
 		panel_4.add(lblNewLabel_16, "cell 0 17,alignx trailing,aligny center");
 		
 		JComboBox busStatusComboBox = new JComboBox();
 		panel_4.add(busStatusComboBox, "cell 1 17,alignx left");
+		
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT BusinessStatus FROM BusinessStatus";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         busStatusComboBox.addItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 	}
 
 }

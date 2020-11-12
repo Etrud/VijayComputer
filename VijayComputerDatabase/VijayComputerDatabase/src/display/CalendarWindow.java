@@ -306,8 +306,8 @@ public class CalendarWindow {
 	    JButton btnNewButton_1_1 = new JButton("Edit Announcement");
 	    btnNewButton_1_1.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		editAnnouncement eAnnoun = new editAnnouncement();
-	    		eAnnoun.createWindow();
+	    		editAnnouncementDialog eAnnoun = new editAnnouncementDialog();
+	    		eAnnoun.newWindow();
 	    	}
 	    });
 	    panel_7.add(btnNewButton_1_1, "cell 0 1,alignx left,aligny top");
