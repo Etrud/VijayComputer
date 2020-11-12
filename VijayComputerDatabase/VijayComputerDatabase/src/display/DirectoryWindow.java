@@ -124,13 +124,13 @@ public class DirectoryWindow {
 		mnNewMenu_2.add(phoneChkBox);
 		frmVijayComputerDirectory.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		frmVijayComputerDirectory.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
+		JPanel tablePanel = new JPanel();
+		tablePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		frmVijayComputerDirectory.getContentPane().add(tablePanel, BorderLayout.CENTER);
+		tablePanel.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
 		
 		JPanel studentPanel = new JPanel();
-		panel.add(studentPanel, "cell 0 0,grow");
+		tablePanel.add(studentPanel, "cell 0 0,grow");
 		studentPanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_3 = new JLabel("Student Directory:");
@@ -151,7 +151,7 @@ public class DirectoryWindow {
 		scrollPane.setViewportView(studentTable);
 		
 		JPanel empPanel = new JPanel();
-		panel.add(empPanel, "cell 0 1,grow");
+		tablePanel.add(empPanel, "cell 0 1,grow");
 		empPanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_2 = new JLabel("Employee Directory:");
@@ -172,7 +172,7 @@ public class DirectoryWindow {
 		scrollPane_1.setViewportView(empTable);
 		
 		JPanel busPanel = new JPanel();
-		panel.add(busPanel, "cell 0 2,grow");
+		tablePanel.add(busPanel, "cell 0 2,grow");
 		busPanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_1 = new JLabel("Business Directory:");

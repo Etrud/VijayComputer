@@ -1,10 +1,15 @@
 package display;
 
 import java.awt.EventQueue;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -21,10 +26,6 @@ public class CreateClass {
 
 	private JFrame frmCreateClass;
 	private JFormattedTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
 	private JLabel textField_5;
 	private JTextField textField_6;
 	private JTextField textField_8;
@@ -66,7 +67,7 @@ public class CreateClass {
 	private void initialize() {
 		frmCreateClass = new JFrame();
 		frmCreateClass.setTitle("Create Class");
-		frmCreateClass.setBounds(100, 100, 668, 569);
+		frmCreateClass.setBounds(100, 100, 668, 587);
 		frmCreateClass.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCreateClass.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -84,33 +85,69 @@ public class CreateClass {
 		panel.add(textField, "cell 1 0,alignx left");
 		textField.setColumns(8);
 		
-		JLabel lblNewLabel_1 = new JLabel("Employee ID:");
+		
+		//Employee Assigned Combo Box
+		JLabel lblNewLabel_1 = new JLabel("Employee Assigned:");
 		panel.add(lblNewLabel_1, "cell 0 1,alignx trailing");
+		JComboBox employeeComboBox = new JComboBox();
+		panel.add(employeeComboBox, "cell 1 1,alignx left");
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT Employee.FirstName+ Employee.LastName FROM Employee";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         employeeComboBox.addItem(s);
+	        }
+	        pst.close();
+	        rs.close();
+	        conn.close();
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		
-		textField_1 = new JTextField();
-		panel.add(textField_1, "cell 1 1,alignx left");
-		textField_1.setColumns(30);
-		
+		//Class Type Combo Box
 		JLabel lblNewLabel_2 = new JLabel("Class Type:");
 		panel.add(lblNewLabel_2, "cell 0 2,alignx trailing");
+		JComboBox classTypeComboBox = new JComboBox();
+		panel.add(classTypeComboBox, "cell 1 2,alignx left");
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT GenderName FROM Gender";
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         classTypeComboBox.addItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		
-		textField_2 = new JTextField();
-		panel.add(textField_2, "cell 1 2,alignx left");
-		textField_2.setColumns(30);
 		
-		JLabel lblNewLabel_3 = new JLabel("Course ID:");
+		
+		
+		JLabel lblNewLabel_3 = new JLabel("Course Name:");
 		panel.add(lblNewLabel_3, "cell 0 3,alignx trailing");
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(1);
-		panel.add(textField_3, "cell 1 3,alignx left");
+		JComboBox courseNameComboBox = new JComboBox();
+		panel.add(courseNameComboBox, "cell 1 3,alignx left");
 		
-		JLabel lblNewLabel_4 = new JLabel("Hardware ID");
+		JLabel lblNewLabel_4 = new JLabel("Hardware Select:");
 		panel.add(lblNewLabel_4, "cell 0 4,alignx trailing");
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(11);
-		panel.add(textField_4, "cell 1 4,alignx left");
+		JComboBox hardwareComboBox = new JComboBox();
+		panel.add(hardwareComboBox, "cell 1 4,alignx left");
 		
 		JLabel lblNewLabel_5 = new JLabel("Mobile Phone:");
 		panel.add(lblNewLabel_5, "cell 0 5,alignx trailing");
@@ -129,8 +166,8 @@ public class CreateClass {
 		JLabel lblNewLabel_7 = new JLabel("Gender");
 		panel.add(lblNewLabel_7, "cell 0 7,alignx trailing");
 		
-		JComboBox comboBox = new JComboBox();
-		panel.add(comboBox, "cell 1 7,alignx left");
+		JComboBox genderComboBox = new JComboBox();
+		panel.add(genderComboBox, "cell 1 7,alignx left");
 		
 		JLabel lblNewLabel_8 = new JLabel("Date of Birth:");
 		panel.add(lblNewLabel_8, "cell 0 8,alignx trailing,aligny baseline");
@@ -170,14 +207,14 @@ public class CreateClass {
 		JLabel lblNewLabel_9_2_2 = new JLabel("Country:");
 		panel.add(lblNewLabel_9_2_2, "cell 0 13,alignx trailing");
 		
-		JComboBox comboBox_1_1 = new JComboBox();
-		panel.add(comboBox_1_1, "cell 1 13,alignx left");
+		JComboBox countryComboBox = new JComboBox();
+		panel.add(countryComboBox, "cell 1 13,alignx left");
 		
 		JLabel lblNewLabel_10 = new JLabel("State / Providence:");
 		panel.add(lblNewLabel_10, "cell 0 14,alignx trailing,aligny center");
 		
-		JComboBox comboBox_1 = new JComboBox();
-		panel.add(comboBox_1, "cell 1 14,alignx left");
+		JComboBox stateProvComboBox = new JComboBox();
+		panel.add(stateProvComboBox, "cell 1 14,alignx left");
 		
 		JLabel lblNewLabel_10_1 = new JLabel("Facebook:");
 		panel.add(lblNewLabel_10_1, "cell 0 15,alignx trailing");
