@@ -44,7 +44,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class createAnnouncement {
 
@@ -89,7 +92,7 @@ public class createAnnouncement {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmVcaCreate.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(new MigLayout("", "[115px][287px,grow]", "[16px][16px,grow][16px,grow][132px]"));
+		panel.setLayout(new MigLayout("", "[115px][287px,grow]", "[16px][16px,grow][16px,grow][132px][]"));
 		
 		JLabel lblNewLabel_2 = new JLabel("Announcement ID:");
 		panel.add(lblNewLabel_2, "cell 0 0,alignx right,aligny center");
@@ -162,6 +165,35 @@ public class createAnnouncement {
 		textArea.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.add(textArea, "cell 1 3,grow");
 		
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("Class Select:");
+		panel.add(lblNewLabel_1_1_1_1, "cell 0 4,alignx trailing");
+		
+		JComboBox classComboBox = new JComboBox();
+		panel.add(classComboBox, "cell 1 4,growx");
+		
+		try{
+	    	
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	    	String sql = "SELECT StateProvName FROM StateProv";
+	        
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         classComboBox.addItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(224, 255, 255));
 		frmVcaCreate.getContentPane().add(panel_1, BorderLayout.EAST);
@@ -185,6 +217,19 @@ public class createAnnouncement {
 		panel_4.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+
+			    	String sql = "INSERT INTO Announcement (";
+			    	Statement pst = conn.createStatement();
+			        pst.executeUpdate(sql);
+				}
+				catch(SQLException e1) {
+				}
+				
+				
+				
+				
 				frmVcaCreate.dispose();
 			}
 		});

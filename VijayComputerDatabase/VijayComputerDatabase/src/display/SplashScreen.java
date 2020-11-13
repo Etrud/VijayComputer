@@ -74,7 +74,7 @@ public class SplashScreen {
 		splashScreen.setForeground(new Color(0, 0, 0));
 		splashScreen.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\logo.png"));
 		splashScreen.setTitle("Vijay Computer Academy Database Application");
-		splashScreen.setBounds(100, 100, 752, 707);
+		splashScreen.setBounds(100, 100, 1042, 707);
 		splashScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		splashScreen.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -116,11 +116,22 @@ public class SplashScreen {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(new Color(245, 245, 245));
 		panel_1.add(buttonPanel, BorderLayout.CENTER);
-		buttonPanel.setLayout(new GridLayout(0, 2, 15, 15));
+		buttonPanel.setLayout(new MigLayout("", "[grow,fill][][138.00,grow,fill][][174.00,grow,fill]", "[grow,baseline][][grow,baseline][][grow]"));
+		
+		
+		//Room Reserve Button
+		JButton financeButton = new JButton("Room Reservation");
+		financeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RoomRentalWindow fin = new RoomRentalWindow();
+				fin.newWindow();
+			}
+		});
 		
 		
 		//Enrollment Button
 		JButton enrollmentButton = new JButton("Student Services");
+		buttonPanel.add(enrollmentButton, "cell 0 0,growy");
 		enrollmentButton.setPreferredSize(new Dimension(50, 50));
 		enrollmentButton.setForeground(new Color(255, 255, 255));
 		enrollmentButton.setBackground(new Color(51, 153, 204));
@@ -134,7 +145,37 @@ public class SplashScreen {
 			}
 		});
 		enrollmentButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\VijayComputerDatabase\\resources\\student.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
-		buttonPanel.add(enrollmentButton);
+		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(5);
+		buttonPanel.add(horizontalStrut_1, "cell 1 0");
+		
+		JButton btnCertificationCenter = new JButton("Certification Center");
+		btnCertificationCenter.setPreferredSize(new Dimension(25, 25));
+		btnCertificationCenter.setIconTextGap(15);
+		btnCertificationCenter.setForeground(Color.WHITE);
+		btnCertificationCenter.setFont(new Font("Verdana", Font.BOLD, 21));
+		btnCertificationCenter.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		btnCertificationCenter.setBackground(new Color(51, 153, 204));
+		buttonPanel.add(btnCertificationCenter, "cell 2 0,grow");
+		
+		Component horizontalStrut_1_1 = Box.createHorizontalStrut(5);
+		buttonPanel.add(horizontalStrut_1_1, "cell 3 0");
+		
+		//Employee Services
+		JButton employeeSButton = new JButton("Employee Services");
+		buttonPanel.add(employeeSButton, "cell 4 0,grow");
+		employeeSButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\employee.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		employeeSButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EmployeeServicesWindow esw = new EmployeeServicesWindow();
+				esw.createWindow();
+			}
+		});
+		employeeSButton.setIconTextGap(15);
+		employeeSButton.setForeground(new Color(255, 255, 255));
+		employeeSButton.setBackground(new Color(51, 153, 204));
+		employeeSButton.setFont(new Font("Verdana", Font.BOLD, 18));
+		employeeSButton.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		
 		
 		//Calendar Button
@@ -145,6 +186,9 @@ public class SplashScreen {
 				calWin.newScreen();
 			}
 		});
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		buttonPanel.add(verticalStrut, "cell 0 1");
 		calendarButton.setIconTextGap(15);
 		calendarButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\calendar.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		calendarButton.setForeground(new Color(255, 255, 255));
@@ -152,35 +196,7 @@ public class SplashScreen {
 		calendarButton.setFont(new Font("Verdana", Font.BOLD, 21));
 		calendarButton.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		calendarButton.setPreferredSize(new Dimension(25, 25));
-		buttonPanel.add(calendarButton);
-		
-		
-		//Equipment Button
-		JButton equipmentButton = new JButton("Equipment");
-		equipmentButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EquipmentWindow equWin = new EquipmentWindow();
-				equWin.createWindow();
-			}
-		});
-		equipmentButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\laptop.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
-		equipmentButton.setIconTextGap(15);
-		equipmentButton.setForeground(new Color(255, 255, 255));
-		equipmentButton.setBackground(new Color(51, 153, 204));
-		equipmentButton.setFont(new Font("Verdana", Font.BOLD, 21));
-		equipmentButton.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		equipmentButton.setPreferredSize(new Dimension(25, 25));
-		buttonPanel.add(equipmentButton);
-		
-		
-		//Room Reserve Button
-		JButton financeButton = new JButton("Room Reservation");
-		financeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RoomRentalWindow fin = new RoomRentalWindow();
-				fin.newWindow();
-			}
-		});
+		buttonPanel.add(calendarButton, "cell 0 2,grow");
 		financeButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\classroom.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		financeButton.setIconTextGap(15);
 		financeButton.setForeground(new Color(255, 255, 255));
@@ -188,7 +204,7 @@ public class SplashScreen {
 		financeButton.setFont(new Font("Verdana", Font.BOLD, 21));
 		financeButton.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		financeButton.setPreferredSize(new Dimension(25, 25));
-		buttonPanel.add(financeButton);
+		buttonPanel.add(financeButton, "cell 2 2,grow");
 		
 		//Directory Button
 		JButton directoryButton = new JButton("Directory");
@@ -205,23 +221,28 @@ public class SplashScreen {
 		directoryButton.setFont(new Font("Verdana", Font.BOLD, 21));
 		directoryButton.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		directoryButton.setPreferredSize(new Dimension(25, 25));
-		buttonPanel.add(directoryButton);
+		buttonPanel.add(directoryButton, "cell 4 2,grow");
 		
-		//Employee Services
-		JButton employeeSButton = new JButton("Employee Services");
-		employeeSButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\employee.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
-		employeeSButton.addActionListener(new ActionListener() {
+		Component verticalStrut_1 = Box.createVerticalStrut(20);
+		buttonPanel.add(verticalStrut_1, "cell 0 3");
+		
+		
+		//Equipment Button
+		JButton equipmentButton = new JButton("Equipment");
+		buttonPanel.add(equipmentButton, "cell 2 4,growy");
+		equipmentButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EmployeeServicesWindow esw = new EmployeeServicesWindow();
-				esw.createWindow();
+				EquipmentWindow equWin = new EquipmentWindow();
+				equWin.createWindow();
 			}
 		});
-		employeeSButton.setIconTextGap(15);
-		employeeSButton.setForeground(new Color(255, 255, 255));
-		employeeSButton.setBackground(new Color(51, 153, 204));
-		employeeSButton.setFont(new Font("Verdana", Font.BOLD, 18));
-		employeeSButton.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		buttonPanel.add(employeeSButton);
+		equipmentButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\laptop.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		equipmentButton.setIconTextGap(15);
+		equipmentButton.setForeground(new Color(255, 255, 255));
+		equipmentButton.setBackground(new Color(51, 153, 204));
+		equipmentButton.setFont(new Font("Verdana", Font.BOLD, 21));
+		equipmentButton.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		equipmentButton.setPreferredSize(new Dimension(25, 25));
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(245, 245, 245));

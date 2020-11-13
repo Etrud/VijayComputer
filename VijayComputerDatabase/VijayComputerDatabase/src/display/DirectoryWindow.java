@@ -91,27 +91,6 @@ public class DirectoryWindow {
 		mnNewMenu.add(mntmNewMenuItem_3);
 		mnNewMenu.add(mntmNewMenuItem);
 		
-		JMenu mnNewMenu_1 = new JMenu("Edit");
-		menuBar.add(mnNewMenu_1);
-		
-		JMenuItem mntmNewBusinessContact = new JMenuItem("New Business Contact");
-		mntmNewBusinessContact.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				createBusinessContact contact = new createBusinessContact();
-				contact.createWindow();
-			}
-		});
-		mnNewMenu_1.add(mntmNewBusinessContact);
-		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Edit Business Contacts");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				editBusinessContactDialog contact = new editBusinessContactDialog();
-				contact.newWindow();
-			}
-		});
-		mnNewMenu_1.add(mntmNewMenuItem_2);
-		
 		JMenu mnNewMenu_2 = new JMenu("Hide Info");
 		menuBar.add(mnNewMenu_2);
 		
@@ -596,14 +575,14 @@ public class DirectoryWindow {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(230, 230, 250));
 		frmVijayComputerDirectory.getContentPane().add(panel_3, BorderLayout.WEST);
-		panel_3.setLayout(new MigLayout("", "[grow]", "[][grow]"));
+		panel_3.setLayout(new MigLayout("", "[grow]", "[][][][][]"));
 		
 		JLabel lblNewLabel = new JLabel("Directory Selects:");
 		panel_3.add(lblNewLabel, "cell 0 0,alignx center,aligny center");
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_3.add(panel_5, "cell 0 1,aligny top");
+		panel_3.add(panel_5, "cell 0 1,alignx center,aligny top");
 		panel_5.setLayout(new MigLayout("", "[]", "[][][][][]"));
 		
 		JCheckBox studChkBox = new JCheckBox("Students");
@@ -745,6 +724,29 @@ public class DirectoryWindow {
 	    	}
 	    });
 		panel_5.add(updateButton, "cell 0 4,alignx center,aligny center");
+		
+		Component verticalStrut_2 = Box.createVerticalStrut(20);
+		panel_3.add(verticalStrut_2, "cell 0 2");
+		
+		JLabel lblNewLabel_4 = new JLabel("Business Contacts:");
+		panel_3.add(lblNewLabel_4, "cell 0 3,alignx center");
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_3.add(panel, "cell 0 4,alignx center,aligny center");
+		
+		JButton btnNewButton = new JButton("New Business Contact");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createBusinessContact contact = new createBusinessContact();
+				contact.createWindow();
+			}
+		});
+		panel.setLayout(new MigLayout("", "[89px,center]", "[23px][]"));
+		panel.add(btnNewButton, "cell 0 0,alignx center,aligny center");
+		
+		JButton btnNewButton_1 = new JButton("Edit Business Contact");
+		panel.add(btnNewButton_1, "cell 0 1,alignx center,aligny top");
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(230, 230, 250));

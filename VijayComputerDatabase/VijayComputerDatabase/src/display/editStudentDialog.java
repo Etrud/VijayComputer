@@ -10,11 +10,17 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 public class editStudentDialog {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField idTextField;
+	private int idNum;
 
 	/**
 	 * Launch the application.
@@ -45,7 +51,7 @@ public class editStudentDialog {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 473, 155);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -54,9 +60,9 @@ public class editStudentDialog {
 		JLabel lblNewLabel = new JLabel("Please enter the \"Student ID#\" to select the student you would like to edit");
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		panel.add(textField);
-		textField.setColumns(10);
+		idTextField = new JTextField();
+		panel.add(idTextField);
+		idTextField.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(153, 102, 153));
@@ -65,8 +71,18 @@ public class editStudentDialog {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(153, 102, 153));
 		frame.getContentPane().add(panel_2, BorderLayout.SOUTH);
-		
+
 		JButton btnNewButton = new JButton("Edit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				idNum = Integer.parseInt(idTextField.getText());
+				editStudent eStud = new editStudent();
+				eStud.getStudent(idNum);
+				eStud.editStud();
+				
+				
+			}
+		});
 		panel_2.add(btnNewButton);
 		
 		JPanel panel_3 = new JPanel();

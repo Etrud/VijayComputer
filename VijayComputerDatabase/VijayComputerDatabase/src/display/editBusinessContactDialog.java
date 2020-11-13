@@ -45,7 +45,7 @@ public class editBusinessContactDialog {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 549, 146);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
