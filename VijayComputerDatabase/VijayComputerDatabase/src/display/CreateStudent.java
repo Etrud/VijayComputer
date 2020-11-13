@@ -47,6 +47,7 @@ import javax.swing.ImageIcon;
 import javax.swing.ButtonGroup;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
@@ -71,7 +72,7 @@ public class CreateStudent {
 	private JTextField mobilePhTextField;
 	private JTextField address2StreetTextField;
 	private final ButtonGroup CreateStudentButtonGroup = new ButtonGroup();
-	private int GenderId;
+	private int genderId;
 
 	/**
 	 * Launch the application.
@@ -181,6 +182,7 @@ public class CreateStudent {
 		
 		homePhTextField = new JFormattedTextField(mf1);
 		homePhTextField.setColumns(8);
+	
 		panel.add(homePhTextField, "cell 1 4,alignx left,aligny center");
 		
 		JLabel lblNewLabel_5 = new JLabel("Mobile Phone:");
@@ -196,6 +198,8 @@ public class CreateStudent {
 		
 		mobilePhTextField = new JFormattedTextField(mf2);
 		mobilePhTextField.setColumns(8);
+		
+
 		panel.add(mobilePhTextField, "cell 1 5,alignx left");
 		
 		JLabel lblNewLabel_6 = new JLabel("Email:");
@@ -234,7 +238,6 @@ public class CreateStudent {
 	        JOptionPane.showMessageDialog(null, e);
 	    }
 	    
-	    GenderId = genderComboBox.getSelectedIndex();
 		
 		
 		JLabel lblNewLabel_8 = new JLabel("Date of Birth:");
@@ -379,33 +382,26 @@ public class CreateStudent {
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
 		panel_1.add(verticalStrut_2);
 		
-		JButton createStudentButton = new JButton("Create Student");
-		CreateStudentButtonGroup.add(createStudentButton);
-		panel_1.add(createStudentButton);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(176, 196, 222));
-		panel_2.setAlignmentX(Component.LEFT_ALIGNMENT);
-		frmCreateStudent.getContentPane().add(panel_2, BorderLayout.NORTH);
-		
 		JButton createStudentButton2 = new JButton("Create Student");
+		panel_1.add(createStudentButton2);
+		
+		
+		
 		createStudentButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
-				
 				try {
+					BigInteger big = new BigInteger(homePhTextField.getText().replace("(", "").replace(")","").replace("-", ""));
+					BigInteger big1 = new BigInteger(mobilePhTextField.getText().replace("(", "").replace(")","").replace("-", ""));
+					
 			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-			        System.out.println("Inserting records into the table...");
-			    	String sql = "INSERT INTO Student VALUES ('"+Integer.parseInt(studentIDTextField.getText())+"','"+lastNameTextField.getText()+"','"+
-					firstNameTextField.getText()+"','"+middleInitialTextField.getText()+"','"+homePhTextField.getText()+"','"+Integer.parseInt(mobilePhTextField.getText())+"','"+emailTextField.getText()+"','"+dateField.getJFormattedTextField()+Integer.parseInt(addressNumTextField.getText())+"','"+
-							addressStreetTextField.getText()+"','"+address2StreetTextField.getText()+"','"+postalCodeTextField.getText()+"','"+cityTextField.getText()+"','"+countryComboBox.getSelectedIndex()+"','"+stateComboBox.getSelectedIndex()+"','"+facebookTextField.getText()+"','"+instagramTextField.getText()+"','"+twitterTextField.getText()+"')";
-
-			    	Statement pst = null;
-			    	pst = conn.createStatement();
+			        
+			    	String sql = "INSERT INTO Student (StudentID,LastName,FirstName,MiddleInital,HomePhone,MobilePhone,Email,Gender,DOB,AddressNum,AddressStreet,AddressStreet2,PostalCode,City,CountryID,StateID,FaceBookHandle,InstagramHandle,TwitterHandle) "
+			    			+ "VALUES ("+Integer.parseInt(studentIDTextField.getText())+",'"+lastNameTextField.getText()+"','"+
+					firstNameTextField.getText()+"','"+middleInitialTextField.getText()+"',"+big+","+big1+",'"+emailTextField.getText()+"',"+genderId+", CAST('"+dateField.getJFormattedTextField().getText()+"' as date),'"+Integer.parseInt(addressNumTextField.getText())+"','"+
+							addressStreetTextField.getText()+"','"+address2StreetTextField.getText()+"','"+postalCodeTextField.getText()+"','"+cityTextField.getText()+"',"+countryComboBox.getSelectedIndex()+","+stateComboBox.getSelectedIndex()+",'"+facebookTextField.getText()+"','"+instagramTextField.getText()+"','"+twitterTextField.getText()+"')";
+			    	Statement pst = conn.createStatement();
 			        pst.executeUpdate(sql);
 			        System.out.println("Inserted records into the table...");
-
 				}
 				catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -419,12 +415,34 @@ public class CreateStudent {
 					frmCreateStudent.dispose();
 				}
 			}});
+		CreateStudentButtonGroup.add(createStudentButton2);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(176, 196, 222));
+		panel_2.setAlignmentX(Component.LEFT_ALIGNMENT);
+		frmCreateStudent.getContentPane().add(panel_2, BorderLayout.NORTH);
+		
+		
+		
+		try {
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	    	String sql = "SELECT GenderID from Gender WHERE GenderName = '"+genderComboBox.getSelectedItem().toString()+"'";
+	    	PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+	        
+	        while(rs.next())
+	        {
+	            String a = rs.getString("GenderID");
+	            genderId = Integer.parseInt(a);
+	        }
+		}
+		catch(SQLException e){
+			
+		}
 		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		Component verticalStrut_2_1 = Box.createVerticalStrut(20);
 		panel_2.add(verticalStrut_2_1);
-		CreateStudentButtonGroup.add(createStudentButton2);
-		panel_2.add(createStudentButton2);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(176, 196, 222));

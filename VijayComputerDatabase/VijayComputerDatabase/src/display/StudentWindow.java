@@ -113,7 +113,7 @@ public class StudentWindow {
 				new Object[][] {
 				},
 				new String[] {
-					"Student ID", "First Name", "Last Name", "Email", "DOB", "Student Certification"
+					"Student ID", "First Name", "Last Name", "Email", "DOB"
 				}
 
 			);
@@ -129,10 +129,8 @@ public class StudentWindow {
 		
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-			String sql = "SELECT Student.StudentID, Student.FirstName, Student.LastName, Student.Email, Student.DOB, Certification.CertName"
-					+ " FROM Student INNER JOIN"
-					+ " StuCompCert ON Student.StudentID = StuCompCert.StudentID INNER JOIN"
-					+ " Certification ON StuCompCert.CertID = Certification.CertID ORDER BY Student.StudentID";
+			String sql = "SELECT Student.StudentID, Student.FirstName, Student.LastName, Student.Email, Student.DOB"
+					+ " FROM Student ORDER BY Student.StudentID";
 			PreparedStatement pst = conn.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();
 	        
@@ -143,8 +141,8 @@ public class StudentWindow {
 	            String c = rs.getString("LastName");
 	            String d = rs.getString("Email");
 	            String e = rs.getString("DOB");
-	            String f = rs.getString("CertName");
-	            studModel.addRow(new Object[]{a, b, c, d, e, f});
+
+	            studModel.addRow(new Object[]{a, b, c, d, e});
 	        }
 
 		} catch (SQLException e1) {
