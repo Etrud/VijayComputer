@@ -43,7 +43,6 @@ import javax.swing.table.DefaultTableModel;
 public class RoomRentalWindow {
 
 	private JFrame frmVcaRoom;
-	private JDatePickerImpl dateField;
 	private JTable roomTable;
 	private DefaultTableModel roomModel;
 
@@ -98,12 +97,18 @@ public class RoomRentalWindow {
 		JButton btnNewButton = new JButton("New Room Reservation");
 		panel_5.add(btnNewButton, "cell 0 0,alignx center,aligny center");
 		
-		JButton btnNewButton_1 = new JButton("Update Room Status");
+		JButton btnNewButton_1 = new JButton("Edit Room Reservation");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editRoomReserveDialog lucifer2 = new editRoomReserveDialog();
+				lucifer2.newWindow();
+			}
+		});
 		panel_5.add(btnNewButton_1, "cell 0 1,alignx center,aligny center");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				NewRoomReserve nrr = new NewRoomReserve();
-				nrr.newWindow();
+				createRoomReserve nrr = new createRoomReserve();
+				nrr.createWindow();
 			}
 		});
 		
@@ -120,31 +125,41 @@ public class RoomRentalWindow {
 		frmVcaRoom.getContentPane().add(panel_3, BorderLayout.NORTH);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblNewLabel_1 = new JLabel("Sort Room Reservations by date:");
+		JLabel lblNewLabel_1 = new JLabel("Sort Room Reservations:");
 		panel_3.add(lblNewLabel_1);
-		
-		JPanel panel_6 = new JPanel();
-		panel_3.add(panel_6);
 		 UtilDateModel model=new UtilDateModel();
 		    Properties p = new Properties();
 	        p.put("text.today", "Today");
 	        p.put("text.month", "Month");
 	        p.put("text.year", "Year");
 		    JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-		    dateField = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-		    SpringLayout springLayout = (SpringLayout) dateField.getLayout();
-		    springLayout.putConstraint(SpringLayout.WEST, dateField.getJFormattedTextField(), 0, SpringLayout.WEST, dateField);
-		    panel_6.add(dateField);
 		    
 		    JButton okButton = new JButton("OK");
+		    
+		    
+		    JComboBox ordercomboBox = new JComboBox();
+		    panel_3.add(ordercomboBox);
+		    ordercomboBox.addItem("Ascending");
+		    ordercomboBox.addItem("Descending");
+		    panel_3.add(okButton);
+		
 		    okButton.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
+		    		String way ="";
+		    		
+		    		if(ordercomboBox.getSelectedItem().toString().equals("Ascending"))
+		    		{
+		    			way = "ASC";
+		    		}
+		    		else
+		    			way = "DESC";
+		    		
 		    		roomModel.setRowCount(0);
 		    		try {
 	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    				String sql = "SELECT RoomReserve.Reserve, Room.RoomNum, RoomReserve.TimeStart, RoomReserve.TimeEnd"
 	    						+ " FROM RoomReserve INNER JOIN"
-	    						+ " Room ON RoomReserve.RoomID = Room.RoomID";
+	    						+ " Room ON RoomReserve.RoomID = Room.RoomID ORDER BY Reserve "+way;
 	    				PreparedStatement pst = conn.prepareStatement(sql);
 	    		        ResultSet rs = pst.executeQuery();
 	    		        
@@ -163,8 +178,6 @@ public class RoomRentalWindow {
 		    		
 		    	}
 		    });
-		    panel_3.add(okButton);
-		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmVcaRoom.getContentPane().add(panel_4, BorderLayout.CENTER);

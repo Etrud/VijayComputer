@@ -15,6 +15,7 @@ import display.CreateStudent.DateLabelFormatter;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpringLayout;
@@ -39,22 +40,34 @@ import net.miginfocom.swing.MigLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class editAnnouncement {
 
 	private JFrame frmVcaCreate;
-	private JTextField textField_2;
+	private JTextField annIDTextField;
 	private JDatePickerImpl dateField;
+	private int annID;
+	private String classSection;
+	private JTextArea detailsTextArea;
+	private JSpinner spinner;
+	private int classID;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void createWindow() {
+	public void createWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					editAnnouncement window = new editAnnouncement();
+					editAnnouncement window = new editAnnouncement(annID);
 					window.frmVcaCreate.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,11 +75,14 @@ public class editAnnouncement {
 			}
 		});
 	}
+	
+
 
 	/**
 	 * Create the application.
 	 */
-	public editAnnouncement() {
+	public editAnnouncement(int x) {
+		annID = x;
 		initialize();
 	}
 
@@ -84,15 +100,16 @@ public class editAnnouncement {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmVcaCreate.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(new MigLayout("", "[115px][287px,grow]", "[16px][16px,grow][16px,grow][132px]"));
+		panel.setLayout(new MigLayout("", "[115px][287px,center]", "[16px][16px,grow][16px,grow][132px][]"));
 		
 		JLabel lblNewLabel_2 = new JLabel("Announcement ID:");
 		panel.add(lblNewLabel_2, "cell 0 0,alignx right,aligny center");
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(7);
-		textField_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.add(textField_2, "cell 1 0,alignx left,aligny top");
+		annIDTextField = new JTextField();
+		annIDTextField.setColumns(7);
+		annIDTextField.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.add(annIDTextField, "cell 1 0,alignx left,aligny top");
+
 		
 		JLabel lblNewLabel_1 = new JLabel("Date of Announcement:");
 		panel.add(lblNewLabel_1, "cell 0 1,alignx right,aligny center");
@@ -123,7 +140,7 @@ public class editAnnouncement {
 		Date date = new Date();
 		  SpinnerDateModel sm = 
 		  new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
-		  JSpinner spinner = new JSpinner(sm);
+		  spinner = new JSpinner(sm);
 		  JSpinner.DateEditor de = new JSpinner.DateEditor(spinner, "HH:mm:ss");
 		  de.setBorder(null);
 		  spinner.setEditor(de);
@@ -132,9 +149,72 @@ public class editAnnouncement {
 		JLabel lblNewLabel_1_1_1 = new JLabel("Announcement Details:");
 		panel.add(lblNewLabel_1_1_1, "cell 0 3,growx,aligny center");
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.add(textArea, "cell 1 3,grow");
+		detailsTextArea = new JTextArea();
+		detailsTextArea.setWrapStyleWord(true);
+		detailsTextArea.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.add(detailsTextArea, "cell 1 3,alignx center,growy");
+		
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("Class ID / Section:");
+		panel.add(lblNewLabel_1_1_1_1, "cell 0 4,alignx trailing");
+		
+		JComboBox classSectionComboBox = new JComboBox();
+		panel.add(classSectionComboBox, "cell 1 4,alignx left");
+		try {
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+
+	    	String sql = "SELECT ClassSection FROM Class";
+	    	PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+	        
+	        while(rs.next()){
+		         String s = rs.getString(1);
+		         classSectionComboBox.addItem(s);
+
+		        }
+
+		}
+		catch(SQLException e1) {
+		}
+		try {
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+
+	    	String sql = "SELECT ClassID FROM Class WHERE ClassSection = "+classSection;
+	    	PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+	        
+	        while(rs.next()){
+		         String s = rs.getString(1);
+		         classID = Integer.parseInt(s);
+
+		        }
+
+		}
+		catch(SQLException e1) {
+		}
+		 try{
+		    	
+		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+		    	String sql = "SELECT DISTINCT Class.ClassID, Class.ClassSection"
+		    			+ " FROM Class INNER JOIN"
+		    			+ " Announcement ON Class.ClassID = Announcement.ClassID";
+		        
+		        PreparedStatement pst = conn.prepareStatement(sql);
+		        ResultSet rs = pst.executeQuery();
+
+		        while(rs.next()){
+		         String s = rs.getString("ClassSection");
+		         classSection = s;
+
+		        }
+
+		        pst.close();
+		        rs.close();
+		        conn.close();
+
+		    }catch (Exception e){
+		        JOptionPane.showMessageDialog(null, e);
+		    }
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(224, 255, 255));
@@ -159,14 +239,64 @@ public class editAnnouncement {
 		panel_4.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmVcaCreate.dispose();
+		        try {
+		        	SimpleDateFormat formatT = new SimpleDateFormat("HH:mm:ss");
+					String time = formatT.format(spinner.getValue());
+				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+		    	String sql = "UPDATE Announcement SET Date = CAST( '"+dateField.getJFormattedTextField().getText()+"' as date),Time = CAST('"+time+"' AS TIME),Announcement = '"+detailsTextArea.getText()+"',AnnouncementID = "+Integer.parseInt(annIDTextField.getText())
+		    	+ " WHERE AnnouncementID = "+Integer.parseInt(annIDTextField.getText());
+		    	Statement pst = conn.createStatement();
+		        pst.executeUpdate(sql);
+		        System.out.println("Updated records into the table...");
 			}
-		});
+			catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, e1);
+			}
+			catch(Exception e1){
+			      //Handle errors for Class.forName
+			      e1.printStackTrace();
+			 }
+			finally {
+				frmVcaCreate.dispose();
+				
+			}
+		}});
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBackground(new Color(224, 255, 255));
 		frmVcaCreate.getContentPane().add(panel_1_1, BorderLayout.WEST);
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT * FROM Announcement WHERE AnnouncementID = "+annID;
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+	        while(rs.next())
+	        {
+	        	dateField.getJFormattedTextField().setText(rs.getString("Date"));
+	        	detailsTextArea.setText(rs.getString("Announcement"));
+	        	annIDTextField.setText(rs.getString("AnnouncementID"));
+	        	SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+	        	spinner.setValue(format.parse((rs.getString("Time"))));
+	        	classSectionComboBox.setSelectedItem(classSection);
+
+	        }
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }
+		catch (SQLException e1){
+	        JOptionPane.showMessageDialog(null, e1);
+	    }
+		catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
+		
+
 	}
+	
 	public class DateLabelFormatter extends AbstractFormatter {
 
 	    private String datePattern = "yyyy-MM-dd";

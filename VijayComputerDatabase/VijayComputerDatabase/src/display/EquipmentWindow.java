@@ -112,6 +112,7 @@ public class EquipmentWindow {
 			public void actionPerformed(ActionEvent arg0) {
 				eqpModel.setRowCount(0);
 				try {
+				
 				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 				String sql = "SELECT EquipmentStatus.EqpStatus, Equipment.EquipSerialNum, EquipmentType.EquipmentName, EquipCheckout.CheckoutDate, EquipCheckout.ReturnDate FROM EquipmentStatus INNER JOIN Equipment ON EquipmentStatus.EquipmentStatusID = Equipment.StatusID INNER JOIN EquipmentType ON Equipment.EquipTypeID = EquipmentType.EquipmentID INNER JOIN EquipCheckout ON Equipment.EquipSerialNum = EquipCheckout.EquipSerialNum WHERE EqpStatus = '"+statusComboBox.getSelectedItem().toString()+"'";
 				PreparedStatement pst = conn.prepareStatement(sql);
@@ -160,7 +161,7 @@ public class EquipmentWindow {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(153, 204, 204));
 		frmEquipmentMenu.getContentPane().add(panel_1, BorderLayout.WEST);
-		panel_1.setLayout(new MigLayout("", "[grow]", "[][grow][][][grow][][][]"));
+		panel_1.setLayout(new MigLayout("", "[grow]", "[][grow][][grow][][grow][][][]"));
 		
 		JLabel lblNewLabel_1 = new JLabel("Equipment Checkout System");
 		panel_1.add(lblNewLabel_1, "cell 0 0,alignx center,aligny center");
@@ -188,16 +189,45 @@ public class EquipmentWindow {
 			}
 		});
 		
+		JLabel lblNewLabel_1_1_1 = new JLabel("Equipment Inventory:");
+		panel_1.add(lblNewLabel_1_1_1, "cell 0 2,alignx center");
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1.add(panel_7, "cell 0 3,alignx center,aligny center");
+		panel_7.setLayout(new MigLayout("", "[89px]", "[23px][]"));
+		
+		JButton btnNewButton_2 = new JButton("New Equipment");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				createEquipment cequip = new createEquipment();
+				cequip.createWindow();
+			}
+		});
+		panel_7.add(btnNewButton_2, "cell 0 0,alignx center,aligny top");
+		
+		JButton btnNewButton_3 = new JButton("Edit Equipment");
+		panel_7.add(btnNewButton_3, "cell 0 1,alignx center,aligny top");
+		
 		JLabel lblNewLabel_1_1 = new JLabel("Software Management");
-		panel_1.add(lblNewLabel_1_1, "cell 0 3,alignx center,aligny bottom");
+		panel_1.add(lblNewLabel_1_1, "cell 0 4,alignx center,aligny bottom");
 		
 		JPanel panel_5_1 = new JPanel();
 		panel_5_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.add(panel_5_1, "cell 0 4,alignx center,aligny top");
-		panel_5_1.setLayout(new MigLayout("", "[77px,grow]", "[23px]"));
+		panel_1.add(panel_5_1, "cell 0 5,alignx center,aligny top");
+		panel_5_1.setLayout(new MigLayout("", "[77px,grow]", "[23px][]"));
 		
-		JButton btnNewButton_1 = new JButton("Software");
+		JButton btnNewButton_1 = new JButton("New Software");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				createSoftware csoft = new createSoftware();
+				csoft.createWindow();
+			}
+		});
 		panel_5_1.add(btnNewButton_1, "cell 0 0,alignx center,aligny center");
+		
+		JButton btnNewButton_1_1 = new JButton("Edit Software");
+		panel_5_1.add(btnNewButton_1_1, "cell 0 1");
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(153, 204, 204));

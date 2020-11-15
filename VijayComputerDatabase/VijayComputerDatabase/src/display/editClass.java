@@ -45,13 +45,12 @@ import java.awt.event.ActionListener;
 import java.math.BigInteger;
 import java.awt.event.ActionEvent;
 
-public class CreateClass {
+public class editClass {
 
 	private JFrame frmCreateClass;
 	private JFormattedTextField classIDTextField;
 	private JLabel textField_5;
 	private JTextField maxStudTextField;
-	private JDatePickerImpl dateField;
 	private JDatePickerImpl dateField2;
 	private JDatePickerImpl dateField1;
 	private int EmpId;
@@ -59,17 +58,19 @@ public class CreateClass {
 	private int CourseId;
 	private int ContactId;
 	private int RoomReserveID;
+	private int classID;
+	private int equipmentID;
 
 
 
 	/**
 	 * Launch the application.
 	 */
-	public static void newWindow() {
+	public void newWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateClass window = new CreateClass();
+					editClass window = new editClass(classID);
 					window.frmCreateClass.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -81,7 +82,8 @@ public class CreateClass {
 	/**
 	 * Create the application.
 	 */
-	public CreateClass() {
+	public editClass(int x) {
+		classID = x;
 		initialize();
 	}
 
@@ -90,7 +92,7 @@ public class CreateClass {
 	 */
 	private void initialize() {
 		frmCreateClass = new JFrame();
-		frmCreateClass.setTitle("Create Class");
+		frmCreateClass.setTitle("VCA - Update Class");
 		frmCreateClass.setBounds(100, 100, 520, 517);
 		frmCreateClass.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmCreateClass.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -108,30 +110,7 @@ public class CreateClass {
 		classIDTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel.add(classIDTextField, "cell 2 0,alignx left");
 		classIDTextField.setColumns(8);
-		
-		try{
-	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	        String sql = "SELECT MAX(ClassID) FROM Class";
-	        PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
 
-	        while(rs.next()){
-	         int s = rs.getInt(1);
-	         int q = s +1;
-	         classIDTextField.setText(Integer.toString(q));
-
-	        }
-
-	        pst.close();
-	        rs.close();
-	        conn.close();
-
-	    }catch (Exception e){
-	        JOptionPane.showMessageDialog(null, e);
-	    }
-		
-		
 		//Employee Assigned Combo Box
 		JLabel lblNewLabel_1 = new JLabel("Employee Assigned:");
 		panel.add(lblNewLabel_1, "cell 1 1,alignx trailing");
@@ -179,7 +158,28 @@ public class CreateClass {
 	    }catch (Exception e){
 	        JOptionPane.showMessageDialog(null, e);
 	    }
-		
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT ClassType.ClassType"
+	        		+ " FROM Class INNER JOIN"
+	        		+ " ClassType ON Class.ClassTypeID = ClassType.ClassTypeID WHERE ClassID ="+classID;
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         classTypeComboBox.setSelectedItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		
 		
 		
@@ -208,7 +208,6 @@ public class CreateClass {
 	    }catch (Exception e){
 	        JOptionPane.showMessageDialog(null, e);
 	    }
-		
 		JLabel lblNewLabel_4 = new JLabel("Equipment Serial Select:");
 		panel.add(lblNewLabel_4, "cell 1 4,alignx trailing");
 		
@@ -234,7 +233,29 @@ public class CreateClass {
 	    }catch (Exception e){
 	        JOptionPane.showMessageDialog(null, e);
 	    }
-		
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT EquipCheckout.EquipSerialNum, EquipCheckout.HardwareID"
+	        		+ " FROM EquipCheckout INNER JOIN"
+	        		+ " Class ON EquipCheckout.HardwareID = Class.HardwareID"
+	        		+ " WHERE Class.ClassID ="+classID;
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString("EquipSerialNum");
+	         hardwareComboBox.setSelectedItem(s);
+	         equipmentID = Integer.parseInt(rs.getString("HardwareID"));
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		
 		JLabel lblNewLabel_5 = new JLabel("Room Reservation:");
 		panel.add(lblNewLabel_5, "cell 1 5,alignx trailing");
@@ -290,7 +311,29 @@ public class CreateClass {
 	    }catch (Exception e){
 	        JOptionPane.showMessageDialog(null, e);
 	    }
-		
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT BusinessContact.BusinessName"
+	        		+ " FROM Class INNER JOIN"
+	        		+ " ClassContact ON Class.CustomerID = ClassContact.CustomerId INNER JOIN"
+	        		+ " BusinessContact ON ClassContact.ContactId = BusinessContact.ContactID"
+	        		+ " WHERE Class.ClassID ="+classID;
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         customerComboBox.setSelectedItem(s);
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		
 		JLabel lblNewLabel_6 = new JLabel("Section #:");
 		panel.add(lblNewLabel_6, "cell 1 7,alignx trailing");
@@ -304,15 +347,13 @@ public class CreateClass {
 		try{
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	        String sql = "SELECT MAX(ClassSection) FROM Class";
+	        String sql = "SELECT ClassSection FROM Class WHERE ClassID = "+classID;
 	        PreparedStatement pst = conn.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();
 
 	        while(rs.next()){
 	         int s = rs.getInt(1);
-	         int q = s +1;
-	         classSecTextField.setText(Integer.toString(q));
-
+	         classSecTextField.setText(Integer.toString(s));
 	        }
 
 	        pst.close();
@@ -392,6 +433,9 @@ public class CreateClass {
 		  de2.setBorder(null);
 		  spinner2.setEditor(de2);
 		  timePanel2.add(spinner2);
+
+		  
+	
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut_2, "cell 0 12");
@@ -402,6 +446,7 @@ public class CreateClass {
 		maxStudTextField = new JTextField();
 		maxStudTextField.setColumns(4);
 		panel.add(maxStudTextField, "cell 2 12,alignx left");
+
 		
 		
 		
@@ -411,9 +456,6 @@ public class CreateClass {
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		panel_1.add(verticalStrut_1);
-		
-		JButton btnNewButton = new JButton("Create");
-		panel_1.add(btnNewButton);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(173, 216, 230));
@@ -455,6 +497,7 @@ public class CreateClass {
 	            String a = rs.getString("EmployeeID");
 	            EmpId = Integer.parseInt(a);
 	        }
+
 		}
 		catch(SQLException e){
 			
@@ -472,27 +515,13 @@ public class CreateClass {
 	            String a = rs.getString("ClassTypeID");
 	            ClassTypeId = Integer.parseInt(a);
 	        }
+
 		}
 		catch(SQLException e){
 			
 		}	
 		
-		try {
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	    	int index = employeeComboBox.getSelectedItem().toString().indexOf(' ');
-	    	String sql = "SELECT CourseID from Course WHERE CourseName = '"+courseNameComboBox.getSelectedItem().toString()+"'";
-	    	PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-	        
-	        while(rs.next())
-	        {
-	            String a = rs.getString("CourseID");
-	            CourseId = Integer.parseInt(a);
-	        }
-		}
-		catch(SQLException e){
-			
-		}
+
 		try {
 	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    	int index = employeeComboBox.getSelectedItem().toString().indexOf(' ');
@@ -505,6 +534,7 @@ public class CreateClass {
 	            String a = rs.getString("CustomerID");
 	            ContactId = Integer.parseInt(a);
 	        }
+
 		}
 		catch(SQLException e){
 			
@@ -527,46 +557,147 @@ public class CreateClass {
 	            String a = rs.getString("RoomReserveID");
 	            RoomReserveID = Integer.parseInt(a);
 	        }
+
 		}
 		catch(SQLException e){
 			
 		}
-		
-		JButton btnNewButton_1 = new JButton("Create");
+		try {
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	    	int index = employeeComboBox.getSelectedItem().toString().indexOf(' ');
+	    	String sql = "SELECT CourseID from Course WHERE CourseName = '"+courseNameComboBox.getSelectedItem().toString()+"'";
+	    	PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+	        
+	        while(rs.next())
+	        {
+	            String a = rs.getString("CourseID");
+	            CourseId = Integer.parseInt(a);
+	        }
+	        pst.close();
+	        rs.close();
+	        conn.close();
+		}
+		catch(SQLException e){
+
+		}
+		JButton btnNewButton_1 = new JButton("Update Class");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					
-					SimpleDateFormat formatT = new SimpleDateFormat("HH:mm:ss");
-					String time1 = formatT.format(spinner.getValue());
+		        	SimpleDateFormat formatT = new SimpleDateFormat("HH:mm:ss");
+					String time = formatT.format(spinner.getValue());
 					String time2 = formatT.format(spinner2.getValue());
-					
-				
-			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-			    	String sql = "INSERT INTO Class (ClassID,EmployeeID,ClassTypeID,CourseID,HardwareID,CustomerID,RoomReserveID,ClassSection,ClassStartDate,ClassEndDate,ClassTimeStart,ClassTimeEnd,NumofStudents)"
-			    			+" VALUES ("+Integer.parseInt(classIDTextField.getText())+","+EmpId+","+ClassTypeId+","+CourseId+","+hardwareComboBox.getSelectedItem()+","+ContactId+","+RoomReserveID+","+Integer.parseInt(classSecTextField.getText())+
-			    			" , CAST('"+dateField1.getJFormattedTextField().getText()+"' as date),CAST('"+dateField2.getJFormattedTextField().getText()+"' as date),CAST('"+time1+"' AS TIME),CAST('"+time2+"' AS TIME),"+Integer.parseInt(maxStudTextField.getText())+")";
-			    	Statement pst = conn.createStatement();
-			        pst.executeUpdate(sql);
-			        System.out.println("Inserted records into the table...");
-				}
-				catch (SQLException e) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, e);
-				}
-				catch(Exception e){
-				      //Handle errors for Class.forName
-				      e.printStackTrace();
-				 }
-				finally {
-					frmCreateClass.dispose();
-				}
+					Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+					String sql = "UPDATE Class SET ClassID ="+classID+", EmployeeID ="+EmpId+", ClassTypeID ="+ClassTypeId+", CourseID ="+CourseId+", HardwareID ="+equipmentID+", CustomerID = "+ContactId+
+		    			", RoomReserveID ="+RoomReserveID+", ClassSection ="+Integer.parseInt(classSecTextField.getText())+", ClassStartDate = CAST( '"+dateField1.getJFormattedTextField().getText()+"' as date),"
+		    			+" ClassEndDate = CAST( '"+dateField2.getJFormattedTextField().getText()+"' as date), ClassTimeStart = CAST('"+time+"' AS TIME), ClassTimeEnd = CAST('"+time2+"' AS TIME), NumofStudents = "+Integer.parseInt(maxStudTextField.getText())+" WHERE Class.ClassID = "+classID;
+					PreparedStatement stmt = conn.prepareStatement(sql);
+					stmt.executeUpdate();
+			        stmt.close();
+			        conn.close();
+
+			}
+			catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, e1);
+			}
+			catch(Exception e1){
+			      //Handle errors for Class.forName
+			      e1.printStackTrace();
+			 }
+			finally {
+				frmCreateClass.dispose();
 				
 			}
-		});
+		}});
 		panel_2.add(btnNewButton_1);
+
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT NumofStudents FROM Class WHERE ClassID = "+classID;
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         int s = rs.getInt(1);
+	         maxStudTextField.setText(Integer.toString(s));
+	        }
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT Course.CourseName"
+	        		+ " FROM Class INNER JOIN Course ON Class.CourseID = Course.CourseID"
+	        		+ " WHERE Class.ClassID ="+classID;
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString(1);
+	         courseNameComboBox.setSelectedItem(s);
+
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		
+		  
+		  try{
+		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+		        String sql = "SELECT Class.ClassStartDate,Class.ClassEndDate,Class.ClassTimeStart, Class.ClassTimeEnd FROM Class WHERE ClassID = "+classID;
+		        PreparedStatement pst = conn.prepareStatement(sql);
+		        ResultSet rs = pst.executeQuery();
+
+		        while(rs.next()){
+
+		         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+		       	spinner.setValue(format.parse((rs.getString("ClassTimeStart"))));
+		       	spinner2.setValue(format.parse((rs.getString("ClassTimeEnd"))));
+		       	dateField1.getJFormattedTextField().setText(rs.getString("ClassStartDate"));
+		       	dateField2.getJFormattedTextField().setText(rs.getString("ClassEndDate"));
+		        }
+
+		        pst.close();
+		        rs.close();
+		        conn.close();
+
+		    }catch (Exception e){
+		        JOptionPane.showMessageDialog(null, e);
+		    }
+		  try{
+		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+		        String sql = "SELECT ClassID FROM Class WHERE ClassID = "+classID;
+		        PreparedStatement pst = conn.prepareStatement(sql);
+		        ResultSet rs = pst.executeQuery();
+
+		        while(rs.next()){
+		         int s = rs.getInt(1);
+		         classIDTextField.setText(Integer.toString(s));
+		        }
+
+		        pst.close();
+		        rs.close();
+		        conn.close();
+
+		    }catch (Exception e){
+		        JOptionPane.showMessageDialog(null, e);
+		    }
 	}
 	public class DateLabelFormatter extends AbstractFormatter {
 

@@ -746,6 +746,12 @@ public class DirectoryWindow {
 		panel.add(btnNewButton, "cell 0 0,alignx center,aligny center");
 		
 		JButton btnNewButton_1 = new JButton("Edit Business Contact");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editBusinessContactDialog diablo = new editBusinessContactDialog();
+				diablo.newWindow();
+			}
+		});
 		panel.add(btnNewButton_1, "cell 0 1,alignx center,aligny top");
 		
 		JPanel panel_2 = new JPanel();

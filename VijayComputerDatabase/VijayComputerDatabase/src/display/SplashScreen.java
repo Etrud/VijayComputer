@@ -150,6 +150,13 @@ public class SplashScreen {
 		buttonPanel.add(horizontalStrut_1, "cell 1 0");
 		
 		JButton btnCertificationCenter = new JButton("Certification Center");
+		btnCertificationCenter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				certificationWindow certWin = new certificationWindow();
+				certWin.createWindow();
+			}
+		});
+		btnCertificationCenter.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\employee.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		btnCertificationCenter.setPreferredSize(new Dimension(25, 25));
 		btnCertificationCenter.setIconTextGap(15);
 		btnCertificationCenter.setForeground(Color.WHITE);

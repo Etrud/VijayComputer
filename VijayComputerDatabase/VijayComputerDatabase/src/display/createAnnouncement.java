@@ -33,7 +33,8 @@ import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.Properties;
 
 import net.miginfocom.swing.MigLayout;
@@ -46,6 +47,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
@@ -149,7 +151,7 @@ public class createAnnouncement {
 		FlowLayout flowLayout_1 = (FlowLayout) timePanel.getLayout();
 		flowLayout_1.setHgap(0);
 		panel.add(timePanel, "cell 1 2,alignx left,growy");
-		Date date = new Date();
+		Date date = new Date(0);
 		  SpinnerDateModel sm = 
 		  new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
 		  JSpinner spinner = new JSpinner(sm);
@@ -161,21 +163,21 @@ public class createAnnouncement {
 		JLabel lblNewLabel_1_1_1 = new JLabel("Announcement Details:");
 		panel.add(lblNewLabel_1_1_1, "cell 0 3,growx,aligny center");
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.add(textArea, "cell 1 3,grow");
+		JTextArea annTextArea = new JTextArea();
+		annTextArea.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.add(annTextArea, "cell 1 3,grow");
 		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("Class Select:");
+		JLabel lblNewLabel_1_1_1_1 = new JLabel(" Section Number:");
 		panel.add(lblNewLabel_1_1_1_1, "cell 0 4,alignx trailing");
 		
 		JComboBox classComboBox = new JComboBox();
-		panel.add(classComboBox, "cell 1 4,growx");
+		panel.add(classComboBox, "cell 1 4,alignx left");
 		
 		try{
 	    	
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	    	String sql = "SELECT StateProvName FROM StateProv";
+	    	String sql = "SELECT ClassSection FROM Class";
 	        
 	        PreparedStatement pst = conn.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();
@@ -217,20 +219,46 @@ public class createAnnouncement {
 		panel_4.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int classID = 0;
+				
 				try {
 			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 
-			    	String sql = "INSERT INTO Announcement (";
-			    	Statement pst = conn.createStatement();
-			        pst.executeUpdate(sql);
+			    	String sql = "SELECT ClassID FROM Class WHERE ClassSection = '"+classComboBox.getSelectedItem().toString()+"'";
+			    	PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+			        while(rs.next())
+			        {
+			            String a = rs.getString("ClassID");
+			            classID = Integer.parseInt(a);
+			        }
+
 				}
 				catch(SQLException e1) {
 				}
 				
 				
-				
-				
-				frmVcaCreate.dispose();
+				try {
+					SimpleDateFormat formatT = new SimpleDateFormat("HH:mm:ss");
+					String time = formatT.format(spinner.getValue());
+
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+
+			    	String sql = "INSERT INTO Announcement (ClassID,Date,Time,Announcement,AnnouncementID) VALUES ("+classID+",CAST( '"+dateField.getJFormattedTextField().getText()+"' as date),CAST('"+time+"' AS TIME),'"+annTextArea.getText()+"',"+Integer.parseInt(annIDTextField.getText())+")";
+			    	Statement pst = conn.createStatement();
+			        pst.executeUpdate(sql);
+				}
+				catch(SQLException e1) {
+					JOptionPane.showMessageDialog(null, e1);
+
+				}
+				catch(Exception e2) {
+					e2.printStackTrace();
+				}
+				finally
+				{
+					frmVcaCreate.dispose();
+				}
 			}
 		});
 		

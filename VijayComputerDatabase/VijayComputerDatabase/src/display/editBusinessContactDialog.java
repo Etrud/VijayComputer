@@ -10,11 +10,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class editBusinessContactDialog {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField contactIDTextField;
 
 	/**
 	 * Launch the application.
@@ -54,9 +56,9 @@ public class editBusinessContactDialog {
 		JLabel lblNewLabel = new JLabel("Please enter the \"Contact ID#\" to select the business contact you would like to edit");
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		panel.add(textField);
-		textField.setColumns(10);
+		contactIDTextField = new JTextField();
+		panel.add(contactIDTextField);
+		contactIDTextField.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(153, 102, 153));
@@ -67,6 +69,12 @@ public class editBusinessContactDialog {
 		frame.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
 		JButton btnNewButton = new JButton("Edit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editBusinessContact eBus = new editBusinessContact(Integer.parseInt(contactIDTextField.getText()));
+				eBus.createWindow();
+			}
+		});
 		panel_2.add(btnNewButton);
 		
 		JPanel panel_3 = new JPanel();

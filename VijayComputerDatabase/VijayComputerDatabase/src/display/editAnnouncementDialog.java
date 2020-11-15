@@ -10,11 +10,14 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class editAnnouncementDialog {
 
 	private JFrame frame;
 	private JTextField textField;
+	private int ann;
 
 	/**
 	 * Launch the application.
@@ -67,6 +70,17 @@ public class editAnnouncementDialog {
 		frame.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
 		JButton btnNewButton = new JButton("Edit");
+		btnNewButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				editAnnouncement eAnn= new editAnnouncement(Integer.parseInt(textField.getText()));
+				 //int ann2  = Integer.parseInt(textField.getText());
+				//eAnn.setAnnID(ann2);
+				//System.out.println(ann2);
+				eAnn.createWindow();
+
+			}
+		});
 		panel_2.add(btnNewButton);
 		
 		JPanel panel_3 = new JPanel();
