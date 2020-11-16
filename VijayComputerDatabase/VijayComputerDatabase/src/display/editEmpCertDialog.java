@@ -11,16 +11,13 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import net.miginfocom.swing.MigLayout;
 
-public class editRoomReserveDialog {
+public class editEmpCertDialog {
 
 	private JFrame frame;
-	private JTextField idTextField;
-	private int idNum;
+	private JTextField certTextField;
 
 	/**
 	 * Launch the application.
@@ -29,7 +26,7 @@ public class editRoomReserveDialog {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					editRoomReserveDialog window = new editRoomReserveDialog();
+					editEmpCertDialog window = new editEmpCertDialog();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +38,7 @@ public class editRoomReserveDialog {
 	/**
 	 * Create the application.
 	 */
-	public editRoomReserveDialog() {
+	public editEmpCertDialog() {
 		initialize();
 	}
 
@@ -50,19 +47,20 @@ public class editRoomReserveDialog {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 473, 155);
+		frame.setBounds(100, 100, 549, 146);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(new MigLayout("", "[1px][511px]", "[1px]"));
 		
-		JLabel lblNewLabel = new JLabel("Please enter the \"Room Reservation ID#\" to select the student you would like to edit");
-		panel.add(lblNewLabel);
+		JLabel lblNewLabel = new JLabel("Please enter the \"Certification ID#\" to select the software you would like to edit:");
+		panel.add(lblNewLabel, "cell 0 0,grow");
 		
-		idTextField = new JTextField();
-		panel.add(idTextField);
-		idTextField.setColumns(10);
+		certTextField = new JTextField();
+		panel.add(certTextField, "cell 1 0,grow");
+		certTextField.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(153, 102, 153));
@@ -71,15 +69,12 @@ public class editRoomReserveDialog {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(153, 102, 153));
 		frame.getContentPane().add(panel_2, BorderLayout.SOUTH);
-
+		
 		JButton btnNewButton = new JButton("Edit");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				idNum = Integer.parseInt(idTextField.getText());
-				editRoomReserve eStud = new editRoomReserve(Integer.parseInt(idTextField.getText()));
-				eStud.createWindow();
-				
-				
+			public void actionPerformed(ActionEvent arg0) {
+				editEmpCert eCert = new editEmpCert(Integer.parseInt(certTextField.getText()));
+				eCert.createWindow();
 			}
 		});
 		panel_2.add(btnNewButton);

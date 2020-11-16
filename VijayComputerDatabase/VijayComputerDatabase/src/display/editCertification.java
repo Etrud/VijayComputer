@@ -22,14 +22,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class editSoftware {
+public class editCertification {
 
 	private JFrame frmVcaCreate;
-	private JTextField softwareIDTextField;
-	private int statusID;
-	private int typeID;
-	private int softwareID;
-	private JTextField softwareNameTextField;
+	private JTextField serialTextField;
+	private int certID;
+	private JTextField nameTextField;
 
 	/**
 	 * Launch the application.
@@ -38,7 +36,7 @@ public class editSoftware {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					editSoftware window = new editSoftware(softwareID);
+					editCertification window = new editCertification(certID);
 					window.frmVcaCreate.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,8 +48,8 @@ public class editSoftware {
 	/**
 	 * Create the application.
 	 */
-	public editSoftware(int x) {
-		softwareID = x;
+	public editCertification(int x) {
+		certID = x;
 		initialize();
 	}
 
@@ -60,8 +58,8 @@ public class editSoftware {
 	 */
 	private void initialize() {
 		frmVcaCreate = new JFrame();
-		frmVcaCreate.setTitle("VCA - Edit Software");
-		frmVcaCreate.setBounds(100, 100, 374, 213);
+		frmVcaCreate.setTitle("VCA - Edit Certification");
+		frmVcaCreate.setBounds(100, 100, 374, 250);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmVcaCreate.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -73,19 +71,19 @@ public class editSoftware {
 		panel_1.setBackground(new Color(204, 204, 204));
 		frmVcaCreate.getContentPane().add(panel_1, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel_3 = new JLabel("Edit Software");
+		JLabel lblNewLabel_3 = new JLabel("Edit Certification");
 		panel_1.add(lblNewLabel_3);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(204, 204, 204));
 		frmVcaCreate.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
-		JButton createEquipment = new JButton("Edit Software");
+		JButton createEquipment = new JButton("Edit Certification\r\n");
 		createEquipment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-			        String sql = "UPDATE Software SET SoftwareID = "+Integer.parseInt(softwareIDTextField.getText())+", SoftwareName = '"+softwareNameTextField.getText()+"' WHERE SoftwareID = "+softwareID;
+			        String sql = "UPDATE Certification SET CertID = "+Integer.parseInt(serialTextField.getText())+", CertName = '"+nameTextField.getText()+"' WHERE CertID = "+certID;
 			        Statement pst = conn.createStatement();
 			        pst.executeUpdate(sql);
 			        System.out.println("Inserted records into the table...");
@@ -116,25 +114,25 @@ public class editSoftware {
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmVcaCreate.getContentPane().add(panel_4, BorderLayout.CENTER);
-		panel_4.setLayout(new MigLayout("", "[][grow]", "[][]"));
+		panel_4.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
 		
-		JLabel lblNewLabel = new JLabel("Software ID:");
-		panel_4.add(lblNewLabel, "cell 0 0,alignx right");
+		JLabel lblNewLabel = new JLabel("Certification ID:");
+		panel_4.add(lblNewLabel, "cell 0 0,alignx trailing,aligny center");
 		
-		softwareIDTextField = new JTextField();
-		panel_4.add(softwareIDTextField, "cell 1 0,alignx left");
-		softwareIDTextField.setColumns(10);
+		serialTextField = new JTextField();
+		panel_4.add(serialTextField, "cell 1 0,alignx left");
+		serialTextField.setColumns(4);
 		
 		 try{
 		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-		        String sql = "SELECT SoftwareID FROM Software WHERE SoftwareID = "+softwareID;
+		        String sql = "SELECT CertID FROM Certification WHERE CertID = "+certID;
 		        PreparedStatement pst = conn.prepareStatement(sql);
 		        ResultSet rs = pst.executeQuery();
 
 		        while(rs.next()){
 		         int s = rs.getInt(1);
-		         softwareIDTextField.setText(Integer.toString(s));
+		         serialTextField.setText(Integer.toString(s));
 
 		        }
 
@@ -145,27 +143,28 @@ public class editSoftware {
 		    }catch (Exception e){
 		        JOptionPane.showMessageDialog(null, e);
 		    }
+		 
+		
+		
+		JLabel lblNewLabel_1 = new JLabel("Certification Name:");
+		panel_4.add(lblNewLabel_1, "cell 0 1,alignx trailing");
+		
+		nameTextField = new JTextField();
+		nameTextField.setColumns(25);
+		panel_4.add(nameTextField, "cell 1 1,alignx left"); 
 		
 		
 		
-		JLabel lblNewLabel_2_1 = new JLabel("Software Name:");
-		panel_4.add(lblNewLabel_2_1, "cell 0 1,alignx trailing");
-		
-		softwareNameTextField = new JTextField();
-		softwareNameTextField.setColumns(25);
-		panel_4.add(softwareNameTextField, "cell 1 1,alignx left");
-
-		 try{
+		try{
 		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-		        String sql = "SELECT SoftwareName FROM Software WHERE SoftwareID = "+softwareID;
+		        String sql = "SELECT CertName FROM Certification WHERE CertID = "+certID;
 		        PreparedStatement pst = conn.prepareStatement(sql);
 		        ResultSet rs = pst.executeQuery();
 
 		        while(rs.next()){
 		         String s = rs.getString(1);
-		         softwareNameTextField.setText(s);
-
+		         nameTextField.setText(s);
 		        }
 
 		        pst.close();
@@ -175,7 +174,6 @@ public class editSoftware {
 		    }catch (Exception e){
 		        JOptionPane.showMessageDialog(null, e);
 		    }
-		
 		
 	}
 

@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JTable;
+import javax.swing.JTable.PrintMode;
 import javax.swing.SpringLayout;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -22,11 +23,13 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -229,10 +232,7 @@ public class EnrollmentWindow {
         p.put("text.today", "Today");
         p.put("text.month", "Month");
         p.put("text.year", "Year");
-	    JDatePanelImpl datePanel2 = new JDatePanelImpl(model, p);
-		
-		
-		JPanel panel_3 = new JPanel();
+	    JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(60, 179, 113));
 		frmEnrollmentWindow.getContentPane().add(panel_3, BorderLayout.SOUTH);
 		panel_3.setLayout(new MigLayout("", "[1px]", "[]"));
@@ -295,6 +295,18 @@ public class EnrollmentWindow {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Print");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					final MessageFormat headerFormat= new MessageFormat("Class Information");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					classTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");

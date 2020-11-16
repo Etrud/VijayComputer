@@ -39,7 +39,7 @@ public class EmployeeServicesWindow {
 	/**
 	 * Launch the application.
 	 */
-	public static void createWindow() {
+	public void createWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -187,6 +187,12 @@ public class EmployeeServicesWindow {
 		panel_6.setLayout(new MigLayout("", "[75px]", "[23px][]"));
 		
 		JButton btnNewButton_3 = new JButton("Finances");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FinanceWindow fin = new FinanceWindow();
+				fin.createWindow();
+			}
+		});
 		panel_6.add(btnNewButton_3, "flowy,cell 0 0,alignx center,aligny center");
 		
 		Component verticalStrut = Box.createVerticalStrut(20);

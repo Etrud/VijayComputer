@@ -88,6 +88,13 @@ public class certificationWindow {
 		panel_6.add(btnNewButton_2, "cell 0 0,alignx center,aligny top");
 		
 		JButton btnNewButton_2_1 = new JButton("Edit Certification");
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editCertificationDialog eCert = new editCertificationDialog();
+				eCert.newWindow();
+				
+			}
+		});
 		panel_6.add(btnNewButton_2_1, "cell 0 1,alignx center");
 		
 		JLabel lblNewLabel = new JLabel("Employee Certifications");

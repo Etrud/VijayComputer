@@ -156,7 +156,7 @@ public class SplashScreen {
 				certWin.createWindow();
 			}
 		});
-		btnCertificationCenter.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\employee.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		btnCertificationCenter.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\cert.png").getImage().getScaledInstance(45,45,Image.SCALE_SMOOTH)));
 		btnCertificationCenter.setPreferredSize(new Dimension(25, 25));
 		btnCertificationCenter.setIconTextGap(15);
 		btnCertificationCenter.setForeground(Color.WHITE);

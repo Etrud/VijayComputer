@@ -40,6 +40,8 @@ import java.awt.FlowLayout;
 import javax.swing.JCheckBox;
 import javax.swing.border.TitledBorder;
 import java.awt.Component;
+import java.awt.Dimension;
+
 import javax.swing.Box;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JButton;
@@ -69,11 +71,12 @@ public class CalendarWindow {
 	private JPanel birthPanel;
 	private DefaultTableModel classModel;
 	private DefaultTableModel annModel;
+	JPanel holderPanel;
 	private DefaultTableModel empModel;
 	/**
 	 * Launch the application.
 	 */
-	public static void newScreen() {
+	public void newScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -205,10 +208,12 @@ public class CalendarWindow {
 	    
 	    JButton btnNewButton = new JButton("Update");
 	    btnNewButton.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent arg0) {
+	    	@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent arg0) {
 	    		if(classChkBox.isSelected())
 	    		{
 	    			classPanel.setVisible(true);
+	    			classPanel.setMaximumSize(new Dimension(15000,15000));
 	    			try {
 	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    				String sql = "SELECT Class.ClassStartDate, Class.ClassEndDate, Class.ClassID, Room.RoomNum, Employee.FirstName, Employee.LastName FROM Class INNER JOIN RoomReserve ON Class.RoomReserveID = RoomReserve.RoomReserveID INNER JOIN Room ON RoomReserve.RoomID = Room.RoomID INNER JOIN Employee ON Class.EmployeeID = Employee.EmployeeID WHERE datediff(day, ClassStartDate,'"+dateField.getJFormattedTextField().getText()+"') = 0 OR datediff(day, ClassEndDate,'"+dateField.getJFormattedTextField().getText()+"') = 0";
@@ -234,10 +239,12 @@ public class CalendarWindow {
 	    		{
 	    			classPanel.setVisible(false);
 	    			classModel.setRowCount(0);
+	    			classPanel.setMaximumSize(new Dimension(0,0));
 	    		}
 	    		if(annChkBox.isSelected())
 	    		{
 	    			annPanel.setVisible(true);
+	    			annPanel.setMaximumSize(new Dimension(15000,15000));
 	    			try {
 	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    				String sql = "SELECT Announcement.Date, Announcement.Time,Room.RoomNum, Announcement.Announcement FROM Announcement INNER JOIN Class ON Announcement.ClassID = Class.ClassID INNER JOIN RoomReserve ON Class.RoomReserveID = RoomReserve.RoomReserveID INNER JOIN Room ON RoomReserve.RoomID = Room.RoomID WHERE datediff(day, ClassStartDate,'"+dateField.getJFormattedTextField().getText()+"') = 0 OR datediff(day, Date,'"+dateField.getJFormattedTextField().getText()+"') = 0";
@@ -262,10 +269,13 @@ public class CalendarWindow {
 	    		{
 	    			annPanel.setVisible(false);
 	    			annModel.setRowCount(0);
+	    			annPanel.setMaximumSize(new Dimension(0,0));
+	    			
 	    		}
 	    		if(birthdayChkBox.isSelected())
 	    		{
 	    			birthPanel.setVisible(true);
+	    			birthPanel.setMaximumSize(new Dimension(15000,15000));
 	    			try {
 	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    				String sql = "SELECT Employee.DOB, Employee.FirstName, Employee.LastName, Employee.MobilePhone FROM Employee WHERE DATEPART(d,DOB)='"+dateField.getJFormattedTextField().getText().substring(8)+"' AND DATEPART(m,DOB)='"+dateField.getJFormattedTextField().getText().substring(5,7)+"'";
@@ -290,6 +300,7 @@ public class CalendarWindow {
 	    		{
 	    			birthPanel.setVisible(false);
 	    			empModel.setRowCount(0);
+	    			birthPanel.setMaximumSize(new Dimension(0,0));
 	    		}
 	    	}
 	    });
@@ -319,13 +330,13 @@ public class CalendarWindow {
 	    });
 	
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		frmCalendar.getContentPane().add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow][][grow][][grow][][][grow]"));
+		holderPanel = new JPanel();
+		holderPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		frmCalendar.getContentPane().add(holderPanel, BorderLayout.CENTER);
+		holderPanel.setLayout(new MigLayout("", "[grow]", "[grow,fill][grow,fill][grow,fill][][grow][][grow][][][grow]"));
 		
 		classPanel = new JPanel();
-		panel_1.add(classPanel, "cell 0 0,grow");
+		holderPanel.add(classPanel, "cell 0 0,grow");
 		classPanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_3 = new JLabel("Classes:");
@@ -350,7 +361,7 @@ public class CalendarWindow {
 		scrollPane.setViewportView(classTable);
 		
 		annPanel = new JPanel();
-		panel_1.add(annPanel, "cell 0 1,grow");
+		holderPanel.add(annPanel, "cell 0 1,grow");
 		annPanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_4 = new JLabel("Announcments:");
@@ -373,7 +384,7 @@ public class CalendarWindow {
 		scrollPane_1.setViewportView(annTable);
 		
 		birthPanel = new JPanel();
-		panel_1.add(birthPanel, "cell 0 2,grow");
+		holderPanel.add(birthPanel, "cell 0 2,grow");
 		birthPanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_5 = new JLabel("Employee Birthdays:");
@@ -394,13 +405,6 @@ public class CalendarWindow {
 		empBirthTable.getColumnModel().getColumn(1).setPreferredWidth(111);
 		empBirthTable.getColumnModel().getColumn(2).setPreferredWidth(110);
 		scrollPane_2.setViewportView(empBirthTable);
-		DefaultTableModel calModel =new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Date", "Type of Event", "Name of Event"
-			}
-		);
 }
 		
 		

@@ -39,7 +39,7 @@ public class EquipmentWindow {
 	/**
 	 * Launch the application.
 	 */
-	public static void createWindow() {
+	public void createWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -207,6 +207,12 @@ public class EquipmentWindow {
 		panel_7.add(btnNewButton_2, "cell 0 0,alignx center,aligny top");
 		
 		JButton btnNewButton_3 = new JButton("Edit Equipment");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editEquipmentDialog eDiao = new editEquipmentDialog();
+				eDiao.newWindow();
+			}
+		});
 		panel_7.add(btnNewButton_3, "cell 0 1,alignx center,aligny top");
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Software Management");
@@ -227,6 +233,12 @@ public class EquipmentWindow {
 		panel_5_1.add(btnNewButton_1, "cell 0 0,alignx center,aligny center");
 		
 		JButton btnNewButton_1_1 = new JButton("Edit Software");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editSoftwareDialog eSoftD = new editSoftwareDialog();
+				eSoftD.newWindow();
+			}
+		});
 		panel_5_1.add(btnNewButton_1_1, "cell 0 1");
 		
 		JPanel panel_2 = new JPanel();

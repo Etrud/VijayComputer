@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,6 +25,8 @@ import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.print.*;
 import javax.swing.Box;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -41,6 +44,7 @@ public class DirectoryWindow {
 	private DefaultTableModel studModel;
 	private DefaultTableModel empModel;
 	private DefaultTableModel busModel;
+	private JPanel tablePanel;
 
 	/**
 	 * Launch the application.
@@ -87,8 +91,47 @@ public class DirectoryWindow {
 			}
 		});
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Print");
-		mnNewMenu.add(mntmNewMenuItem_3);
+		JMenu mnNewMenu_1 = new JMenu("Print");
+		mnNewMenu.add(mnNewMenu_1);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Student Directory");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					studentTable.print();
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Employee Directory");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					empTable.print();
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_2);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Business Directory");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					busTable.print();
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_3);
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenu mnNewMenu_2 = new JMenu("Hide Info");
@@ -490,7 +533,7 @@ public class DirectoryWindow {
 		mnNewMenu_2.add(phoneChkBox);
 		frmVijayComputerDirectory.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JPanel tablePanel = new JPanel();
+		tablePanel = new JPanel();
 		tablePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		frmVijayComputerDirectory.getContentPane().add(tablePanel, BorderLayout.CENTER);
 		tablePanel.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
@@ -603,6 +646,8 @@ public class DirectoryWindow {
 				if(studChkBox.isSelected())
 	    		{
 	    			studentPanel.setVisible(true);
+	    			studentPanel.setMaximumSize(new Dimension(15000,15000));
+
 	    			try {
 	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    				String sql = "SELECT Student.StudentID, Student.FirstName, Student.MiddleInital, Student.LastName, Student.HomePhone, Student.MobilePhone, Student.Email, Student.AddressNum, Student.AddressStreet, Student.AddressStreet2, Student.PostalCode, Student.City, StateProv.StateAbvr, Country.CountryAbvr, Student.FaceBookHandle, Student.InstagramHandle, Student.TwitterHandle FROM Student INNER JOIN StateProv ON Student.StateID = StateProv.StateID INNER JOIN Country ON Student.CountryID = Country.CountryID";
@@ -639,10 +684,14 @@ public class DirectoryWindow {
 	    		{
 	    			studentPanel.setVisible(false);
 	    			studModel.setRowCount(0);
+	    			studentPanel.setMaximumSize(new Dimension(0,0));
+
 	    		}
 	    		if(empChkBox.isSelected())
 	    		{
 	    			empPanel.setVisible(true);
+	    			empPanel.setMaximumSize(new Dimension(15000,15000));
+
 	    			try {
 	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    				String sql = "SELECT Employee.EmployeeID, Employee.FirstName, Employee.MiddleInitial, Employee.LastName, EmployeeStatus.Status, Employee.HomePhone, Employee.MobilePhone, Employee.Email, Employee.AddressNum,Employee.AddressStreet,Employee.AddressStreet2, Employee.PostalCode, Employee.City, StateProv.StateProvName, Country.CountryName, Employee.FacebookHandle, Employee.InstagramHandle, Employee.TwitterHandle FROM Employee INNER JOIN StateProv ON Employee.StateProvinceID = StateProv.StateID INNER JOIN Country ON Employee.CountryID = Country.CountryID INNER JOIN EmployeeStatus ON Employee.EmployeeStatusID = EmployeeStatus.EmpStatusID";	    				
@@ -680,10 +729,14 @@ public class DirectoryWindow {
 	    		{
 	    			empPanel.setVisible(false);
 	    			empModel.setRowCount(0);
+	    			empPanel.setMaximumSize(new Dimension(0,0));
+
 	    		}
 	    		if(busChkBox.isSelected())
 	    		{
 	    			busPanel.setVisible(true);
+	    			busPanel.setMaximumSize(new Dimension(15000,15000));
+
 	    			try {
 	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 	    				String sql = "SELECT BusinessContact.ContactID, BusinessContact.BusinessName, Title.TitleNAME, BusinessContact.FirstName, BusinessContact.MiddleInitial, BusinessContact.LastName, BusinessStatus.BusinessStatus,BusinessContact.Email, BusinessContact.Phone, BusinessContact.AddressNum, BusinessContact.AddressStreet,BusinessContact.AddressStreet2, BusinessContact.PostalCode, BusinessContact.City, StateProv.StateProvName, Country.CountryName FROM BusinessContact INNER JOIN BusinessStatus ON BusinessContact.BusinessStatusID = BusinessStatus.BusinessStatusID INNER JOIN Title ON BusinessContact.TitleID = Title.TitleID INNER JOIN Country ON BusinessContact.CountryID = Country.CountryID INNER JOIN StateProv ON BusinessContact.StateID = stateProv.StateID";
@@ -720,6 +773,8 @@ public class DirectoryWindow {
 	    		{
 	    			busPanel.setVisible(false);
 	    			busModel.setRowCount(0);
+	    			busPanel.setMaximumSize(new Dimension(0,0));
+
 	    		}
 	    	}
 	    });

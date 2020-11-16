@@ -21,7 +21,7 @@ public class editClassDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void newWindow() {
+	public void newWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
