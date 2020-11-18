@@ -22,6 +22,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.border.LineBorder;
+import javax.swing.JLabel;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FinanceWindow {
 
@@ -64,27 +70,58 @@ public class FinanceWindow {
 		frmVcaFinances.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(51, 0, 255));
+		panel.setBackground(new Color(255, 204, 204));
 		frmVcaFinances.getContentPane().add(panel, BorderLayout.WEST);
-		panel.setLayout(new MigLayout("", "[10px]", "[10px]"));
+		panel.setLayout(new MigLayout("", "[10px,grow]", "[10px][][][][]"));
+		
+		JLabel lblEmployeePayStub = new JLabel("Employee Pay Stub");
+		panel.add(lblEmployeePayStub, "cell 0 0,alignx center");
 		
 		JPanel panel_5 = new JPanel();
-		panel.add(panel_5, "cell 0 0,alignx left,aligny top");
-		panel_5.setLayout(new MigLayout("", "[89px]", "[23px]"));
+		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.add(panel_5, "cell 0 1,alignx left,aligny top");
+		panel_5.setLayout(new MigLayout("", "[89px]", "[23px][]"));
 		
-		JButton btnNewButton = new JButton("New button");
-		panel_5.add(btnNewButton, "cell 0 0,alignx left,aligny top");
+		JButton btnNewButton = new JButton("Create Pay Insert");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				createEmpPayHistory ecag = new createEmpPayHistory();
+				ecag.createWindow();
+				
+			}
+		});
+		panel_5.add(btnNewButton, "cell 0 0,alignx center,aligny top");
+		
+		Component verticalStrut = Box.createVerticalStrut(50);
+		panel.add(verticalStrut, "cell 0 2");
+		
+		JLabel lblNewLabel = new JLabel("Employee Work History");
+		panel.add(lblNewLabel, "cell 0 3,alignx center");
+		
+		JPanel panel_5_1 = new JPanel();
+		panel_5_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.add(panel_5_1, "cell 0 4,grow");
+		panel_5_1.setLayout(new MigLayout("", "[129.00]", "[]"));
+		
+		JButton btnNewButton_1 = new JButton("Create Work Insert");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				createEmpWorkHistory cEmp = new createEmpWorkHistory();
+				cEmp.createWindow();
+			}
+		});
+		panel_5_1.add(btnNewButton_1, "cell 0 0,growx");
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(51, 0, 255));
+		panel_1.setBackground(new Color(255, 204, 204));
 		frmVcaFinances.getContentPane().add(panel_1, BorderLayout.EAST);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(51, 0, 255));
+		panel_2.setBackground(new Color(255, 204, 204));
 		frmVcaFinances.getContentPane().add(panel_2, BorderLayout.NORTH);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(51, 0, 255));
+		panel_3.setBackground(new Color(255, 204, 204));
 		frmVcaFinances.getContentPane().add(panel_3, BorderLayout.SOUTH);
 		
 		JPanel panel_4 = new JPanel();
@@ -113,7 +150,7 @@ public class FinanceWindow {
 		JMenu mnNewMenu = new JMenu("File");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
+		JMenuItem mntmNewMenuItem = new JMenuItem("Print");
 		mnNewMenu.add(mntmNewMenuItem);
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");

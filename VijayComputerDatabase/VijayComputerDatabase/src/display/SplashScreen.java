@@ -146,7 +146,7 @@ public class SplashScreen {
 		});
 		enrollmentButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\VijayComputerDatabase\\resources\\student.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(5);
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		buttonPanel.add(horizontalStrut_1, "cell 1 0");
 		
 		JButton btnCertificationCenter = new JButton("Certification Center");
@@ -165,7 +165,7 @@ public class SplashScreen {
 		btnCertificationCenter.setBackground(new Color(51, 153, 204));
 		buttonPanel.add(btnCertificationCenter, "cell 2 0,grow");
 		
-		Component horizontalStrut_1_1 = Box.createHorizontalStrut(5);
+		Component horizontalStrut_1_1 = Box.createHorizontalStrut(20);
 		buttonPanel.add(horizontalStrut_1_1, "cell 3 0");
 		
 		//Employee Services
@@ -296,8 +296,6 @@ public class SplashScreen {
 		signOutNM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				splashScreen.dispose();
-				MainScreen login = new MainScreen();
-				login.newWindow();
 				
 			}
 		});

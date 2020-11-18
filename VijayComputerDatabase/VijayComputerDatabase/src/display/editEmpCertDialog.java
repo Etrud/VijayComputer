@@ -55,7 +55,7 @@ public class editEmpCertDialog {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new MigLayout("", "[1px][511px]", "[1px]"));
 		
-		JLabel lblNewLabel = new JLabel("Please enter the \"Certification ID#\" to select the software you would like to edit:");
+		JLabel lblNewLabel = new JLabel("Please enter the \"Emp Cert ID#\" to select the software you would like to edit:");
 		panel.add(lblNewLabel, "cell 0 0,grow");
 		
 		certTextField = new JTextField();

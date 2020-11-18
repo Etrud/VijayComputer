@@ -75,6 +75,7 @@ public class EmployeeServicesWindow {
 		frmVcaEmployee.getContentPane().add(panel, BorderLayout.NORTH);
 		
 		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.add(panel_7);
 		
 		JLabel lblNewLabel_2 = new JLabel("Sort by status:");

@@ -178,8 +178,8 @@ public class EquipmentWindow {
 		panel_5.add(btnNewButton, "cell 0 1,alignx center,aligny center");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				NewReturnCheckout ret = new NewReturnCheckout();
-				ret.newWindow();
+				NewEquipmentReturn ret = new NewEquipmentReturn();
+				ret.createWindow();
 			}
 		});
 		newCheckoutButton.addActionListener(new ActionListener() {

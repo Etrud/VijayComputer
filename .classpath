@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="VijayComputerDatabase/jgoodies-forms-1.8.0.jar"/>
 	<classpathentry kind="lib" path="VijayComputerDatabase/miglayout15-swing.jar"/>
 	<classpathentry kind="lib" path="VijayComputerDatabase/mssql-jdbc-8.4.1.jre14.jar"/>
+	<classpathentry kind="lib" path="VijayComputerDatabase/VijayComputerDatabase/resources"/>
 	<classpathentry kind="output" path="VijayComputerDatabase/bin"/>
 </classpath>

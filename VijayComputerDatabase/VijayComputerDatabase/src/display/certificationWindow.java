@@ -61,7 +61,7 @@ public class certificationWindow {
 	private void initialize() {
 		frmVcaCertification = new JFrame();
 		frmVcaCertification.setTitle("VCA - Certification Center");
-		frmVcaCertification.setBounds(100, 100, 695, 446);
+		frmVcaCertification.setBounds(100, 100, 798, 502);
 		frmVcaCertification.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmVcaCertification.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -76,7 +76,7 @@ public class certificationWindow {
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.add(panel_6, "cell 0 1,grow");
-		panel_6.setLayout(new MigLayout("", "[89px,grow]", "[23px][]"));
+		panel_6.setLayout(new MigLayout("", "[89px,grow]", "[23px][][]"));
 		
 		JButton btnNewButton_2 = new JButton("New Certification");
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -97,32 +97,21 @@ public class certificationWindow {
 		});
 		panel_6.add(btnNewButton_2_1, "cell 0 1,alignx center");
 		
-		JLabel lblNewLabel = new JLabel("Employee Certifications");
-		panel.add(lblNewLabel, "cell 0 3,alignx center");
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.add(panel_5, "cell 0 4,alignx center,growy");
-		panel_5.setLayout(new MigLayout("", "[89px]", "[23px][]"));
-		
-		JButton btnNewButton = new JButton("Assign Employee Cert");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnNewButton_3 = new JButton("View All");
+		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				createEmpCertification eC = new createEmpCertification();
-				eC.createWindow();
+				viewAllCerts viewAll = new viewAllCerts();
+				viewAll.createWindow();
 			}
 		});
-		panel_5.add(btnNewButton, "cell 0 0,alignx center,aligny top");
-		
-		JButton btnNewButton_1 = new JButton("Edit Employee Cert");
-		panel_5.add(btnNewButton_1, "cell 0 1,alignx center,aligny top");
+		panel_6.add(btnNewButton_3, "cell 0 2,alignx center");
 		
 		JLabel lblStudentCertifications = new JLabel("Student Certifications");
-		panel.add(lblStudentCertifications, "cell 0 6,alignx center");
+		panel.add(lblStudentCertifications, "cell 0 3,alignx center");
 		
 		JPanel panel_5_1 = new JPanel();
 		panel_5_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.add(panel_5_1, "cell 0 7,alignx center,growy");
+		panel.add(panel_5_1, "cell 0 4,alignx center,growy");
 		panel_5_1.setLayout(new MigLayout("", "[]", "[][]"));
 		
 		JButton btnNewButton_1_1 = new JButton("Assign Student Cert");
@@ -135,7 +124,39 @@ public class certificationWindow {
 		panel_5_1.add(btnNewButton_1_1, "cell 0 0,alignx center");
 		
 		JButton btnNewButton_1_2 = new JButton("Edit Student Cert");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editStudentCertDialog eDialog = new editStudentCertDialog();
+				eDialog.newWindow();
+			}
+		});
 		panel_5_1.add(btnNewButton_1_2, "cell 0 1,alignx center");
+		
+		JLabel lblNewLabel = new JLabel("Employee Certifications");
+		panel.add(lblNewLabel, "cell 0 6,alignx center");
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.add(panel_5, "cell 0 7,alignx center,growy");
+		panel_5.setLayout(new MigLayout("", "[89px]", "[23px][]"));
+		
+		JButton btnNewButton = new JButton("Assign Employee Cert");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				createEmpCertification eC = new createEmpCertification();
+				eC.createWindow();
+			}
+		});
+		panel_5.add(btnNewButton, "cell 0 0,alignx center,aligny top");
+		
+		JButton btnNewButton_1 = new JButton("Edit Employee Cert");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editEmpCertDialog ecog = new editEmpCertDialog();
+				ecog.newWindow();
+			}
+		});
+		panel_5.add(btnNewButton_1, "cell 0 1,alignx center,aligny top");
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 204, 0));
@@ -169,19 +190,27 @@ public class certificationWindow {
 		JScrollPane scrollPane = new JScrollPane();
 		panel_10.add(scrollPane);
 		
+		
+		
+		
+		
+		
+		
 		stuCertTable = new JTable();
 		
 		stuCertModel = new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Certification Name", "Student ID", "Student Name", "Expected Completion Date"
+				"ID#","Certification Name", "Student ID", "Student Name", "Expected Completion Date"
 			}
 		);
 		stuCertTable.setModel(stuCertModel);
-		stuCertTable.getColumnModel().getColumn(0).setPreferredWidth(105);
-		stuCertTable.getColumnModel().getColumn(2).setPreferredWidth(127);
-		stuCertTable.getColumnModel().getColumn(3).setPreferredWidth(145);
+		stuCertTable.getColumnModel().getColumn(0).setPreferredWidth(45);
+		stuCertTable.getColumnModel().getColumn(1).setPreferredWidth(113);
+		stuCertTable.getColumnModel().getColumn(2).setPreferredWidth(71);
+		stuCertTable.getColumnModel().getColumn(3).setPreferredWidth(108);
+		stuCertTable.getColumnModel().getColumn(4).setPreferredWidth(147);
 		scrollPane.setViewportView(stuCertTable);
 		
 		JPanel panel_7 = new JPanel();
@@ -204,59 +233,64 @@ public class certificationWindow {
 			new Object[][] {
 			},
 			new String[] {
-				"Certification Name", "Employee ID", "Employee Name", "Employee Certification Date"
+				"ID#","Certification Name", "Employee ID", "Employee Name", "Employee Certification Date"
 			}
 		);
 		empCertTable.setModel(empCertModel);
-		empCertTable.getColumnModel().getColumn(0).setPreferredWidth(104);
-		empCertTable.getColumnModel().getColumn(2).setPreferredWidth(89);
+			
+		empCertTable.getColumnModel().getColumn(0).setPreferredWidth(41);
+		empCertTable.getColumnModel().getColumn(1).setPreferredWidth(115);
+		empCertTable.getColumnModel().getColumn(2).setPreferredWidth(78);
 		empCertTable.getColumnModel().getColumn(3).setPreferredWidth(148);
+		empCertTable.getColumnModel().getColumn(4).setPreferredWidth(144);
 		scrollPane_1.setViewportView(empCertTable);
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			String sql = "SELECT StuCompCert.StuCompCertID,Certification.CertName, StuCompCert.StudentID,(Student.FirstName+' '+ Student.LastName) as StuName, StuCompCert.StuCertDate"
+					+ " FROM StuCompCert INNER JOIN"
+					+ " Certification ON StuCompCert.CertID = Certification.CertID INNER JOIN"
+					+ " Student ON StuCompCert.StudentID = Student.StudentID ORDER BY StudentID";
+			PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+	        
+	        while(rs.next())
+	        {
+	        	String a1 = rs.getString("StuCompCertID");
+	            String a = rs.getString("CertName");
+	            String b = rs.getString("StudentID");
+	            String c = rs.getString("StuName");
+	            String d = rs.getString("StuCertDate");
+
+	            stuCertModel.addRow(new Object[]{a1,a, b, c, d});
+	        }
+
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, e1);
+		}
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			String sql = "SELECT EmpCert.EmpCert, Certification.CertName,(Employee.FirstName+' '+ Employee.LastName) as EmpName, Employee.EmployeeID, EmpCert.EmpCertDate"
+					+ "					FROM            Certification INNER JOIN"
+					+ "					                         EmpCert ON Certification.CertID = EmpCert.CertID INNER JOIN"
+					+ "					                         Employee ON EmpCert.EmpID = Employee.EmployeeID ORDER BY EmployeeID";
+			PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+	        
+	        while(rs.next())
+	        {
+	            String a1 = rs.getString("EmpCert");
+	            String a = rs.getString("CertName");
+	            String b = rs.getString("EmployeeID");
+	            String c = rs.getString("EmpName");
+	            String d = rs.getString("EmpCertDate");
+
+	            empCertModel.addRow(new Object[]{a1,a, b, c, d});
+	        }
+
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, e1);
+		}
 		
-		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-			String sql = "SELECT Certification.CertName, StuCompCert.StudentID,(Student.FirstName+' '+ Student.LastName) as StuName, StuCompCert.StuCertDate"
-					+ " FROM StuCompCert INNER JOIN"
-					+ " Certification ON StuCompCert.CertID = Certification.CertID INNER JOIN"
-					+ " Student ON StuCompCert.StudentID = Student.StudentID";
-			PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-	        
-	        while(rs.next())
-	        {
-	            String a = rs.getString("CertName");
-	            String b = rs.getString("StudentID");
-	            String c = rs.getString("StuName");
-	            String d = rs.getString("StuCertDate");
-
-	            stuCertModel.addRow(new Object[]{a, b, c, d});
-	        }
-
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1);
-		}
-		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-			String sql = "SELECT Certification.CertName, StuCompCert.StudentID,(Student.FirstName+' '+ Student.LastName) as StuName, StuCompCert.StuCertDate"
-					+ " FROM StuCompCert INNER JOIN"
-					+ " Certification ON StuCompCert.CertID = Certification.CertID INNER JOIN"
-					+ " Student ON StuCompCert.StudentID = Student.StudentID";
-			PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-	        
-	        while(rs.next())
-	        {
-	            String a = rs.getString("CertName");
-	            String b = rs.getString("StudentID");
-	            String c = rs.getString("StuName");
-	            String d = rs.getString("StuCertDate");
-
-	            empCertModel.addRow(new Object[]{a, b, c, d});
-	        }
-
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1);
-		}
 	}
 
 }

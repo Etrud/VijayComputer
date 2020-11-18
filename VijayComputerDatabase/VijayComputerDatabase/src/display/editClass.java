@@ -451,14 +451,14 @@ public class editClass {
 		
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(173, 216, 230));
+		panel_1.setBackground(new Color(153, 204, 153));
 		frmCreateClass.getContentPane().add(panel_1, BorderLayout.NORTH);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		panel_1.add(verticalStrut_1);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(173, 216, 230));
+		panel_2.setBackground(new Color(153, 204, 153));
 		frmCreateClass.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
@@ -471,14 +471,14 @@ public class editClass {
 		frmCreateClass.getContentPane().add(textField_5, BorderLayout.WEST);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(173, 216, 230));
+		panel_3.setBackground(new Color(153, 204, 153));
 		frmCreateClass.getContentPane().add(panel_3, BorderLayout.WEST);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(10);
 		panel_3.add(horizontalStrut_1);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(new Color(173, 216, 230));
+		panel_4.setBackground(new Color(153, 204, 153));
 		frmCreateClass.getContentPane().add(panel_4, BorderLayout.EAST);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(10);

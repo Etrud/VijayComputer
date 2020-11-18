@@ -49,7 +49,7 @@ public class editEmployee {
 	private JTextField firstNameTextField;
 	private JTextField lastNameTextField;
 	private JTextField middleITextField;
-	private JTextField homePhTextField;
+	private JFormattedTextField homePhTextField;
 	private JTextField emailTextField;
 	private JTextField addNumTextField;
 	private JTextField addStreetTextField;
@@ -58,10 +58,14 @@ public class editEmployee {
 	private JTextField fbTextField;
 	private JTextField instaTextField;
 	private JTextField twitTextField;
-	private JTextField mobilePhTextField;
+	private JFormattedTextField mobilePhTextField;
 	private JTextField addStreet2TextField;
 	private JTextField ssnTextField;
-	private JTextField textField;
+	private JTextField salTextField;
+	private int empTypeID;
+	private int empStatusID;
+	private int employeeID;
+
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl dateField;
 	private JDatePickerImpl dateField2;
@@ -69,11 +73,11 @@ public class editEmployee {
 	/**
 	 * Launch the application.
 	 */
-	public static void newWindow() {
+	public void newWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					editEmployee window = new editEmployee();
+					editEmployee window = new editEmployee(employeeID);
 					window.frmCreateEmployee.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -85,7 +89,8 @@ public class editEmployee {
 	/**
 	 * Create the application.
 	 */
-	public editEmployee() {
+	public editEmployee(int x) {
+		employeeID = x;
 		initialize();
 	}
 
@@ -167,7 +172,14 @@ public class editEmployee {
 			e.printStackTrace();
 		}
 	    mf1.setPlaceholderCharacter('_');
-		
+	    MaskFormatter mf2 = null;
+		try {
+			mf2 = new MaskFormatter("(###)-###-####");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    mf2.setPlaceholderCharacter('_');
 		
 		homePhTextField = new JFormattedTextField(mf1);
 		panel_5.add(homePhTextField, "cell 1 6");
@@ -176,7 +188,7 @@ public class editEmployee {
 		JLabel lblNewLabel_5 = new JLabel("Mobile Phone:");
 		panel_5.add(lblNewLabel_5, "cell 0 7");
 		
-		mobilePhTextField = new JFormattedTextField(mf1);
+		mobilePhTextField = new JFormattedTextField(mf2);
 		panel_5.add(mobilePhTextField, "cell 1 7");
 		mobilePhTextField.setColumns(8);
 		
@@ -318,14 +330,13 @@ public class editEmployee {
 		 try{
 		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-		        String sql = "SELECT MAX(EmployeeID) FROM Employee";
+		        String sql = "SELECT EmployeeID FROM Employee WHERE EmployeeID ="+employeeID;
 		        PreparedStatement pst = conn.prepareStatement(sql);
 		        ResultSet rs = pst.executeQuery();
 
 		        while(rs.next()){
 		         int s = rs.getInt(1);
-		         int q = s +1;
-		         empIDTextField.setText(Integer.toString(q));
+		         empIDTextField.setText(Integer.toString(s));
 
 		        }
 
@@ -375,9 +386,9 @@ public class editEmployee {
 		JLabel lblNewLabel_13 = new JLabel("Salary:");
 		panel_9.add(lblNewLabel_13, "cell 0 0");
 		
-		textField = new JTextField();
-		panel_9.add(textField, "cell 1 0");
-		textField.setColumns(10);
+		salTextField = new JTextField();
+		panel_9.add(salTextField, "cell 1 0");
+		salTextField.setColumns(10);
 		
 		JLabel lblNewLabel_14 = new JLabel("Pay Type:");
 		panel_9.add(lblNewLabel_14, "cell 0 1,alignx trailing");
@@ -478,20 +489,8 @@ public class editEmployee {
 		    }catch (Exception e){
 		        JOptionPane.showMessageDialog(null, e);
 		    }
+
 		
-		homePhTextField = new JTextField();
-		
-		
-		
-		mobilePhTextField = new JTextField();
-		MaskFormatter mf2 = null;
-		try {
-			mf2 = new MaskFormatter("(###)-###-####");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    mf1.setPlaceholderCharacter('_');
 		
 	    try{
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -535,25 +534,258 @@ public class editEmployee {
 	    }
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(173, 216, 230));
+		panel_1.setBackground(new Color(255, 204, 204));
 		frmCreateEmployee.getContentPane().add(panel_1, BorderLayout.SOUTH);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(15);
 		panel_1.add(verticalStrut_1);
 		
+		 try{
+		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+		        String sql = "SELECT Employee.EmployeeID, EmployeeType.EmpTypeName, EmployeeStatus.Status, Employee.FirstName, Employee.LastName, Employee.MiddleInitial, Employee.HomePhone, Employee.MobilePhone,"
+		        		+ " Employee.Email, Employee.DOB, Employee.HireDate, Employee.ContractEndDate, Employee.SSN, Employee.AddressNum, Employee.AddressStreet, Employee.AddressStreet2, Employee.PostalCode,"
+		        		+ " Employee.City, StateProv.StateProvName, Country.CountryName, Employee.Salary, PayType.PayType, PayPeriod.PayPeriod, WorkEligibilityStatus.EligibilityStatus, Employee.FacebookHandle,"
+		        		+ " Employee.InstagramHandle, Employee.TwitterHandle"
+		        		+ " FROM EmployeeType INNER JOIN"
+		        		+ " Employee ON EmployeeType.TypeID = Employee.EmployeeTypeID INNER JOIN"
+		        		+ " EmployeeStatus ON Employee.EmployeeStatusID = EmployeeStatus.EmpStatusID INNER JOIN"
+		        		+ " PayType ON Employee.PayTypeID = PayType.PayTypeID INNER JOIN"
+		        		+ " PayPeriod ON Employee.PayPeriodID = PayPeriod.PayPeriodID INNER JOIN"
+		        		+ " StateProv ON Employee.StateProvinceID = StateProv.StateID INNER JOIN"
+		        		+ " Country ON Employee.CountryID = Country.CountryID INNER JOIN"
+		        		+ " WorkEligibilityStatus ON Employee.WorkEligibilityID = WorkEligibilityStatus.EligibilityID WHERE EmployeeID = "+employeeID;
+		        PreparedStatement pst = conn.prepareStatement(sql);
+		        ResultSet rs = pst.executeQuery();
+
+		        while(rs.next()){
+		         typecomboBox.setSelectedItem(rs.getString("EmpTypeName"));
+		         statuscomboBox.setSelectedItem(rs.getString("Status"));
+		         firstNameTextField.setText(rs.getString("FirstName"));
+		         lastNameTextField.setText(rs.getString("LastName"));
+		         middleITextField.setText(rs.getString("MiddleInitial"));
+		         homePhTextField.setText(rs.getString("HomePhone"));
+		         mobilePhTextField.setText(rs.getString("MobilePhone"));
+		         emailTextField.setText(rs.getString("Email"));
+		         dateField.getJFormattedTextField().setText(rs.getString("DOB"));
+		         dateField2.getJFormattedTextField().setText(rs.getString("HireDate"));
+		         dateField3.getJFormattedTextField().setText(rs.getString("ContractEndDate"));
+		         ssnTextField.setText(rs.getString("SSN"));
+		         addNumTextField.setText(rs.getString("AddressNum"));
+		         addStreetTextField.setText(rs.getString("AddressStreet"));
+		         addStreet2TextField.setText(rs.getString("AddressStreet2"));
+		         postalCodeTextField.setText(rs.getString("PostalCode"));
+		         cityTextField.setText(rs.getString("City"));
+		         stateProvComboBox.setSelectedItem(rs.getString("StateProvName"));
+		         countryComboBox.setSelectedItem(rs.getString("CountryName"));
+		         salTextField.setText(rs.getString("Salary"));
+		         payTypecomboBox.setSelectedItem(rs.getString("PayType"));
+		         payPeriodComboBox.setSelectedItem(rs.getString("PayPeriod"));
+		         workEComboBox.setSelectedItem(rs.getString("EligibilityStatus"));
+		         fbTextField.setText(rs.getString("FacebookHandle"));
+		         instaTextField.setText(rs.getString("InstagramHandle"));
+		         twitTextField.setText(rs.getString("TwitterHandle"));
+
+		        }
+
+		        pst.close();
+		        rs.close();
+		        conn.close();
+
+		    }catch (Exception e){
+		        JOptionPane.showMessageDialog(null, e);
+		    }
+		
+		
+		
+		
+		
+		
+		
 		JButton btnNewButton = new JButton("Edit Employee");
 		btnNewButton.addActionListener(new ActionListener() {
+			private int stateID;
+			private int countryID;
+			private int payTypeID;
+			private int payPeriodID;
+			private int bigEID;
+
 			public void actionPerformed(ActionEvent arg0) {
+				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "SELECT EmployeeType.TypeID"
+			        		+ " FROM Employee INNER JOIN"
+			        		+ " EmployeeType ON Employee.EmployeeTypeID = EmployeeType.TypeID WHERE EmployeeID = ";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         int s = rs.getInt(1);
+			         empTypeID = s;
+			        }
+
+			        pst.close();
+			        rs.close();
+			        conn.close();
+
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    }
+				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "EmployeeStatus.EmpStatusID"
+			        		+ " FROM Employee INNER JOIN"
+			        		+  "EmployeeStatus ON Employee.EmployeeStatusID = EmployeeStatus.EmpStatusID WHERE Status = '"+statuscomboBox.getSelectedItem().toString()+"'";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         int s = rs.getInt(1);
+			         empStatusID = s;
+			        }
+
+			        pst.close();
+			        rs.close();
+			        conn.close();
+
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    }
+				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "SELECT StateProv.StateID"
+			        		+ " FROM StateProv INNER JOIN"
+			        		+ " Employee ON StateProv.StateID = Employee.StateProvinceID WHERE StateProvName = '"+stateProvComboBox.getSelectedItem().toString()+"'";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         int s = rs.getInt(1);
+			         stateID = s;
+			        }
+
+			        pst.close();
+			        rs.close();
+			        conn.close();
+
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    }				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "SELECT Country.CountryID"
+			        		+ "FROM Employee INNER JOIN"
+			        		+ " Country ON Employee.CountryID = Country.CountryID WHERE CountryName = '"+countryComboBox.getSelectedItem().toString()+"'";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         int s = rs.getInt(1);
+			         countryID = s;
+			        }
+
+			        pst.close();
+			        rs.close();
+			        conn.close();
+
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    }				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "SELECT PayType.PayTypeID"
+			        		+ " FROM PayType INNER JOIN"
+			        		+ " Employee ON PayType.PayTypeID = Employee.PayTypeID WHERE PayType = '"+payTypecomboBox.getSelectedItem().toString()+"'";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         int s = rs.getInt(1);
+			         payTypeID = s;
+			        }
+
+			        pst.close();
+			        rs.close();
+			        conn.close();
+
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    }				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "SELECT PayPeriodID"
+			        		+ "FROM PayPeriod WHERE PayPeriod = '"+payPeriodComboBox.getSelectedItem().toString()+"'";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         int s = rs.getInt(1);
+			         payPeriodID = s;
+			        }
+
+			        pst.close();
+			        rs.close();
+			        conn.close();
+
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    }				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "SELECT EligibilityID"
+			        		+ "FROM WorkEligibilityStatus WHERE EligibilityStatus = '"+workEComboBox.getSelectedItem().toString()+"'";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         int s = rs.getInt(1);
+			         bigEID = s;
+			        }
+
+			        pst.close();
+			        rs.close();
+			        conn.close();
+
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    }
+
 				try {
 					BigInteger big = new BigInteger(homePhTextField.getText().replace("(", "").replace(")","").replace("-", ""));
 					BigInteger big1 = new BigInteger(mobilePhTextField.getText().replace("(", "").replace(")","").replace("-", ""));
 					
 			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 			        
-			    	String sql = "INSERT INTO Student (EmployeeID,EmployeeTypeID,EmployeeStatusID,FirstName,LastName,MiddleInital,HomePhone,MobilePhone,Email,DOB,HireDate,ContractEndDate,SSN,AddressNum,AddressStreet,AddressStreet2,PostalCode,City,StateProvinceID,CountryID,Salary,PayTypeID,PayPeriodID,WorkEligibilityID,FaceBookHandle,InstagramHandle,TwitterHandle) "
-			    			+ "VALUES ("+Integer.parseInt(empIDTextField.getText())+",'"+lastNameTextField.getText()+"','"+
-					firstNameTextField.getText()+"','"+middleITextField.getText()+"',"+big+","+big1+",'"+emailTextField.getText()+"', CAST('"+dateField.getJFormattedTextField().getText()+"' as date),'"+Integer.parseInt(addNumTextField.getText())+"','"+
-							addStreetTextField.getText()+"','"+addStreet2TextField.getText()+"','"+postalCodeTextField.getText()+"','"+cityTextField.getText()+"',"+countryComboBox.getSelectedIndex()+","+stateProvComboBox.getSelectedIndex()+",'"+fbTextField.getText()+"','"+instaTextField.getText()+"','"+twitTextField.getText()+"')";
+			    	String sql = "UPDATE Employee SET EmployeeID = "+Integer.parseInt(empIDTextField.getText())
+			    	+", EmployeeTypeID = "+empTypeID
+			    	+", EmployeeStatusID = "+empStatusID
+			    	+ ", FirstName = '"+firstNameTextField.getText()
+			    	+ "', LastName = '"+lastNameTextField.getText()
+			    	+ "', MiddleInital = '"+middleITextField.getText()
+			    	+ "', HomePhone = "+big
+			    	+ ", MobilePhone = "+big1
+			    	+ ", Email = '"+emailTextField.getText()
+			    	+ ", DOB = CAST('"+dateField.getJFormattedTextField().getText()+"' as date)"
+			    	+ ", HireDate = CAST('"+dateField2.getJFormattedTextField().getText()+"' as date)"
+			    	+ ", ContractEndDate= CAST('"+dateField2.getJFormattedTextField().getText()+"' as date)"
+			    	+ ",SSN = "+Integer.parseInt(ssnTextField.getText())
+			    	+ ", AddressNum = "+Integer.parseInt(addNumTextField.getText())
+			    	+ ", AddressStreet = '"+addStreetTextField.getText()
+			    	+ "', AddressStreet2 = '"+addStreet2TextField.getText()
+			    	+ "', PostalCode = '"+postalCodeTextField.getText()
+			    	+ "', City = '"+cityTextField.getText()
+			    	+ "', StateProvinceID = "+stateID
+			    	+ ", CountryID = "+countryID
+			    	+ ", Salary = "+Integer.parseInt(salTextField.getText())
+			    	+ ",PayTypeID = "+payTypeID 
+			    	+ ",PayPeriodID ="+payPeriodID
+			    	+ ",WorkEligibilityID ="+bigEID
+			    	+ ",FaceBookHandle = '"+fbTextField.getText()
+			    	+ "', InstagramHandle = '"+instaTextField.getText()
+			    	+ "', TwitterHandle = '"+twitTextField.getText() + "WHERE EmployeeID = "+Integer.parseInt(empIDTextField.getText());
 			    	Statement pst = conn.createStatement();
 			        pst.executeUpdate(sql);
 			        System.out.println("Inserted records into the table...");
@@ -573,21 +805,21 @@ public class editEmployee {
 		panel_1.add(btnNewButton);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(173, 216, 230));
+		panel_2.setBackground(new Color(255, 204, 204));
 		frmCreateEmployee.getContentPane().add(panel_2, BorderLayout.NORTH);
 		
 		Component verticalStrut_1_1 = Box.createVerticalStrut(15);
 		panel_2.add(verticalStrut_1_1);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(173, 216, 230));
+		panel_3.setBackground(new Color(255, 204, 204));
 		frmCreateEmployee.getContentPane().add(panel_3, BorderLayout.WEST);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		panel_3.add(horizontalStrut_1);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(new Color(173, 216, 230));
+		panel_4.setBackground(new Color(255, 204, 204));
 		frmCreateEmployee.getContentPane().add(panel_4, BorderLayout.EAST);
 		
 		Component horizontalStrut_1_1 = Box.createHorizontalStrut(20);

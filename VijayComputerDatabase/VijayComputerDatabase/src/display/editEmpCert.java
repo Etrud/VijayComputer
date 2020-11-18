@@ -80,51 +80,26 @@ public class editEmpCert {
 		frmVcaCreate.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(204, 204, 204));
+		panel.setBackground(new Color(255, 204, 153));
 		frmVcaCreate.getContentPane().add(panel, BorderLayout.WEST);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(204, 204, 204));
+		panel_1.setBackground(new Color(255, 204, 153));
 		frmVcaCreate.getContentPane().add(panel_1, BorderLayout.NORTH);
 		
 		JLabel lblNewLabel_3 = new JLabel("Edit Employee Certification Assignment");
 		panel_1.add(lblNewLabel_3);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(204, 204, 204));
+		panel_2.setBackground(new Color(255, 204, 153));
 		frmVcaCreate.getContentPane().add(panel_2, BorderLayout.SOUTH);
 
 		JButton createEmpCert = new JButton("Edit Employee Certification");
-		createEmpCert.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-			        String sql = "INSERT INTO EmpCert(EmpID,CertID,EmpCert,EmpCertDate) VALUES ("+empID+","+certID+","+Integer.parseInt(serialTextField.getText())+", CAST( '"+dateField.getJFormattedTextField().getText()+"' as date))";
-			        Statement pst = conn.createStatement();
-			        pst.executeUpdate(sql);
-			        System.out.println("Inserted records into the table...");
-				}
-				catch(SQLException e)
-				{
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, e);
-				}
-				catch(Exception e){
-				      //Handle errors for Class.forName
-				      e.printStackTrace();
-				 }
-				finally {
-					frmVcaCreate.dispose();
-				}
-			}
-		});
-		
-		
-		
+
 		panel_2.add(createEmpCert);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(204, 204, 204));
+		panel_3.setBackground(new Color(255, 204, 153));
 		frmVcaCreate.getContentPane().add(panel_3, BorderLayout.EAST);
 		
 		JPanel panel_4 = new JPanel();
@@ -142,15 +117,13 @@ public class editEmpCert {
 		 try{
 		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-		        String sql = "SELECT MAX(EmpCert) FROM EmpCert";
+		        String sql = "SELECT EmpCert FROM EmpCert WHERE EmpCert = "+empCertID;
 		        PreparedStatement pst = conn.prepareStatement(sql);
 		        ResultSet rs = pst.executeQuery();
 
 		        while(rs.next()){
 		         int s = rs.getInt(1);
-		         int q = s +1;
-		         serialTextField.setText(Integer.toString(q));
-
+		         serialTextField.setText(Integer.toString(s));
 		        }
 
 		        pst.close();
@@ -185,7 +158,27 @@ public class editEmpCert {
 	    }catch (Exception e){
 	        JOptionPane.showMessageDialog(null, e);
 	    }
-		
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT Certification.CertName,Certification.CertID"
+	        		+ " FROM Certification INNER JOIN"
+	        		+ " EmpCert ON Certification.CertID = EmpCert.CertID WHERE EmpCert = "+empCertID;
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString("CertName");
+	         certComboBox.setSelectedItem(s);
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		JLabel lblNewLabel_2 = new JLabel("Employee:");
 		panel_4.add(lblNewLabel_2, "cell 0 2,alignx trailing,aligny center");
 		
@@ -210,7 +203,27 @@ public class editEmpCert {
 	    }catch (Exception e){
 	        JOptionPane.showMessageDialog(null, e);
 	    }
-		
+		try{
+	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+	        String sql = "SELECT CAST(EmployeeID AS VARCHAR)+', '+Employee.FirstName+' '+Employee.LastName as EMP"
+	        		+ " FROM Employee INNER JOIN"
+	        		+ " EmpCert ON Employee.EmployeeID = EmpCert.EmpID WHERE EmpCert ="+empCertID;
+	        PreparedStatement pst = conn.prepareStatement(sql);
+	        ResultSet rs = pst.executeQuery();
+
+	        while(rs.next()){
+	         String s = rs.getString("EMP");
+	         empComboBox.setSelectedItem(s);
+	        }
+
+	        pst.close();
+	        rs.close();
+	        conn.close();
+
+	    }catch (Exception e){
+	        JOptionPane.showMessageDialog(null, e);
+	    }
 		
 		JLabel lblNewLabel_4 = new JLabel("Certification Date:");
 		panel_4.add(lblNewLabel_4, "cell 0 3,alignx trailing,aligny center");
@@ -230,36 +243,88 @@ public class editEmpCert {
 		    springLayout.putConstraint(SpringLayout.WEST, dateField.getJFormattedTextField(), 0, SpringLayout.WEST, dateField);
 		    certdatePanel.add(dateField);
 		  
-		    try {
+		    try{
+		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-
-		    	String sql = "SELECT EmployeeID FROM Employee WHERE EmployeeID = '"+empComboBox.getSelectedItem().toString().substring(0,empComboBox.getSelectedItem().toString().indexOf(','))+"'";
-		    	PreparedStatement pst = conn.prepareStatement(sql);
+		        String sql = "SELECT EmpCertDate"
+		        		+ " FROM EmpCert WHERE EmpCert ="+empCertID;
+		        PreparedStatement pst = conn.prepareStatement(sql);
 		        ResultSet rs = pst.executeQuery();
-		        while(rs.next())
-		        {
-		            String a = rs.getString("EmployeeID");
-		            empID = Integer.parseInt(a);
+
+		        while(rs.next()){
+		         String s = rs.getString("EmpCertDate");
+		         dateField.getJFormattedTextField().setText(s);
 		        }
 
-			}
-			catch(SQLException e1) {
-			}
-			try {
-		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+		        pst.close();
+		        rs.close();
+		        conn.close();
 
-		    String sql = "SELECT CertID FROM Certification WHERE CertName = '"+certComboBox.getSelectedItem().toString()+"'";
-		    	PreparedStatement pst = conn.prepareStatement(sql);
-		        ResultSet rs = pst.executeQuery();
-		        while(rs.next())
-		        {
-		            String a = rs.getString("CertID");
-		            certID = Integer.parseInt(a);
-		        }
+		    }catch (Exception e){
+		        JOptionPane.showMessageDialog(null, e);
+		    }
+		    
+		    
+			
+			createEmpCert.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					 try {
+					    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 
-			}
-			catch(SQLException e1) {
-			}	
+					    	String sql = "SELECT EmployeeID FROM Employee WHERE EmployeeID = '"+empComboBox.getSelectedItem().toString().substring(0,empComboBox.getSelectedItem().toString().indexOf(','))+"'";
+					    	PreparedStatement pst = conn.prepareStatement(sql);
+					        ResultSet rs = pst.executeQuery();
+					        while(rs.next())
+					        {
+					            String a = rs.getString("EmployeeID");
+					            empID = Integer.parseInt(a);
+					        }
+
+						}
+						catch(SQLException e1) {
+						}
+					try {
+				    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+
+				    String sql = "SELECT CertID FROM Certification WHERE CertName = '"+certComboBox.getSelectedItem().toString()+"'";
+				    	PreparedStatement pst = conn.prepareStatement(sql);
+				        ResultSet rs = pst.executeQuery();
+				        while(rs.next())
+				        {
+				            String a = rs.getString("CertID");
+				            certID = Integer.parseInt(a);
+				        }
+
+					}
+					catch(SQLException e1) {
+					}
+					try {
+				    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+				        String sql = "UPDATE EmpCert SET EmpID = "+empID+", CertID ="+certID+", EmpCert ="+Integer.parseInt(serialTextField.getText())+",EmpCertDate = CAST('"+dateField.getJFormattedTextField().getText()+"' as date) WHERE EmpCert = "+empCertID;
+				        Statement pst = conn.createStatement();
+				        pst.executeUpdate(sql);
+				        System.out.println("Inserted records into the table...");
+					}
+					catch(SQLException e)
+					{
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e);
+					}
+					catch(Exception e){
+					      //Handle errors for Class.forName
+					      e.printStackTrace();
+					 }
+					finally {
+						frmVcaCreate.dispose();
+					}
+				}
+			});
+			
+			
+			
+			
+			
+			
 	}
 	
 	public class DateLabelFormatter extends AbstractFormatter {

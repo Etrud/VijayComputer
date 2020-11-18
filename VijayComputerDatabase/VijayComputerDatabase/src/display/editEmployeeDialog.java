@@ -76,9 +76,8 @@ public class editEmployeeDialog {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				idNum = Integer.parseInt(idTextField.getText());
-				editStudent eStud = new editStudent();
-				eStud.getStudent(idNum);
-				eStud.editStud();
+				editEmployee eStud = new editEmployee(Integer.parseInt(idTextField.getText()));
+				eStud.newWindow();
 				
 				
 			}

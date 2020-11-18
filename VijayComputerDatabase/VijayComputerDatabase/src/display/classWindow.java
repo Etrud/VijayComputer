@@ -72,14 +72,14 @@ public class classWindow {
 		frmStudentView.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(153, 255, 102));
+		panel_2.setBackground(new Color(102, 204, 153));
 		frmStudentView.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
 		Component verticalStrut = Box.createVerticalStrut(5);
 		panel_2.add(verticalStrut);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(153, 255, 102));
+		panel.setBackground(new Color(102, 204, 153));
 		frmStudentView.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new MigLayout("", "[grow]", "[23px,grow]"));
 		
@@ -169,14 +169,14 @@ public class classWindow {
 		
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(153, 255, 102));
+		panel_3.setBackground(new Color(102, 204, 153));
 		frmStudentView.getContentPane().add(panel_3, BorderLayout.WEST);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(5);
 		panel_3.add(horizontalStrut);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(new Color(153, 255, 102));
+		panel_4.setBackground(new Color(102, 204, 153));
 		frmStudentView.getContentPane().add(panel_4, BorderLayout.EAST);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(5);

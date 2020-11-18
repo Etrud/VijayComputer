@@ -66,23 +66,24 @@ public class StudentWindow {
 		frmStudentView = new JFrame();
 		frmStudentView.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\user.png"));
 		frmStudentView.setTitle("Student View");
-		frmStudentView.setBounds(100, 100, 735, 522);
+		frmStudentView.setBounds(100, 100, 764, 522);
 		frmStudentView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmStudentView.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(153, 255, 102));
+		panel_2.setBackground(new Color(102, 204, 102));
 		frmStudentView.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
 		Component verticalStrut = Box.createVerticalStrut(5);
 		panel_2.add(verticalStrut);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(153, 255, 102));
+		panel.setBackground(new Color(102, 204, 102));
 		frmStudentView.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new MigLayout("", "[grow]", "[23px,grow]"));
 		
 		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.add(panel_5, "cell 0 0,alignx center,growy");
 		
 		JLabel lblNewLabel = new JLabel("Student Options:");
@@ -159,14 +160,14 @@ public class StudentWindow {
 		
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(153, 255, 102));
+		panel_3.setBackground(new Color(102, 204, 102));
 		frmStudentView.getContentPane().add(panel_3, BorderLayout.WEST);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(5);
 		panel_3.add(horizontalStrut);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(new Color(153, 255, 102));
+		panel_4.setBackground(new Color(102, 204, 102));
 		frmStudentView.getContentPane().add(panel_4, BorderLayout.EAST);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(5);
@@ -183,81 +184,6 @@ public class StudentWindow {
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Exit");
 		mnNewMenu_1.add(mntmNewMenuItem_1);
-		
-		JMenu mnNewMenu = new JMenu("Select / View");
-		menuBar.add(mnNewMenu);
-		
-		JRadioButtonMenuItem rdbtnmntmNewRadioItem = new JRadioButtonMenuItem("Student ID");
-		rdbtnmntmNewRadioItem.setSelected(true);
-		mnNewMenu.add(rdbtnmntmNewRadioItem);
-		
-		JRadioButtonMenuItem rdbtnmntmFirstName = new JRadioButtonMenuItem("First Name");
-		rdbtnmntmFirstName.setSelected(true);
-		mnNewMenu.add(rdbtnmntmFirstName);
-		
-		JRadioButtonMenuItem rdbtnmntmLastName = new JRadioButtonMenuItem("Last Name");
-		rdbtnmntmLastName.setSelected(true);
-		mnNewMenu.add(rdbtnmntmLastName);
-		
-		JRadioButtonMenuItem rdbtnmntmMiddleInital = new JRadioButtonMenuItem("Middle Inital");
-		rdbtnmntmMiddleInital.setSelected(true);
-		mnNewMenu.add(rdbtnmntmMiddleInital);
-		
-		JRadioButtonMenuItem rdbtnmntmHomePhone = new JRadioButtonMenuItem("Home Phone");
-		rdbtnmntmHomePhone.setSelected(true);
-		mnNewMenu.add(rdbtnmntmHomePhone);
-		
-		JRadioButtonMenuItem rdbtnmntmMobilePhone = new JRadioButtonMenuItem("Mobile Phone");
-		rdbtnmntmMobilePhone.setSelected(true);
-		mnNewMenu.add(rdbtnmntmMobilePhone);
-		
-		JRadioButtonMenuItem rdbtnmntmEmail = new JRadioButtonMenuItem("Email");
-		rdbtnmntmEmail.setSelected(true);
-		mnNewMenu.add(rdbtnmntmEmail);
-		
-		JRadioButtonMenuItem rdbtnmntmGender = new JRadioButtonMenuItem("Gender");
-		rdbtnmntmGender.setSelected(true);
-		mnNewMenu.add(rdbtnmntmGender);
-		
-		JRadioButtonMenuItem rdbtnmntmDateOfBirth = new JRadioButtonMenuItem("Date of Birth");
-		rdbtnmntmDateOfBirth.setSelected(true);
-		mnNewMenu.add(rdbtnmntmDateOfBirth);
-		
-		JRadioButtonMenuItem rdbtnmntmAddressNum = new JRadioButtonMenuItem("Address Num");
-		rdbtnmntmAddressNum.setSelected(true);
-		mnNewMenu.add(rdbtnmntmAddressNum);
-		
-		JRadioButtonMenuItem rdbtnmntmAddressStreet = new JRadioButtonMenuItem("Address Street");
-		rdbtnmntmAddressStreet.setSelected(true);
-		mnNewMenu.add(rdbtnmntmAddressStreet);
-		
-		JRadioButtonMenuItem rdbtnmntmPostalCode = new JRadioButtonMenuItem("Postal Code");
-		rdbtnmntmPostalCode.setSelected(true);
-		mnNewMenu.add(rdbtnmntmPostalCode);
-		
-		JRadioButtonMenuItem rdbtnmntmCity = new JRadioButtonMenuItem("City");
-		rdbtnmntmCity.setSelected(true);
-		mnNewMenu.add(rdbtnmntmCity);
-		
-		JRadioButtonMenuItem rdbtnmntmState = new JRadioButtonMenuItem("State");
-		rdbtnmntmState.setSelected(true);
-		mnNewMenu.add(rdbtnmntmState);
-		
-		JRadioButtonMenuItem rdbtnmntmCountry = new JRadioButtonMenuItem("Country");
-		rdbtnmntmCountry.setSelected(true);
-		mnNewMenu.add(rdbtnmntmCountry);
-		
-		JRadioButtonMenuItem rdbtnmntmFacebook = new JRadioButtonMenuItem("Facebook");
-		rdbtnmntmFacebook.setSelected(true);
-		mnNewMenu.add(rdbtnmntmFacebook);
-		
-		JRadioButtonMenuItem rdbtnmntmInstagram = new JRadioButtonMenuItem("Instagram");
-		rdbtnmntmInstagram.setSelected(true);
-		mnNewMenu.add(rdbtnmntmInstagram);
-		
-		JRadioButtonMenuItem rdbtnmntmTwitter = new JRadioButtonMenuItem("Twitter");
-		rdbtnmntmTwitter.setSelected(true);
-		mnNewMenu.add(rdbtnmntmTwitter);
 	}
 
 }

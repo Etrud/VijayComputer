@@ -82,18 +82,18 @@ public class createStudCertification {
 		frmVcaCreate.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(204, 204, 204));
+		panel.setBackground(new Color(255, 204, 153));
 		frmVcaCreate.getContentPane().add(panel, BorderLayout.WEST);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(204, 204, 204));
+		panel_1.setBackground(new Color(255, 204, 153));
 		frmVcaCreate.getContentPane().add(panel_1, BorderLayout.NORTH);
 		
 		JLabel lblNewLabel_3 = new JLabel("Student Certification Assignment");
 		panel_1.add(lblNewLabel_3);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(204, 204, 204));
+		panel_2.setBackground(new Color(255, 204, 153));
 		frmVcaCreate.getContentPane().add(panel_2, BorderLayout.SOUTH);
 
 		JButton createEmpCert = new JButton("Assign Student Certification");
@@ -126,7 +126,7 @@ public class createStudCertification {
 		panel_2.add(createEmpCert);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(204, 204, 204));
+		panel_3.setBackground(new Color(255, 204, 153));
 		frmVcaCreate.getContentPane().add(panel_3, BorderLayout.EAST);
 		
 		JPanel panel_4 = new JPanel();

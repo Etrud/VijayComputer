@@ -92,8 +92,8 @@ public class editAnnouncement {
 	private void initialize() {
 		frmVcaCreate = new JFrame();
 		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\googlecalendar.png"));
-		frmVcaCreate.setTitle("VCA - Create Announcement");
-		frmVcaCreate.setBounds(100, 100, 450, 300);
+		frmVcaCreate.setTitle("VCA - Edit Announcement");
+		frmVcaCreate.setBounds(100, 100, 559, 300);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmVcaCreate.getContentPane().setLayout(new BorderLayout(0, 0));
 		

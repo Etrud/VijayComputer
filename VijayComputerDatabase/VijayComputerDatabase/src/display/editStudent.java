@@ -1,6 +1,5 @@
 package display;
 
-import net.codejava.sql.JavaConnectionSQL;
 import java.awt.EventQueue;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -370,7 +369,7 @@ public class editStudent {
 		panel.add(twitterTextField, "cell 1 18,alignx left");
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(176, 196, 222));
+		panel_1.setBackground(new Color(204, 255, 153));
 		frmCreateStudent.getContentPane().add(panel_1, BorderLayout.SOUTH);
 		
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
@@ -412,7 +411,7 @@ public class editStudent {
 		CreateStudentButtonGroup.add(createStudentButton2);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(176, 196, 222));
+		panel_2.setBackground(new Color(204, 255, 153));
 		panel_2.setAlignmentX(Component.LEFT_ALIGNMENT);
 		frmCreateStudent.getContentPane().add(panel_2, BorderLayout.NORTH);
 		
@@ -422,7 +421,7 @@ public class editStudent {
 		panel_2.add(verticalStrut_2_1);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(new Color(176, 196, 222));
+		panel_4.setBackground(new Color(204, 255, 153));
 		frmCreateStudent.getContentPane().add(panel_4, BorderLayout.EAST);
 		
 		Component horizontalStrut_1_1_1_1 = Box.createHorizontalStrut(20);
@@ -431,7 +430,7 @@ public class editStudent {
 		panel_4.add(horizontalStrut_1_1_1_1);
 		
 		JPanel panel_5 = new JPanel();
-		panel_5.setBackground(new Color(176, 196, 222));
+		panel_5.setBackground(new Color(204, 255, 153));
 		frmCreateStudent.getContentPane().add(panel_5, BorderLayout.WEST);
 		
 		Component horizontalStrut_1_1_1 = Box.createHorizontalStrut(20);

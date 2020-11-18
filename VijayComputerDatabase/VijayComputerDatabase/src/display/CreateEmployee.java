@@ -25,8 +25,6 @@ import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import java.awt.Component;
-import java.awt.Container;
-
 import javax.swing.Box;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
@@ -36,11 +34,9 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
-import display.CreateStudent.DateLabelFormatter;
 import java.awt.event.ActionListener;
 import java.math.BigInteger;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
 
 public class CreateEmployee {
 
@@ -536,7 +532,7 @@ public class CreateEmployee {
 	    }
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(173, 216, 230));
+		panel_1.setBackground(new Color(255, 204, 204));
 		frmCreateEmployee.getContentPane().add(panel_1, BorderLayout.SOUTH);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(15);
@@ -546,21 +542,21 @@ public class CreateEmployee {
 		panel_1.add(btnNewButton);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(173, 216, 230));
+		panel_2.setBackground(new Color(255, 204, 204));
 		frmCreateEmployee.getContentPane().add(panel_2, BorderLayout.NORTH);
 		
 		Component verticalStrut_1_1 = Box.createVerticalStrut(15);
 		panel_2.add(verticalStrut_1_1);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(173, 216, 230));
+		panel_3.setBackground(new Color(255, 204, 204));
 		frmCreateEmployee.getContentPane().add(panel_3, BorderLayout.WEST);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		panel_3.add(horizontalStrut_1);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(new Color(173, 216, 230));
+		panel_4.setBackground(new Color(255, 204, 204));
 		frmCreateEmployee.getContentPane().add(panel_4, BorderLayout.EAST);
 		
 		Component horizontalStrut_1_1 = Box.createHorizontalStrut(20);
