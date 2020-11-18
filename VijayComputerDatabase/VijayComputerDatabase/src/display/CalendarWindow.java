@@ -1,6 +1,7 @@
 package display;
 
 import java.awt.EventQueue;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -19,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.SpringLayout;
 import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.JTable.PrintMode;
 
 import org.jdatepicker.*;
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -46,6 +48,7 @@ import javax.swing.Box;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -114,11 +117,53 @@ public class CalendarWindow {
 		JMenu mnNewMenu = new JMenu("File");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem_3_1 = new JMenuItem("Print");
-		mnNewMenu.add(mntmNewMenuItem_3_1);
+		JMenu mnNewMenu_1 = new JMenu("Print");
+		mnNewMenu.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Exit");
-		mnNewMenu.add(mntmNewMenuItem_4);
+		JMenuItem mntmNewMenuItem = new JMenuItem("Classes");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					final MessageFormat headerFormat= new MessageFormat("Class Calendar");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					classTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Announcements");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					final MessageFormat headerFormat= new MessageFormat("Announcement Calendar");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					annTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Employee Birthdays");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					final MessageFormat headerFormat= new MessageFormat("Class Information");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					empBirthTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_2);
 		frmCalendar.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_5 = new JPanel();

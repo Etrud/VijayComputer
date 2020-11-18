@@ -12,17 +12,23 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JTable;
+import javax.swing.JTable.PrintMode;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class certificationWindow {
 
@@ -244,6 +250,45 @@ public class certificationWindow {
 		empCertTable.getColumnModel().getColumn(3).setPreferredWidth(148);
 		empCertTable.getColumnModel().getColumn(4).setPreferredWidth(144);
 		scrollPane_1.setViewportView(empCertTable);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frmVcaCertification.setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("File");
+		menuBar.add(mnNewMenu);
+		
+		JMenu mnNewMenu_1 = new JMenu("Print");
+		mnNewMenu.add(mnNewMenu_1);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Student Certifications");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					final MessageFormat headerFormat= new MessageFormat("Student Certification Information");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					stuCertTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Employee Certifications");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					final MessageFormat headerFormat= new MessageFormat("Employee Certification Information");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					empCertTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_1);
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 			String sql = "SELECT StuCompCert.StuCompCertID,Certification.CertName, StuCompCert.StudentID,(Student.FirstName+' '+ Student.LastName) as StuName, StuCompCert.StuCertDate"

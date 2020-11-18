@@ -14,15 +14,18 @@ import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.JTable.PrintMode;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Component;
@@ -235,7 +238,19 @@ public class EmployeeServicesWindow {
 		JMenu mnNewMenu = new JMenu("File");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
+		JMenuItem mntmNewMenuItem = new JMenuItem("Print");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					final MessageFormat headerFormat= new MessageFormat("Employee with status: "+statuscomboBox.getSelectedItem().toString());
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					empTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem);
 
 	}

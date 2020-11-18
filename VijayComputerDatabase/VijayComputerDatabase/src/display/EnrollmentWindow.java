@@ -308,9 +308,6 @@ public class EnrollmentWindow {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);
-		
-		JMenuItem mntmExit = new JMenuItem("Exit");
-		mnNewMenu.add(mntmExit);
 	}
 	public class DateLabelFormatter extends AbstractFormatter {
 

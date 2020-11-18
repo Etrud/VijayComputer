@@ -6,15 +6,24 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTable.PrintMode;
+
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
+import java.awt.event.ActionEvent;
 
 public class viewAllCerts {
 
@@ -88,6 +97,27 @@ public class viewAllCerts {
 		JPanel panel_5 = new JPanel();
 		panel_5.setBackground(new Color(255, 204, 153));
 		panel.add(panel_5, BorderLayout.EAST);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frmVcaAll.setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("File");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Print");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					final MessageFormat headerFormat= new MessageFormat("Certification Information");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					certTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
 		
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");

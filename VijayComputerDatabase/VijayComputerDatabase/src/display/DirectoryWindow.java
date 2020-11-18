@@ -15,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -29,6 +30,7 @@ import java.awt.Dimension;
 import java.awt.print.*;
 import javax.swing.Box;
 import javax.swing.JTable;
+import javax.swing.JTable.PrintMode;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
@@ -85,12 +87,6 @@ public class DirectoryWindow {
 		JMenu mnNewMenu = new JMenu("File");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Exit");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
 		JMenu mnNewMenu_1 = new JMenu("Print");
 		mnNewMenu.add(mnNewMenu_1);
 		
@@ -98,7 +94,9 @@ public class DirectoryWindow {
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					studentTable.print();
+					final MessageFormat headerFormat= new MessageFormat("Student Directory");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					studentTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
 				} catch (PrinterException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -111,7 +109,9 @@ public class DirectoryWindow {
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					empTable.print();
+					final MessageFormat headerFormat= new MessageFormat("Employee Directory");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					empTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
 				} catch (PrinterException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -124,7 +124,9 @@ public class DirectoryWindow {
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					busTable.print();
+					final MessageFormat headerFormat= new MessageFormat("Business Contact Directory");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					busTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
 				} catch (PrinterException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -132,7 +134,6 @@ public class DirectoryWindow {
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_3);
-		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenu mnNewMenu_2 = new JMenu("Hide Info");
 		menuBar.add(mnNewMenu_2);

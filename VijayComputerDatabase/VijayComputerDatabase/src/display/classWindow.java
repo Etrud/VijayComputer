@@ -9,11 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
 import javax.swing.Box;
@@ -27,6 +29,7 @@ import javax.swing.JRadioButtonMenuItem;
 import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.JTable.PrintMode;
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
@@ -189,10 +192,19 @@ public class classWindow {
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Print");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					final MessageFormat headerFormat= new MessageFormat("Class Information");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					classTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Exit");
-		mnNewMenu_1.add(mntmNewMenuItem_1);
 	}
 
 }

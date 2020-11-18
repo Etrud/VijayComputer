@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JMenuBar;
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Color;
 import javax.swing.JTable;
+import javax.swing.JTable.PrintMode;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +29,7 @@ import javax.swing.JLabel;
 import java.awt.Component;
 import javax.swing.Box;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.awt.event.ActionEvent;
 
 public class FinanceWindow {
@@ -151,6 +154,18 @@ public class FinanceWindow {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Print");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					final MessageFormat headerFormat= new MessageFormat("Finance");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					finTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem);
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");

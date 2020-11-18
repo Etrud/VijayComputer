@@ -1,6 +1,7 @@
 package display;
 
 import java.awt.EventQueue;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.JTable.PrintMode;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
@@ -29,6 +31,7 @@ import display.CreateStudent.DateLabelFormatter;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -39,6 +42,9 @@ import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class RoomRentalWindow {
 
@@ -198,6 +204,27 @@ public class RoomRentalWindow {
 		roomTable.getColumnModel().getColumn(0).setPreferredWidth(94);
 		roomTable.getColumnModel().getColumn(1).setPreferredWidth(83);
 		scrollPane.setViewportView(roomTable);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frmVcaRoom.setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("File");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Print");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					final MessageFormat headerFormat= new MessageFormat("Room Rentals");
+					final MessageFormat footerFormat= new MessageFormat("- {0} -");
+					roomTable.print(PrintMode.FIT_WIDTH,headerFormat,footerFormat);
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
 	}
 
 
