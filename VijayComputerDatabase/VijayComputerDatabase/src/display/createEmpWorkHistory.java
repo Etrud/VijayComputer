@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -46,6 +47,8 @@ public class createEmpWorkHistory {
 	private JTextField idtextField;
 	private JTextField textField_1;
 	private JDatePickerImpl dateField;
+	private JComboBox empComboBox;
+	private JComboBox dayComboBox;
 
 	/**
 	 * Launch the application.
@@ -94,10 +97,7 @@ public class createEmpWorkHistory {
 		frmVcaCreate.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
 		JButton btnNewButton = new JButton("Create Pay Insert");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+	
 		panel_2.add(btnNewButton);
 		
 		JPanel panel_3 = new JPanel();
@@ -142,7 +142,7 @@ public class createEmpWorkHistory {
 		JLabel lblNewLabel_1 = new JLabel("Employee:");
 		panel_4.add(lblNewLabel_1, "cell 0 1,alignx right");
 		
-		JComboBox empComboBox = new JComboBox();
+		empComboBox = new JComboBox();
 		panel_4.add(empComboBox, "cell 1 1,alignx left");
 		try{
 	    	
@@ -190,7 +190,7 @@ public class createEmpWorkHistory {
 		JLabel lblNewLabel_2_1 = new JLabel("Day:");
 		panel_4.add(lblNewLabel_2_1, "cell 0 3,alignx right");
 		
-		JComboBox dayComboBox = new JComboBox();
+dayComboBox = new JComboBox();
 		panel_4.add(dayComboBox, "cell 1 3,alignx left");
 		try{
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -246,6 +246,34 @@ public class createEmpWorkHistory {
 		textField_1 = new JTextField();
 		panel_4.add(textField_1, "cell 1 6,alignx left");
 		textField_1.setColumns(10);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "INSERT EmpWorkHistory (EmpPK,EmployeeID,WorkDate,DayID,TimeIn,TimeOut,HoursWorked) VALUES ("+Integer.parseInt(idtextField.getText())
+			        +", "+Integer.parseInt(empComboBox.getSelectedItem().toString().substring(0,empComboBox.getSelectedItem().toString().indexOf(",")))+", CAST ('"+dateField.getJFormattedTextField().getText()+"' as date),"
+			        +(dayComboBox.getSelectedIndex()+1)+", CAST('"+spinner.getValue().toString()+"' as time), CAST('"+spinner2.getValue().toString()+"' as time)";
+			        Statement pst = conn.createStatement();
+			        pst.executeUpdate(sql);
+
+			        
+
+			        pst.close();
+			        conn.close();
+
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    }
+			}
+			
+		});
+		
+		
+		
+		
+		
 	}
 	
 	public class DateLabelFormatter extends AbstractFormatter {

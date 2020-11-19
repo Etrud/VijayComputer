@@ -200,7 +200,7 @@ public class createEmpPayHistory {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-			        String sql = "INSERT EmpPayHistory (EmpPK,EmpID,Date,PayAmount) VALUES ("+Integer.parseInt(softwareIDTextField.getText())+","+empComboBox.getSelectedItem().toString().substring(0,empComboBox.getSelectedItem().toString().indexOf(","))+
+			        String sql = "INSERT EmpPayHistory (EmpPK,EmpID,Date,PayAmount) VALUES ("+Integer.parseInt(softwareIDTextField.getText())+","+Integer.parseInt(empComboBox.getSelectedItem().toString().substring(0,empComboBox.getSelectedItem().toString().indexOf(",")))+
 			        		", CAST('"+dateField.getJFormattedTextField().getText()+"' as date),"+Float.parseFloat(payTextField.getText())+")";
 			        Statement pst = conn.createStatement();
 			        pst.executeUpdate(sql);
