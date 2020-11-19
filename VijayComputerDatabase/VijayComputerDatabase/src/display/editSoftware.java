@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class editSoftware {
 
@@ -60,6 +61,7 @@ public class editSoftware {
 	 */
 	private void initialize() {
 		frmVcaCreate = new JFrame();
+		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage(editSoftware.class.getResource("/laptop.png")));
 		frmVcaCreate.setTitle("VCA - Edit Software");
 		frmVcaCreate.setBounds(100, 100, 374, 213);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

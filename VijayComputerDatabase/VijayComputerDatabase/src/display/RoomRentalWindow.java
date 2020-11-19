@@ -45,6 +45,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.Toolkit;
 
 public class RoomRentalWindow {
 
@@ -81,6 +82,7 @@ public class RoomRentalWindow {
 	 */
 	private void initialize() {
 		frmVcaRoom = new JFrame();
+		frmVcaRoom.setIconImage(Toolkit.getDefaultToolkit().getImage(RoomRentalWindow.class.getResource("/classroom.png")));
 		frmVcaRoom.setTitle("VCA - Room Reservation");
 		frmVcaRoom.setBounds(100, 100, 687, 374);
 		frmVcaRoom.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

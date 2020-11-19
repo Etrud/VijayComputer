@@ -76,7 +76,7 @@ public class DirectoryWindow {
 	 */
 	private void initialize() {
 		frmVijayComputerDirectory = new JFrame();
-		frmVijayComputerDirectory.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\communicate.png"));
+		frmVijayComputerDirectory.setIconImage(Toolkit.getDefaultToolkit().getImage(DirectoryWindow.class.getResource("/book.png")));
 		frmVijayComputerDirectory.setTitle("VCA - Directory");
 		frmVijayComputerDirectory.setBounds(100, 100, 1330, 502);
 		frmVijayComputerDirectory.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

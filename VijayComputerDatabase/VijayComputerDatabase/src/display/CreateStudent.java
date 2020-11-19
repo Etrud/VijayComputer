@@ -101,7 +101,7 @@ public class CreateStudent {
 	 */
 	private void initialize() {
 		frmCreateStudent = new JFrame();
-		frmCreateStudent.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\resources\\user.png"));
+		frmCreateStudent.setIconImage(Toolkit.getDefaultToolkit().getImage(CreateStudent.class.getResource("/student.png")));
 		frmCreateStudent.setTitle("Create Student");
 		frmCreateStudent.setBounds(100, 100, 604, 660);
 		frmCreateStudent.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -397,7 +397,7 @@ public class CreateStudent {
 			    	String sql = "INSERT INTO Student (StudentID,LastName,FirstName,MiddleInital,HomePhone,MobilePhone,Email,Gender,DOB,AddressNum,AddressStreet,AddressStreet2,PostalCode,City,CountryID,StateID,FaceBookHandle,InstagramHandle,TwitterHandle) "
 			    			+ "VALUES ("+Integer.parseInt(studentIDTextField.getText())+",'"+lastNameTextField.getText()+"','"+
 					firstNameTextField.getText()+"','"+middleInitialTextField.getText()+"',"+big+","+big1+",'"+emailTextField.getText()+"',"+genderId+", CAST('"+dateField.getJFormattedTextField().getText()+"' as date),'"+Integer.parseInt(addressNumTextField.getText())+"','"+
-							addressStreetTextField.getText()+"','"+address2StreetTextField.getText()+"','"+postalCodeTextField.getText()+"','"+cityTextField.getText()+"',"+countryComboBox.getSelectedIndex()+","+stateComboBox.getSelectedIndex()+",'"+facebookTextField.getText()+"','"+instagramTextField.getText()+"','"+twitterTextField.getText()+"')";
+							addressStreetTextField.getText()+"','"+address2StreetTextField.getText()+"','"+postalCodeTextField.getText()+"','"+cityTextField.getText()+"',"+(countryComboBox.getSelectedIndex()+1)+","+(stateComboBox.getSelectedIndex()+1)+",'"+facebookTextField.getText()+"','"+instagramTextField.getText()+"','"+twitterTextField.getText()+"')";
 			    	Statement pst = conn.createStatement();
 			        pst.executeUpdate(sql);
 			        System.out.println("Inserted records into the table...");

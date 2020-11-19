@@ -37,6 +37,7 @@ import org.jdatepicker.impl.UtilDateModel;
 import java.awt.event.ActionListener;
 import java.math.BigInteger;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class CreateEmployee {
 
@@ -94,6 +95,7 @@ public class CreateEmployee {
 	 */
 	private void initialize() {
 		frmCreateEmployee = new JFrame();
+		frmCreateEmployee.setIconImage(Toolkit.getDefaultToolkit().getImage(CreateEmployee.class.getResource("/employee.png")));
 		frmCreateEmployee.setTitle("VCA - Create Employee");
 		frmCreateEmployee.setBounds(100, 100, 838, 782);
 		frmCreateEmployee.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

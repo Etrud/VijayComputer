@@ -107,7 +107,7 @@ public class CalendarWindow {
 		frmCalendar.setBackground(new Color(153, 204, 255));
 		frmCalendar.getContentPane().setBackground(new Color(255, 204, 204));
 		frmCalendar.setTitle("VCA - Calendar");
-		frmCalendar.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\googlecalendar.png"));
+		frmCalendar.setIconImage(Toolkit.getDefaultToolkit().getImage(CalendarWindow.class.getResource("/calendar.png")));
 		frmCalendar.setBounds(100, 100, 1137, 530);
 		frmCalendar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -253,7 +253,6 @@ public class CalendarWindow {
 	    
 	    JButton btnNewButton = new JButton("Update");
 	    btnNewButton.addActionListener(new ActionListener() {
-	    	@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 	    		if(classChkBox.isSelected())
 	    		{
@@ -292,10 +291,9 @@ public class CalendarWindow {
 	    			annPanel.setMaximumSize(new Dimension(15000,15000));
 	    			try {
 	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	    				String sql = "SELECT Announcement.Date, Announcement.Time,Room.RoomNum, Announcement.Announcement FROM Announcement INNER JOIN Class ON Announcement.ClassID = Class.ClassID INNER JOIN RoomReserve ON Class.RoomReserveID = RoomReserve.RoomReserveID INNER JOIN Room ON RoomReserve.RoomID = Room.RoomID WHERE datediff(day, ClassStartDate,'"+dateField.getJFormattedTextField().getText()+"') = 0 OR datediff(day, Date,'"+dateField.getJFormattedTextField().getText()+"') = 0";
+	    				String sql = "SELECT Announcement.Date, Announcement.Time,Room.RoomNum, Announcement.Announcement FROM Announcement INNER JOIN Class ON Announcement.ClassID = Class.ClassID INNER JOIN RoomReserve ON Class.RoomReserveID = RoomReserve.RoomReserveID INNER JOIN Room ON RoomReserve.RoomID = Room.RoomID WHERE Announcement.Date = CAST('"+dateField.getJFormattedTextField().getText()+"' as date)";
 	    				PreparedStatement pst = conn.prepareStatement(sql);
 	    		        ResultSet rs = pst.executeQuery();
-	    		        
 	    		        while(rs.next())
 	    		        {
 	    		            String a = rs.getString("Date");
@@ -323,7 +321,7 @@ public class CalendarWindow {
 	    			birthPanel.setMaximumSize(new Dimension(15000,15000));
 	    			try {
 	    				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	    				String sql = "SELECT Employee.DOB, Employee.FirstName, Employee.LastName, Employee.MobilePhone FROM Employee WHERE DATEPART(d,DOB)='"+dateField.getJFormattedTextField().getText().substring(8)+"' AND DATEPART(m,DOB)='"+dateField.getJFormattedTextField().getText().substring(5,7)+"'";
+	    				String sql = "SELECT Employee.DOB, Employee.FirstName, Employee.LastName, Employee.MobilePhone FROM Employee WHERE DATEPart(day,Employee.DOB) - DATEPart(day,'"+dateField.getJFormattedTextField().getText()+"') = 0 AND  DATEPart(month,Employee.DOB) - DATEPart(month,'"+dateField.getJFormattedTextField().getText()+"')  = 0";
 	    				PreparedStatement pst = conn.prepareStatement(sql);
 	    		        ResultSet rs = pst.executeQuery();
 	    		        

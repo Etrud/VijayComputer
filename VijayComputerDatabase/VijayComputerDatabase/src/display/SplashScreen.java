@@ -72,7 +72,7 @@ public class SplashScreen {
 	private void initialize() {
 		splashScreen = new JFrame();
 		splashScreen.setForeground(new Color(0, 0, 0));
-		splashScreen.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\logo.png"));
+		splashScreen.setIconImage(Toolkit.getDefaultToolkit().getImage(SplashScreen.class.getResource("/logo.png")));
 		splashScreen.setTitle("Vijay Computer Academy Database Application");
 		splashScreen.setBounds(100, 100, 1042, 707);
 		splashScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,7 +91,7 @@ public class SplashScreen {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIconTextGap(1);
-		lblNewLabel.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\VijayComputerDatabase\\resources\\logo.png").getImage().getScaledInstance(75,75,Image.SCALE_SMOOTH)));
+		lblNewLabel.setIcon(new ImageIcon(new ImageIcon(SplashScreen.class.getResource("/logo.png")).getImage().getScaledInstance(70,70,Image.SCALE_SMOOTH)));
 		panel.add(lblNewLabel);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(10);
@@ -144,7 +144,7 @@ public class SplashScreen {
 				enroll.newScreen();
 			}
 		});
-		enrollmentButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\VijayComputerDatabase\\resources\\student.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		enrollmentButton.setIcon(new ImageIcon(new ImageIcon(SplashScreen.class.getResource("/student.png")).getImage().getScaledInstance(45,45,Image.SCALE_SMOOTH)));
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		buttonPanel.add(horizontalStrut_1, "cell 1 0");
@@ -156,7 +156,7 @@ public class SplashScreen {
 				certWin.createWindow();
 			}
 		});
-		btnCertificationCenter.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\cert.png").getImage().getScaledInstance(45,45,Image.SCALE_SMOOTH)));
+		btnCertificationCenter.setIcon(new ImageIcon(new ImageIcon(SplashScreen.class.getResource("/cert.png")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		btnCertificationCenter.setPreferredSize(new Dimension(25, 25));
 		btnCertificationCenter.setIconTextGap(15);
 		btnCertificationCenter.setForeground(Color.WHITE);
@@ -171,7 +171,7 @@ public class SplashScreen {
 		//Employee Services
 		JButton employeeSButton = new JButton("Employee Services");
 		buttonPanel.add(employeeSButton, "cell 4 0,grow");
-		employeeSButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\employee.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		employeeSButton.setIcon(new ImageIcon(new ImageIcon(SplashScreen.class.getResource("/employee.png")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		employeeSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EmployeeServicesWindow esw = new EmployeeServicesWindow();
@@ -197,14 +197,14 @@ public class SplashScreen {
 		Component verticalStrut = Box.createVerticalStrut(20);
 		buttonPanel.add(verticalStrut, "cell 0 1");
 		calendarButton.setIconTextGap(15);
-		calendarButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\calendar.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		calendarButton.setIcon(new ImageIcon(new ImageIcon(SplashScreen.class.getResource("/calendar.png")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		calendarButton.setForeground(new Color(255, 255, 255));
 		calendarButton.setBackground(new Color(51, 153, 204));
 		calendarButton.setFont(new Font("Verdana", Font.BOLD, 21));
 		calendarButton.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		calendarButton.setPreferredSize(new Dimension(25, 25));
 		buttonPanel.add(calendarButton, "cell 0 2,grow");
-		financeButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\classroom.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		financeButton.setIcon(new ImageIcon(new ImageIcon(SplashScreen.class.getResource("/classroom.png")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		financeButton.setIconTextGap(15);
 		financeButton.setForeground(new Color(255, 255, 255));
 		financeButton.setBackground(new Color(51, 153, 204));
@@ -221,7 +221,7 @@ public class SplashScreen {
 				dir.createWindow();
 			}
 		});
-		directoryButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\book.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		directoryButton.setIcon(new ImageIcon(new ImageIcon(SplashScreen.class.getResource("/book.png")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		directoryButton.setIconTextGap(15);
 		directoryButton.setForeground(new Color(255, 255, 255));
 		directoryButton.setBackground(new Color(51, 153, 204));
@@ -243,7 +243,7 @@ public class SplashScreen {
 				equWin.createWindow();
 			}
 		});
-		equipmentButton.setIcon(new ImageIcon(new ImageIcon("VijayComputerDatabase\\\\VijayComputerDatabase\\resources\\laptop.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+		equipmentButton.setIcon(new ImageIcon(new ImageIcon(SplashScreen.class.getResource("/laptop.png")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		equipmentButton.setIconTextGap(15);
 		equipmentButton.setForeground(new Color(255, 255, 255));
 		equipmentButton.setBackground(new Color(51, 153, 204));

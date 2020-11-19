@@ -91,7 +91,7 @@ public class editAnnouncement {
 	 */
 	private void initialize() {
 		frmVcaCreate = new JFrame();
-		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\googlecalendar.png"));
+		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage(editAnnouncement.class.getResource("/calendar.png")));
 		frmVcaCreate.setTitle("VCA - Edit Announcement");
 		frmVcaCreate.setBounds(100, 100, 559, 300);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -150,6 +150,7 @@ public class editAnnouncement {
 		panel.add(lblNewLabel_1_1_1, "cell 0 3,growx,aligny center");
 		
 		detailsTextArea = new JTextArea();
+		detailsTextArea.setColumns(40);
 		detailsTextArea.setWrapStyleWord(true);
 		detailsTextArea.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.add(detailsTextArea, "cell 1 3,alignx center,growy");
@@ -178,7 +179,7 @@ public class editAnnouncement {
 		try {
 	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 
-	    	String sql = "SELECT ClassID FROM Class WHERE ClassSection = "+classSection;
+	    	String sql = "SELECT ClassID FROM Class WHERE ClassSection = "+Integer.parseInt(classSectionComboBox.getSelectedItem().toString());
 	    	PreparedStatement pst = conn.prepareStatement(sql);
 	        ResultSet rs = pst.executeQuery();
 	        
@@ -243,7 +244,7 @@ public class editAnnouncement {
 		        	SimpleDateFormat formatT = new SimpleDateFormat("HH:mm:ss");
 					String time = formatT.format(spinner.getValue());
 				Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-		    	String sql = "UPDATE Announcement SET Date = CAST( '"+dateField.getJFormattedTextField().getText()+"' as date),Time = CAST('"+time+"' AS TIME),Announcement = '"+detailsTextArea.getText()+"',AnnouncementID = "+Integer.parseInt(annIDTextField.getText())
+		    	String sql = "UPDATE Announcement SET ClassID = "+classID+", Date = CAST( '"+dateField.getJFormattedTextField().getText()+"' as date),Time = CAST('"+time+"' AS TIME),Announcement = '"+detailsTextArea.getText()+"',AnnouncementID = "+Integer.parseInt(annIDTextField.getText())
 		    	+ " WHERE AnnouncementID = "+Integer.parseInt(annIDTextField.getText());
 		    	Statement pst = conn.createStatement();
 		        pst.executeUpdate(sql);
@@ -279,7 +280,7 @@ public class editAnnouncement {
 	        	annIDTextField.setText(rs.getString("AnnouncementID"));
 	        	SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 	        	spinner.setValue(format.parse((rs.getString("Time"))));
-	        	classSectionComboBox.setSelectedItem(classSection);
+	        	classSectionComboBox.setSelectedIndex(rs.getInt("ClassID"));
 
 	        }
 	        pst.close();

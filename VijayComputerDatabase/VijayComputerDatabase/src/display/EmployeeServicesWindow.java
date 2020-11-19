@@ -67,9 +67,9 @@ public class EmployeeServicesWindow {
 	 */
 	private void initialize() {
 		frmVcaEmployee = new JFrame();
-		frmVcaEmployee.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\skills.png"));
+		frmVcaEmployee.setIconImage(Toolkit.getDefaultToolkit().getImage(EmployeeServicesWindow.class.getResource("/employee.png")));
 		frmVcaEmployee.setTitle("VCA - Employee Services");
-		frmVcaEmployee.setBounds(100, 100, 715, 345);
+		frmVcaEmployee.setBounds(100, 100, 715, 409);
 		frmVcaEmployee.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmVcaEmployee.getContentPane().setLayout(new BorderLayout(0, 0));
 		

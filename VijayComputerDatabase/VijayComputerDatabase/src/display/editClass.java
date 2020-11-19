@@ -44,6 +44,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.math.BigInteger;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class editClass {
 
@@ -92,6 +93,7 @@ public class editClass {
 	 */
 	private void initialize() {
 		frmCreateClass = new JFrame();
+		frmCreateClass.setIconImage(Toolkit.getDefaultToolkit().getImage(editClass.class.getResource("/student.png")));
 		frmCreateClass.setTitle("VCA - Update Class");
 		frmCreateClass.setBounds(100, 100, 520, 517);
 		frmCreateClass.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -39,6 +39,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class editRoomReserve {
 
@@ -77,6 +78,7 @@ public class editRoomReserve {
 	 */
 	private void initialize() {
 		frmVcaCreate = new JFrame();
+		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage(editRoomReserve.class.getResource("/classroom.png")));
 		frmVcaCreate.setTitle("VCA - Edit Room Reservation");
 		frmVcaCreate.setBounds(100, 100, 401, 294);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -35,6 +35,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class createEmpPayHistory {
 
@@ -74,6 +75,7 @@ public class createEmpPayHistory {
 	 */
 	private void initialize() {
 		frmVcaCreate = new JFrame();
+		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage(createEmpPayHistory.class.getResource("/employee.png")));
 		frmVcaCreate.setTitle("VCA - Create Employee Pay Insert");
 		frmVcaCreate.setBounds(100, 100, 394, 252);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

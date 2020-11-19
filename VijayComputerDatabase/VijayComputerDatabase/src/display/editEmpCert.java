@@ -34,6 +34,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class editEmpCert {
 
@@ -74,6 +75,7 @@ public class editEmpCert {
 	 */
 	private void initialize() {
 		frmVcaCreate = new JFrame();
+		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage(editEmpCert.class.getResource("/cert.png")));
 		frmVcaCreate.setTitle("VCA - Edit Employee Certification Assignment");
 		frmVcaCreate.setBounds(100, 100, 425, 250);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class helpTicket extends JDialog {
 
@@ -42,6 +43,7 @@ public class helpTicket extends JDialog {
 	 * Create the dialog.
 	 */
 	public helpTicket() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(helpTicket.class.getResource("/logo.png")));
 		setTitle("Submit a Help Request");
 		setResizable(false);			
 		helpTextArea = new JTextArea();

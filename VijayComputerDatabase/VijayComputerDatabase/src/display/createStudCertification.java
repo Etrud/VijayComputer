@@ -35,6 +35,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class createStudCertification {
 
@@ -76,6 +77,7 @@ public class createStudCertification {
 	 */
 	private void initialize() {
 		frmVcaCreate = new JFrame();
+		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage(createStudCertification.class.getResource("/cert.png")));
 		frmVcaCreate.setTitle("VCA - Student Certification Assignment");
 		frmVcaCreate.setBounds(100, 100, 432, 250);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

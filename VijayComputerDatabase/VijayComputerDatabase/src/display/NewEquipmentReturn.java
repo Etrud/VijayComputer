@@ -47,6 +47,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class NewEquipmentReturn {
 
@@ -85,6 +86,7 @@ public class NewEquipmentReturn {
 	 */
 	private void initialize() {
 		frmVcaEquipment = new JFrame();
+		frmVcaEquipment.setIconImage(Toolkit.getDefaultToolkit().getImage(NewEquipmentReturn.class.getResource("/laptop.png")));
 		frmVcaEquipment.setTitle("VCA - Equipment Return");
 		frmVcaEquipment.setBounds(100, 100, 631, 328);
 		frmVcaEquipment.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

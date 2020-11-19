@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class createCertification {
 
@@ -59,6 +60,7 @@ public class createCertification {
 	 */
 	private void initialize() {
 		frmVcaCreate = new JFrame();
+		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage(createCertification.class.getResource("/cert.png")));
 		frmVcaCreate.setTitle("VCA - Create Certification");
 		frmVcaCreate.setBounds(100, 100, 374, 250);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

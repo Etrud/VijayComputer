@@ -86,7 +86,7 @@ public class EnrollmentWindow {
 	 */
 	private void initialize() {
 		frmEnrollmentWindow = new JFrame();
-		frmEnrollmentWindow.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\user.png"));
+		frmEnrollmentWindow.setIconImage(Toolkit.getDefaultToolkit().getImage(EnrollmentWindow.class.getResource("/student.png")));
 		frmEnrollmentWindow.setTitle("VCA - Enrollment");
 		frmEnrollmentWindow.setBounds(100, 100, 1009, 527);
 		frmEnrollmentWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -219,7 +219,7 @@ public class EnrollmentWindow {
 		panel_1.add(panel_7, "cell 0 7,alignx center,aligny center");
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("VijayComputerDatabase\\VijayComputerDatabase\\resources\\logo.png"));
+		lblNewLabel_3.setIcon(new ImageIcon(EnrollmentWindow.class.getResource("/logo.png")));
 		panel_7.add(lblNewLabel_3);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

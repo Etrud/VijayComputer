@@ -44,6 +44,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.math.BigInteger;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class CreateClass {
 
@@ -90,6 +91,7 @@ public class CreateClass {
 	 */
 	private void initialize() {
 		frmCreateClass = new JFrame();
+		frmCreateClass.setIconImage(Toolkit.getDefaultToolkit().getImage(CreateClass.class.getResource("/student.png")));
 		frmCreateClass.setTitle("Create Class");
 		frmCreateClass.setBounds(100, 100, 520, 517);
 		frmCreateClass.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -443,100 +445,100 @@ public class CreateClass {
 		panel_4.add(horizontalStrut);
 		
 		
-		try {
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	    	int index = employeeComboBox.getSelectedItem().toString().indexOf(' ');
-	    	String sql = "SELECT EmployeeID from Employee WHERE Employee.FirstName = '"+employeeComboBox.getSelectedItem().toString().substring(0,index)+"'";
-	    	PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-	        
-	        while(rs.next())
-	        {
-	            String a = rs.getString("EmployeeID");
-	            EmpId = Integer.parseInt(a);
-	        }
-		}
-		catch(SQLException e){
-			
-		}
-		
-		try {
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	    	int index = employeeComboBox.getSelectedItem().toString().indexOf(' ');
-	    	String sql = "SELECT ClassTypeID from ClassType WHERE ClassType = '"+classTypeComboBox.getSelectedItem().toString()+"'";
-	    	PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-	        
-	        while(rs.next())
-	        {
-	            String a = rs.getString("ClassTypeID");
-	            ClassTypeId = Integer.parseInt(a);
-	        }
-		}
-		catch(SQLException e){
-			
-		}	
-		
-		try {
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	    	int index = employeeComboBox.getSelectedItem().toString().indexOf(' ');
-	    	String sql = "SELECT CourseID from Course WHERE CourseName = '"+courseNameComboBox.getSelectedItem().toString()+"'";
-	    	PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-	        
-	        while(rs.next())
-	        {
-	            String a = rs.getString("CourseID");
-	            CourseId = Integer.parseInt(a);
-	        }
-		}
-		catch(SQLException e){
-			
-		}
-		try {
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	    	int index = employeeComboBox.getSelectedItem().toString().indexOf(' ');
-	    	String sql = "SELECT ClassContact.CustomerId,BusinessContact.BusinessName from ClassContact INNER JOIN BusinessContact ON BusinessContact.ContactID = ClassContact.ContactId WHERE BusinessName ='"+customerComboBox.getSelectedItem().toString()+"'";
-	    	PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-	        
-	        while(rs.next())
-	        {
-	            String a = rs.getString("CustomerID");
-	            ContactId = Integer.parseInt(a);
-	        }
-		}
-		catch(SQLException e){
-			
-		}
-		try {
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	    	int index = roomComboBox.getSelectedItem().toString().indexOf(',');
-	    	int roomNum = Integer.parseInt(roomComboBox.getSelectedItem().toString().substring(0, index));
-	    	index = roomComboBox.getSelectedItem().toString().indexOf(' ');
-	    	DateLabelFormatter reserveD = new DateLabelFormatter();
-	    	
-			String s = roomComboBox.getSelectedItem().toString().substring(index+1);
-	
-	    	String sql = "SELECT RoomReserveID FROM RoomReserve INNER JOIN Room ON RoomReserve.RoomID=Room.RoomID WHERE RoomNum = "+roomNum+" AND Reserve = '"+s+"'";
-	    	PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-	        
-	        while(rs.next())
-	        {
-	            String a = rs.getString("RoomReserveID");
-	            RoomReserveID = Integer.parseInt(a);
-	        }
-		}
-		catch(SQLException e){
-			
-		}
+
 		
 		JButton btnNewButton_1 = new JButton("Create");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					try {
+				    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+				    	int index = employeeComboBox.getSelectedItem().toString().indexOf(' ');
+				    	String sql = "SELECT EmployeeID from Employee WHERE Employee.FirstName = '"+employeeComboBox.getSelectedItem().toString().substring(0,index)+"'";
+				    	PreparedStatement pst = conn.prepareStatement(sql);
+				        ResultSet rs = pst.executeQuery();
+				        
+				        while(rs.next())
+				        {
+				            String a = rs.getString("EmployeeID");
+				            EmpId = Integer.parseInt(a);
+				        }
+					}
+					catch(SQLException e){
+						
+					}
 					
+					try {
+				    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+				    	int index = employeeComboBox.getSelectedItem().toString().indexOf(' ');
+				    	String sql = "SELECT ClassTypeID from ClassType WHERE ClassType = '"+classTypeComboBox.getSelectedItem().toString()+"'";
+				    	PreparedStatement pst = conn.prepareStatement(sql);
+				        ResultSet rs = pst.executeQuery();
+				        
+				        while(rs.next())
+				        {
+				            String a = rs.getString("ClassTypeID");
+				            ClassTypeId = Integer.parseInt(a);
+				        }
+					}
+					catch(SQLException e){
+						
+					}	
+					
+					try {
+				    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+				    	int index = employeeComboBox.getSelectedItem().toString().indexOf(' ');
+				    	String sql = "SELECT CourseID from Course WHERE CourseName = '"+courseNameComboBox.getSelectedItem().toString()+"'";
+				    	PreparedStatement pst = conn.prepareStatement(sql);
+				        ResultSet rs = pst.executeQuery();
+				        
+				        while(rs.next())
+				        {
+				            String a = rs.getString("CourseID");
+				            CourseId = Integer.parseInt(a);
+				        }
+					}
+					catch(SQLException e){
+						
+					}
+					try {
+				    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+				    	int index = employeeComboBox.getSelectedItem().toString().indexOf(' ');
+				    	String sql = "SELECT ClassContact.CustomerId,BusinessContact.BusinessName from ClassContact INNER JOIN BusinessContact ON BusinessContact.ContactID = ClassContact.ContactId WHERE BusinessName ='"+customerComboBox.getSelectedItem().toString()+"'";
+				    	PreparedStatement pst = conn.prepareStatement(sql);
+				        ResultSet rs = pst.executeQuery();
+				        
+				        while(rs.next())
+				        {
+				            String a = rs.getString("CustomerID");
+				            ContactId = Integer.parseInt(a);
+				        }
+					}
+					catch(SQLException e){
+						
+					}
+					try {
+				    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+				    	int index = roomComboBox.getSelectedItem().toString().indexOf(',');
+				    	int roomNum = Integer.parseInt(roomComboBox.getSelectedItem().toString().substring(0, index));
+				    	index = roomComboBox.getSelectedItem().toString().indexOf(' ');
+				    	DateLabelFormatter reserveD = new DateLabelFormatter();
+				    	
+						String s = roomComboBox.getSelectedItem().toString().substring(index+1);
+				
+				    	String sql = "SELECT RoomReserveID FROM RoomReserve INNER JOIN Room ON RoomReserve.RoomID=Room.RoomID WHERE RoomNum = "+roomNum+" AND Reserve = '"+s+"'";
+				    	PreparedStatement pst = conn.prepareStatement(sql);
+				        ResultSet rs = pst.executeQuery();
+				        
+				        while(rs.next())
+				        {
+				            String a = rs.getString("RoomReserveID");
+				            RoomReserveID = Integer.parseInt(a);
+				        }
+					}
+					catch(SQLException e){
+						
+					}
 					SimpleDateFormat formatT = new SimpleDateFormat("HH:mm:ss");
 					String time1 = formatT.format(spinner.getValue());
 					String time2 = formatT.format(spinner2.getValue());

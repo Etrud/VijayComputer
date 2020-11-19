@@ -24,6 +24,7 @@ import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class viewAllCerts {
 
@@ -59,8 +60,9 @@ public class viewAllCerts {
 	 */
 	private void initialize() {
 		frmVcaAll = new JFrame();
+		frmVcaAll.setIconImage(Toolkit.getDefaultToolkit().getImage(viewAllCerts.class.getResource("/cert.png")));
 		frmVcaAll.setTitle("VCA - All Certifications");
-		frmVcaAll.setBounds(100, 100, 450, 300);
+		frmVcaAll.setBounds(100, 100, 554, 300);
 		frmVcaAll.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();

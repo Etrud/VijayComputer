@@ -77,7 +77,7 @@ public class createBusinessContact {
 	private void initialize() {
 		frmVcaCreate = new JFrame();
 		frmVcaCreate.setTitle("VCA - Create Business Contact");
-		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\book.png"));
+		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage(createBusinessContact.class.getResource("/book.png")));
 		frmVcaCreate.setBounds(100, 100, 644, 615);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmVcaCreate.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -342,108 +342,106 @@ public class createBusinessContact {
 	        JOptionPane.showMessageDialog(null, e);
 	    }
 		
-		try{
-	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	        String sql = "SELECT TitleID FROM Title WHERE TitleName = '"+titleComboBox.getSelectedItem().toString()+"'";
-	        PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
 
-	        while(rs.next()){
-	         String s = rs.getString(1);
-	         titleID = Integer.parseInt(s);
-
-	        }
-	        pst.close();
-	        rs.close();
-	        conn.close();
-	    }catch (Exception e){
-	        JOptionPane.showMessageDialog(null, e);
-	    
-	    }
-		try{
-	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	        String sql = "SELECT DepartmentID FROM Department WHERE DepartmentName = '"+departmentComboBox.getSelectedItem().toString()+"'";
-	        PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-
-	        while(rs.next()){
-	         String s = rs.getString(1);
-	         departmentID = Integer.parseInt(s);
-
-	        }
-	        pst.close();
-	        rs.close();
-	        conn.close();
-	    }catch (Exception e){
-	        JOptionPane.showMessageDialog(null, e);
-	    
-	    }		
-		try{
-	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	        String sql = "SELECT CountryID FROM Country WHERE CountryName = '"+countryComboBox.getSelectedItem().toString()+"'";
-	        PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-
-	        while(rs.next()){
-	         String s = rs.getString(1);
-	         countryID = Integer.parseInt(s);
-
-	        }
-	        pst.close();
-	        rs.close();
-	        conn.close();
-	    }catch (Exception e){
-	        JOptionPane.showMessageDialog(null, e);
-	    
-	    }
-		try{
-	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	        String sql = "SELECT StateID FROM StateProv WHERE StateProvName = '"+stateProvComboBox.getSelectedItem().toString()+"'";
-	        PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-
-	        while(rs.next()){
-	         String s = rs.getString(1);
-	         stateID = Integer.parseInt(s);
-
-	        }
-	        pst.close();
-	        rs.close();
-	        conn.close();
-	    }catch (Exception e){
-	        JOptionPane.showMessageDialog(null, e);
-	    
-	    }
-		try{
-	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-	        String sql = "SELECT BusinessStatusID FROM BusinessStatus WHERE BusinessStatus = '"+busStatusComboBox.getSelectedItem().toString()+"'";
-	        PreparedStatement pst = conn.prepareStatement(sql);
-	        ResultSet rs = pst.executeQuery();
-
-	        while(rs.next()){
-	         String s = rs.getString(1);
-	         busStatusID = Integer.parseInt(s);
-
-	        }
-	        pst.close();
-	        rs.close();
-	        conn.close();
-	    }catch (Exception e){
-	        JOptionPane.showMessageDialog(null, e);
-	    
-	    }
-		
-		
-		
-		
 		createBusContact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "SELECT TitleID FROM Title WHERE TitleName = '"+titleComboBox.getSelectedItem().toString()+"'";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         String s = rs.getString(1);
+			         titleID = Integer.parseInt(s);
+
+			        }
+			        pst.close();
+			        rs.close();
+			        conn.close();
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    
+			    }
+				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "SELECT DepartmentID FROM Department WHERE DepartmentName = '"+departmentComboBox.getSelectedItem().toString()+"'";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         String s = rs.getString(1);
+			         departmentID = Integer.parseInt(s);
+
+			        }
+			        pst.close();
+			        rs.close();
+			        conn.close();
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    
+			    }		
+				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "SELECT CountryID FROM Country WHERE CountryName = '"+countryComboBox.getSelectedItem().toString()+"'";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         String s = rs.getString(1);
+			         countryID = Integer.parseInt(s);
+
+			        }
+			        pst.close();
+			        rs.close();
+			        conn.close();
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    
+			    }
+				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "SELECT StateID FROM StateProv WHERE StateProvName = '"+stateProvComboBox.getSelectedItem().toString()+"'";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         String s = rs.getString(1);
+			         stateID = Integer.parseInt(s);
+
+			        }
+			        pst.close();
+			        rs.close();
+			        conn.close();
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    
+			    }
+				try{
+			    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "SELECT BusinessStatusID FROM BusinessStatus WHERE BusinessStatus = '"+busStatusComboBox.getSelectedItem().toString()+"'";
+			        PreparedStatement pst = conn.prepareStatement(sql);
+			        ResultSet rs = pst.executeQuery();
+
+			        while(rs.next()){
+			         String s = rs.getString(1);
+			         busStatusID = Integer.parseInt(s);
+
+			        }
+			        pst.close();
+			        rs.close();
+			        conn.close();
+			    }catch (Exception e){
+			        JOptionPane.showMessageDialog(null, e);
+			    
+			    }
 				try {
+					
 			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 			    	String sql = "INSERT INTO BusinessContact (ContactID,BusinessName,TitleID,DepartmentID,LastName,FirstName,MiddleInitial,Email,Phone,AddressNum,AddressStreet,AddressStreet2,PostalCode,City,CountryID,StateID,BusinessStatusID)"
 			    			+ "VALUES ("+Integer.parseInt(contactIDTextField.getText())+",'"

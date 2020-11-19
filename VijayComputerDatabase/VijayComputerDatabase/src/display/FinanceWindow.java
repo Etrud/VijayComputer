@@ -66,7 +66,7 @@ public class FinanceWindow {
 	 */
 	private void initialize() {
 		frmVcaFinances = new JFrame();
-		frmVcaFinances.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\resources\\hand.png"));
+		frmVcaFinances.setIconImage(Toolkit.getDefaultToolkit().getImage(FinanceWindow.class.getResource("/hand.png")));
 		frmVcaFinances.setTitle("VCA - Finances");
 		frmVcaFinances.setBounds(100, 100, 673, 353);
 		frmVcaFinances.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

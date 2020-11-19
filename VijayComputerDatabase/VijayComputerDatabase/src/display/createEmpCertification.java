@@ -35,6 +35,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class createEmpCertification {
 
@@ -73,6 +74,7 @@ public class createEmpCertification {
 	 */
 	private void initialize() {
 		frmVcaCreate = new JFrame();
+		frmVcaCreate.setIconImage(Toolkit.getDefaultToolkit().getImage(createEmpCertification.class.getResource("/cert.png")));
 		frmVcaCreate.setTitle("VCA - Employee Certification Assignment");
 		frmVcaCreate.setBounds(100, 100, 425, 250);
 		frmVcaCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

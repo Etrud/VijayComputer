@@ -68,9 +68,9 @@ public class classWindow {
 	 */
 	private void initialize() {
 		frmStudentView = new JFrame();
-		frmStudentView.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\VijayComputerDatabase\\resources\\user.png"));
+		frmStudentView.setIconImage(Toolkit.getDefaultToolkit().getImage(classWindow.class.getResource("/student.png")));
 		frmStudentView.setTitle("VCA - Class View");
-		frmStudentView.setBounds(100, 100, 735, 522);
+		frmStudentView.setBounds(100, 100, 1088, 522);
 		frmStudentView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmStudentView.getContentPane().setLayout(new BorderLayout(0, 0));
 		

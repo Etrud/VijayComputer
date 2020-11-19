@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.Toolkit;
 
 public class certificationWindow {
 
@@ -66,6 +67,7 @@ public class certificationWindow {
 	 */
 	private void initialize() {
 		frmVcaCertification = new JFrame();
+		frmVcaCertification.setIconImage(Toolkit.getDefaultToolkit().getImage(certificationWindow.class.getResource("/cert.png")));
 		frmVcaCertification.setTitle("VCA - Certification Center");
 		frmVcaCertification.setBounds(100, 100, 798, 502);
 		frmVcaCertification.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

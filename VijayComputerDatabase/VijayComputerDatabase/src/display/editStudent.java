@@ -116,7 +116,7 @@ public class editStudent {
 	private void initialize() {
 
 		frmCreateStudent = new JFrame();
-		frmCreateStudent.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\resources\\user.png"));
+		frmCreateStudent.setIconImage(Toolkit.getDefaultToolkit().getImage(editStudent.class.getResource("/student.png")));
 		frmCreateStudent.setTitle("VCA - Edit Student");
 		frmCreateStudent.setBounds(100, 100, 604, 660);
 		frmCreateStudent.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

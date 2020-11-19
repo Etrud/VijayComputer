@@ -67,7 +67,7 @@ public class EquipmentWindow {
 	 */
 	private void initialize() {
 		frmEquipmentMenu = new JFrame();
-		frmEquipmentMenu.setIconImage(Toolkit.getDefaultToolkit().getImage("VijayComputerDatabase\\resources\\laptop.png"));
+		frmEquipmentMenu.setIconImage(Toolkit.getDefaultToolkit().getImage(EquipmentWindow.class.getResource("/laptop.png")));
 		frmEquipmentMenu.setTitle("VCA - Equipment");
 		frmEquipmentMenu.setBounds(100, 100, 829, 443);
 		frmEquipmentMenu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

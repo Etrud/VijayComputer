@@ -41,6 +41,7 @@ import java.awt.event.ActionListener;
 import java.math.BigInteger;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 public class editEmployee {
 
@@ -99,6 +100,7 @@ public class editEmployee {
 	 */
 	private void initialize() {
 		frmCreateEmployee = new JFrame();
+		frmCreateEmployee.setIconImage(Toolkit.getDefaultToolkit().getImage(editEmployee.class.getResource("/employee.png")));
 		frmCreateEmployee.setTitle("VCA - Edit Employee");
 		frmCreateEmployee.setBounds(100, 100, 838, 782);
 		frmCreateEmployee.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
