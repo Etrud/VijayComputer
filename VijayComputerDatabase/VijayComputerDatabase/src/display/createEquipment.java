@@ -81,32 +81,6 @@ public class createEquipment {
 		frmVcaCreate.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
 		JButton createEquipment = new JButton("Create Equipment");
-		createEquipment.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-			        String sql = "INSERT INTO Equipment (EquipSerialNum,EquipTypeID,SoftwareID,StatusID) VALUES ("+Integer.parseInt(serialTextField.getText())+","+typeID+","+softwareID+","+statusID+")";
-			        Statement pst = conn.createStatement();
-			        pst.executeUpdate(sql);
-			        System.out.println("Inserted records into the table...");
-				}
-				catch(SQLException e)
-				{
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, e);
-				}
-				catch(Exception e){
-				      //Handle errors for Class.forName
-				      e.printStackTrace();
-				 }
-				finally {
-					frmVcaCreate.dispose();
-				}
-			}
-		});
-		
-		
-		
 		panel_2.add(createEquipment);
 		
 		JPanel panel_3 = new JPanel();
@@ -223,63 +197,90 @@ public class createEquipment {
 		    }catch (Exception e){
 		        JOptionPane.showMessageDialog(null, e);
 		    }
-		 try{
-		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-		        String sql = "SELECT EquipmentStatusID FROM EquipmentStatus WHERE EqpStatus = '"+statusComboBox.getSelectedItem().toString()+"'";
-		        PreparedStatement pst = conn.prepareStatement(sql);
-		        ResultSet rs = pst.executeQuery();
+		 
+		 
+		 
+			createEquipment.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					try{
+				    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+				        String sql = "SELECT EquipmentStatusID FROM EquipmentStatus WHERE EqpStatus = '"+statusComboBox.getSelectedItem().toString()+"'";
+				        PreparedStatement pst = conn.prepareStatement(sql);
+				        ResultSet rs = pst.executeQuery();
 
-		        while(rs.next()){
-		         int i = rs.getInt(1);
-		         statusID = i;
-		        }
+				        while(rs.next()){
+				         int i = rs.getInt(1);
+				         statusID = i;
+				        }
 
-		        pst.close();
-		        rs.close();
-		        conn.close();
+				        pst.close();
+				        rs.close();
+				        conn.close();
 
-		    }catch (Exception e){
-		        JOptionPane.showMessageDialog(null, e);
-		    }
-		 try{
-		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-		        String sql = "SELECT EquipmentID FROM EquipmentType WHERE EquipmentName = '"+equipTypeComboBox.getSelectedItem().toString()+"'";
-		        PreparedStatement pst = conn.prepareStatement(sql);
-		        ResultSet rs = pst.executeQuery();
+				    }catch (Exception e){
+				        JOptionPane.showMessageDialog(null, e);
+				    }
+				 try{
+				    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+				        String sql = "SELECT EquipmentID FROM EquipmentType WHERE EquipmentName = '"+equipTypeComboBox.getSelectedItem().toString()+"'";
+				        PreparedStatement pst = conn.prepareStatement(sql);
+				        ResultSet rs = pst.executeQuery();
 
-		        while(rs.next()){
-		         int i = rs.getInt(1);
-		         typeID = i;
-		        }
+				        while(rs.next()){
+				         int i = rs.getInt(1);
+				         typeID = i;
+				        }
 
-		        pst.close();
-		        rs.close();
-		        conn.close();
+				        pst.close();
+				        rs.close();
+				        conn.close();
 
-		    }catch (Exception e){
-		        JOptionPane.showMessageDialog(null, e);
-		    }
-		 try{
-		    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-		        String sql = "SELECT SoftwareID FROM Software WHERE SoftwareName = '"+softwareComboBox.getSelectedItem().toString()+"'";
-		        PreparedStatement pst = conn.prepareStatement(sql);
-		        ResultSet rs = pst.executeQuery();
+				    }catch (Exception e){
+				        JOptionPane.showMessageDialog(null, e);
+				    }
+				 try{
+				    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+				        String sql = "SELECT SoftwareID FROM Software WHERE SoftwareName = '"+softwareComboBox.getSelectedItem().toString()+"'";
+				        PreparedStatement pst = conn.prepareStatement(sql);
+				        ResultSet rs = pst.executeQuery();
 
-		        while(rs.next()){
-		         int i = rs.getInt(1);
-		         softwareID = i;
-		        }
+				        while(rs.next()){
+				         int i = rs.getInt(1);
+				         softwareID = i;
+				        }
 
-		        pst.close();
-		        rs.close();
-		        conn.close();
+				        pst.close();
+				        rs.close();
+				        conn.close();
 
-		    }catch (Exception e){
-		        JOptionPane.showMessageDialog(null, e);
-		    }
+				    }catch (Exception e){
+				        JOptionPane.showMessageDialog(null, e);
+				    }
+					try {
+				    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+				        String sql = "INSERT INTO Equipment (EquipSerialNum,EquipTypeID,SoftwareID,StatusID) VALUES ("+Integer.parseInt(serialTextField.getText())+","+typeID+","+softwareID+","+statusID+")";
+				        Statement pst = conn.createStatement();
+				        pst.executeUpdate(sql);
+				        System.out.println("Inserted records into the table...");
+					}
+					catch(SQLException e)
+					{
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e);
+					}
+					catch(Exception e){
+					      //Handle errors for Class.forName
+					      e.printStackTrace();
+					 }
+					finally {
+						frmVcaCreate.dispose();
+					}
+				}
+			});
+		 
 	}
 
 }

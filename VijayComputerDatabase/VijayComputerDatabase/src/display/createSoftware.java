@@ -27,8 +27,6 @@ public class createSoftware {
 
 	private JFrame frmVcaCreate;
 	private JTextField softwareIDTextField;
-	private int statusID;
-	private int typeID;
 	private int softwareID;
 	private JTextField softwareNameTextField;
 
@@ -82,32 +80,6 @@ public class createSoftware {
 		frmVcaCreate.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
 		JButton createEquipment = new JButton("Create Equipment");
-		createEquipment.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
-			        String sql = "INSERT INTO Software (SoftwareID,SoftwareName) VALUES ("+Integer.parseInt(softwareIDTextField.getText())+",'"+softwareNameTextField.getText()+"')";
-			        Statement pst = conn.createStatement();
-			        pst.executeUpdate(sql);
-			        System.out.println("Inserted records into the table...");
-				}
-				catch(SQLException e)
-				{
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, e);
-				}
-				catch(Exception e){
-				      //Handle errors for Class.forName
-				      e.printStackTrace();
-				 }
-				finally {
-					frmVcaCreate.dispose();
-				}
-			}
-		});
-		
-		
-		
 		panel_2.add(createEquipment);
 		
 		JPanel panel_3 = new JPanel();
@@ -155,7 +127,30 @@ public class createSoftware {
 		softwareNameTextField = new JTextField();
 		softwareNameTextField.setColumns(25);
 		panel_4.add(softwareNameTextField, "cell 1 1,alignx left");
-
+		
+		
+		createEquipment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+			    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+			        String sql = "INSERT INTO Software (SoftwareID,SoftwareName) VALUES ("+Integer.parseInt(softwareIDTextField.getText())+",'"+softwareNameTextField.getText()+"')";
+			        Statement pst = conn.createStatement();
+			        pst.executeUpdate(sql);
+			        System.out.println("Inserted records into the table...");
+				}
+				catch(SQLException e)
+				{
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e);
+				}
+				catch(Exception e){
+				      //Handle errors for Class.forName
+				      e.printStackTrace();
+				 }
+				finally {
+					frmVcaCreate.dispose();
+				}
+			}
+		});	
 	}
-
 }
