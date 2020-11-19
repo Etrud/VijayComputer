@@ -218,24 +218,25 @@ public class createRoomReserve {
 		  timeEndPanel.add(spinner2);
 		
 		  
-		  try {
-		    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
 
-		    	String sql = "SELECT RoomID FROM Room WHERE RoomNum = '"+roomcomboBox.getSelectedItem().toString()+"'";
-		    	PreparedStatement pst = conn.prepareStatement(sql);
-		        ResultSet rs = pst.executeQuery();
-		        while(rs.next())
-		        {
-		            String a = rs.getString("RoomID");
-		            roomID = Integer.parseInt(a);
-		        }
-
-			}
-			catch(SQLException e1) {
-			}
 			 
 		  createEquipment.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					  try {
+					    	Connection conn = DriverManager.getConnection("jdbc:sqlserver://COT-CIS3365-03\\VIJAYCOMPUTER;databaseName=ProductionDB","sa","Cougarnet2020!");
+
+					    	String sql = "SELECT RoomID FROM Room WHERE RoomNum = '"+roomcomboBox.getSelectedItem().toString()+"'";
+					    	PreparedStatement pst = conn.prepareStatement(sql);
+					        ResultSet rs = pst.executeQuery();
+					        while(rs.next())
+					        {
+					            String a = rs.getString("RoomID");
+					            roomID = Integer.parseInt(a);
+					        }
+
+						}
+						catch(SQLException e1) {
+						}
 					try {
 						
 						SimpleDateFormat formatT = new SimpleDateFormat("HH:mm:ss");
